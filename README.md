@@ -2,28 +2,31 @@
 350 Days to Success 
 
 ### One time
-Declaración de renta
-Tarjeta BIG PASS
-Pagarle a Laura Marcela
-Solicitar Parqueadero Moto
-Solicitar Servicio CLARO
+* Declaración de renta
+* Tarjeta BIG PASS
+* Pagarle a Laura Marcela
+* Solicitar Parqueadero Moto
+* Solicitar Servicio CLARO
 
 ## RobotModel67
-AWS Realoaded
+* AWS Realoaded
 
 ## Workload
-Bizagi
-Python Rules Machine
-Application School: Angular, React & Vue
-Asp Net Core Applications
-JEE8 Web Apis
-Node & Mongo background
+* Bizagi
+* Python Rules Machine
+* Application School: Angular, React & Vue
+* Asp Net Core Applications
+* JEE8 Web Apis
+* Node & Mongo background
 
 ### Daily
-Workout
-English
+* Workout
+* English
 
 ### Weekly
+* Data, AI, Machine Learning
+* Matemathics
+* Devices
 
 ### Ultimate
-Cancelar DIAN / Milano Engineering
+* Cancelar DIAN / Milano Engineering
