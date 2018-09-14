@@ -1,0 +1,844 @@
+1
+00:00:00.03 --> 00:00:01.05
+- [Instructor] Welcome back.
+
+2
+00:00:01.05 --> 00:00:04.05
+In the last video, we set
+up both the target groups,
+
+3
+00:00:04.05 --> 00:00:07.01
+target group one for the beach servers,
+
+4
+00:00:07.01 --> 00:00:10.02
+and target group two for the hill servers.
+
+5
+00:00:10.02 --> 00:00:12.06
+Now, let's start creating
+the load balancer.
+
+6
+00:00:12.06 --> 00:00:14.04
+So we go to load balancers,
+
+7
+00:00:14.04 --> 00:00:17.01
+create load balancer, and click on create
+
+8
+00:00:17.01 --> 00:00:19.04
+for application load balancer.
+
+9
+00:00:19.04 --> 00:00:22.02
+You can give it a name of your choice,
+
+10
+00:00:22.02 --> 00:00:24.09
+I'm gonna call it as myELB,
+
+11
+00:00:24.09 --> 00:00:27.09
+and we can choose internet
+facing load balancer
+
+12
+00:00:27.09 --> 00:00:30.01
+or an internal load balancer,
+
+13
+00:00:30.01 --> 00:00:32.09
+and we understood the differences
+when we discussed about
+
+14
+00:00:32.09 --> 00:00:35.02
+classic load balancers.
+
+15
+00:00:35.02 --> 00:00:37.09
+Right now, we're gonna receive
+traffic from the internet,
+
+16
+00:00:37.09 --> 00:00:41.05
+so we're gonna do internet
+facing load balancer.
+
+17
+00:00:41.05 --> 00:00:42.04
+This is interesting.
+
+18
+00:00:42.04 --> 00:00:47.07
+The IP address type can
+be IPv4 or dual stack.
+
+19
+00:00:47.07 --> 00:00:52.00
+If it's IPv4, it only
+receives IPv4 traffic.
+
+20
+00:00:52.00 --> 00:00:53.09
+If you go for dual stack,
+
+21
+00:00:53.09 --> 00:00:58.04
+it receives both IPv4 and IPv6 traffic.
+
+22
+00:00:58.04 --> 00:01:01.07
+Right now, I only wanna have IPv4,
+
+23
+00:01:01.07 --> 00:01:04.03
+and here, we can configure the listeners.
+
+24
+00:01:04.03 --> 00:01:05.08
+We spoke about listeners
+
+25
+00:01:05.08 --> 00:01:08.05
+during the classic load balancer topic.
+
+26
+00:01:08.05 --> 00:01:11.02
+A listener is a configuration
+that is looking for
+
+27
+00:01:11.02 --> 00:01:15.06
+incoming requests from the
+internet or from your clients.
+
+28
+00:01:15.06 --> 00:01:18.05
+In this case, our clients are
+gonna be accessing the servers
+
+29
+00:01:18.05 --> 00:01:23.02
+on port 80, HTTP, so we'll
+select the protocol as HTTP
+
+30
+00:01:23.02 --> 00:01:26.04
+and the port number as port 80.
+
+31
+00:01:26.04 --> 00:01:29.00
+Next, we need to select
+the availability zones
+
+32
+00:01:29.00 --> 00:01:31.04
+where we want to route the traffic.
+
+33
+00:01:31.04 --> 00:01:35.09
+You could select one or
+you could select multiple.
+
+34
+00:01:35.09 --> 00:01:37.09
+What I'm gonna do is I'm gonna select
+
+35
+00:01:37.09 --> 00:01:39.09
+multiple availability zones.
+
+36
+00:01:39.09 --> 00:01:43.02
+Notice you also have the
+option to choose the VPC.
+
+37
+00:01:43.02 --> 00:01:46.08
+In my case, I only have one VPC.
+
+38
+00:01:46.08 --> 00:01:49.04
+Having done that, let's
+move onto the next step.
+
+39
+00:01:49.04 --> 00:01:51.05
+Meanwhile, you can also
+add some tags over here
+
+40
+00:01:51.05 --> 00:01:53.08
+for identification purposes.
+
+41
+00:01:53.08 --> 00:01:57.02
+I'm gonna say next
+configure security settings.
+
+42
+00:01:57.02 --> 00:02:00.02
+Over here, we would not
+be configuring anything
+
+43
+00:02:00.02 --> 00:02:04.06
+because we have selected HTTP
+as the listener configuration.
+
+44
+00:02:04.06 --> 00:02:08.09
+If you go for HTTPS, then we'll
+have to configure this part.
+
+45
+00:02:08.09 --> 00:02:13.04
+Moving on, we can configure
+the security groups.
+
+46
+00:02:13.04 --> 00:02:15.05
+I'm gonna select an
+existing security group,
+
+47
+00:02:15.05 --> 00:02:18.04
+which is HTTP for myELB,
+
+48
+00:02:18.04 --> 00:02:22.02
+which basically allows port 80 inbound.
+
+49
+00:02:22.02 --> 00:02:24.07
+Click on next, configure routing.
+
+50
+00:02:24.07 --> 00:02:27.07
+On step number four, we
+need to configure routing,
+
+51
+00:02:27.07 --> 00:02:29.01
+and as you can see over here,
+
+52
+00:02:29.01 --> 00:02:31.08
+we need to provide a target group.
+
+53
+00:02:31.08 --> 00:02:35.06
+The good part is that we
+already have one ready.
+
+54
+00:02:35.06 --> 00:02:37.06
+So what I'm gonna do is I'm gonna select
+
+55
+00:02:37.06 --> 00:02:39.05
+an existing target group,
+
+56
+00:02:39.05 --> 00:02:42.05
+and you can select any one of them,
+
+57
+00:02:42.05 --> 00:02:44.07
+TG1 or TG2.
+
+58
+00:02:44.07 --> 00:02:48.02
+What I'm gonna do is
+I'm gonna go with TG1.
+
+59
+00:02:48.02 --> 00:02:51.08
+The protocol is selected
+as HTTP and the port is 80,
+
+60
+00:02:51.08 --> 00:02:53.07
+and the target type is instance,
+
+61
+00:02:53.07 --> 00:02:56.02
+and you'll notice we
+cannot select anything
+
+62
+00:02:56.02 --> 00:03:00.01
+because it's all pre-configured in TG1.
+
+63
+00:03:00.01 --> 00:03:02.03
+Also notice that the health check protocol
+
+64
+00:03:02.03 --> 00:03:06.00
+is configured over here, and
+the path is also configured.
+
+65
+00:03:06.00 --> 00:03:09.07
+Again, all this comes
+from TG1 configuration.
+
+66
+00:03:09.07 --> 00:03:12.05
+Down over here, you'll notice
+everything is pre-configured,
+
+67
+00:03:12.05 --> 00:03:16.02
+nothing is editable because
+it's all configured over here.
+
+68
+00:03:16.02 --> 00:03:17.05
+Why do they have it?
+
+69
+00:03:17.05 --> 00:03:20.04
+Well, if you were configuring
+a new target group,
+
+70
+00:03:20.04 --> 00:03:23.03
+then you would be
+configuring all these items.
+
+71
+00:03:23.03 --> 00:03:26.09
+Right now, it's all pre-configured,
+so we can skip this,
+
+72
+00:03:26.09 --> 00:03:29.07
+and we can go to next, register targets.
+
+73
+00:03:29.07 --> 00:03:32.03
+You'll notice that the
+targets are also selected,
+
+74
+00:03:32.03 --> 00:03:34.07
+because this target has been registered
+
+75
+00:03:34.07 --> 00:03:38.00
+in the target group, right?
+
+76
+00:03:38.00 --> 00:03:39.02
+Click on next review.
+
+77
+00:03:39.02 --> 00:03:42.02
+We can review all the settings
+that we've made so far,
+
+78
+00:03:42.02 --> 00:03:45.03
+and we can click on create.
+
+79
+00:03:45.03 --> 00:03:47.03
+Now, we're ready.
+
+80
+00:03:47.03 --> 00:03:49.05
+So you can see over here,
+
+81
+00:03:49.05 --> 00:03:52.01
+we have a DNS name for the load balancer,
+
+82
+00:03:52.01 --> 00:03:55.07
+it's internet facing, it's
+an application load balancer,
+
+83
+00:03:55.07 --> 00:03:59.03
+it's forwarding traffic to
+both the availability zones,
+
+84
+00:03:59.03 --> 00:04:02.05
+and the IP address type is IPv4,
+
+85
+00:04:02.05 --> 00:04:04.08
+and it is currently being provisioned.
+
+86
+00:04:04.08 --> 00:04:07.01
+Let's try to do a refresh.
+
+87
+00:04:07.01 --> 00:04:09.05
+If we went over here to listeners,
+
+88
+00:04:09.05 --> 00:04:13.05
+we can see we have a listener
+configuration over here.
+
+89
+00:04:13.05 --> 00:04:18.02
+Now, we can try and access
+this page over here,
+
+90
+00:04:18.02 --> 00:04:21.06
+and open a new page, hit enter,
+
+91
+00:04:21.06 --> 00:04:23.07
+and it says the site cannot be reached,
+
+92
+00:04:23.07 --> 00:04:25.09
+and that's because it's
+still being provisioned.
+
+93
+00:04:25.09 --> 00:04:28.06
+We can see over here, it's
+still being provisioned.
+
+94
+00:04:28.06 --> 00:04:31.05
+So we can wait for a little while.
+
+95
+00:04:31.05 --> 00:04:33.09
+Meanwhile, we can go back
+to the target groups,
+
+96
+00:04:33.09 --> 00:04:36.06
+and let's check what's the status of TG1.
+
+97
+00:04:36.06 --> 00:04:39.05
+We can select TG1 and
+we can go to targets,
+
+98
+00:04:39.05 --> 00:04:42.06
+and you'll notice over
+here it says initial,
+
+99
+00:04:42.06 --> 00:04:44.09
+target registration is in progress.
+
+100
+00:04:44.09 --> 00:04:48.01
+So, we need to wait until
+this becomes healthy,
+
+101
+00:04:48.01 --> 00:04:50.03
+and that should happen pretty soon.
+
+102
+00:04:50.03 --> 00:04:53.06
+Let's do a refresh.
+
+103
+00:04:53.06 --> 00:04:56.00
+Alright, so now, it's in a healthy state,
+
+104
+00:04:56.00 --> 00:04:58.05
+which means if we go back over here,
+
+105
+00:04:58.05 --> 00:05:03.06
+and if we did a refresh,
+we can see the IIS page.
+
+106
+00:05:03.06 --> 00:05:05.08
+Which server is this coming from?
+
+107
+00:05:05.08 --> 00:05:09.02
+It is coming from the
+server in AP south one A,
+
+108
+00:05:09.02 --> 00:05:12.04
+or server one, because
+that's the target group
+
+109
+00:05:12.04 --> 00:05:15.06
+that has been associated
+with the load balancer.
+
+110
+00:05:15.06 --> 00:05:17.09
+If you go back to load balancers,
+
+111
+00:05:17.09 --> 00:05:21.06
+we can see over here, under listeners,
+
+112
+00:05:21.06 --> 00:05:23.08
+that it is forwarding to TG1,
+
+113
+00:05:23.08 --> 00:05:26.08
+so it is actually coming from server one.
+
+114
+00:05:26.08 --> 00:05:30.09
+On server one, we know that we
+have a folder called beaches,
+
+115
+00:05:30.09 --> 00:05:36.05
+so if we did this, slash beaches,
+
+116
+00:05:36.05 --> 00:05:39.09
+we should see that, and if
+we click on any one of them,
+
+117
+00:05:39.09 --> 00:05:42.08
+we have a nice, beautiful
+picture of the beach.
+
+118
+00:05:42.08 --> 00:05:48.05
+But what if we did slash
+hills, will it work?
+
+119
+00:05:48.05 --> 00:05:50.03
+It doesn't, because right now
+
+120
+00:05:50.03 --> 00:05:53.05
+we are not forwarding traffic to TG2.
+
+121
+00:05:53.05 --> 00:05:55.06
+That's what we're gonna configure next.
+
+122
+00:05:55.06 --> 00:05:57.05
+So we'll go back over here,
+
+123
+00:05:57.05 --> 00:06:00.04
+and we'll edit the load balancer,
+
+124
+00:06:00.04 --> 00:06:02.05
+so I've selected the load balancer.
+
+125
+00:06:02.05 --> 00:06:05.06
+Listeners, we're not
+gonna add a new listener,
+
+126
+00:06:05.06 --> 00:06:08.04
+we're going to change the
+rules of the listener.
+
+127
+00:06:08.04 --> 00:06:10.04
+So view and edit rules.
+
+128
+00:06:10.04 --> 00:06:12.05
+This is where it starts
+to get a little confusing
+
+129
+00:06:12.05 --> 00:06:13.09
+for some people.
+
+130
+00:06:13.09 --> 00:06:15.04
+View and edit rules.
+
+131
+00:06:15.04 --> 00:06:18.06
+So the rule is like this,
+this is the default rule.
+
+132
+00:06:18.06 --> 00:06:22.03
+It says if the request,
+otherwise not routed,
+
+133
+00:06:22.03 --> 00:06:25.00
+which means if the request does not match
+
+134
+00:06:25.00 --> 00:06:30.00
+any other routing parameter,
+then forward to TG1.
+
+135
+00:06:30.00 --> 00:06:33.01
+What we're gonna do is we're
+gonna add one more rule,
+
+136
+00:06:33.01 --> 00:06:35.08
+so I'll click on the plus icon over here,
+
+137
+00:06:35.08 --> 00:06:37.06
+and I'm gonna say insert a rule,
+
+138
+00:06:37.06 --> 00:06:40.07
+which will add it on top of this one,
+
+139
+00:06:40.07 --> 00:06:43.00
+and we can say add condition.
+
+140
+00:06:43.00 --> 00:06:45.08
+You can do a condition
+based on a host header
+
+141
+00:06:45.08 --> 00:06:47.00
+or a path.
+
+142
+00:06:47.00 --> 00:06:49.07
+A path is the URL of that request,
+
+143
+00:06:49.07 --> 00:06:51.06
+and that is what we're gonna do.
+
+144
+00:06:51.06 --> 00:06:53.09
+So we'll do if the path is,
+
+145
+00:06:53.09 --> 00:06:58.00
+and it contains the word /hills/.
+
+146
+00:06:58.00 --> 00:07:02.01
+If the URL contains the word /hills/,
+
+147
+00:07:02.01 --> 00:07:06.06
+and I'm gonna say add
+action, forward it to TG2,
+
+148
+00:07:06.06 --> 00:07:09.03
+because that's where the
+servers for the hills
+
+149
+00:07:09.03 --> 00:07:10.06
+have been configured.
+
+150
+00:07:10.06 --> 00:07:15.02
+TG2, click on save, fantastic.
+
+151
+00:07:15.02 --> 00:07:19.00
+We can now go back and, before
+we try to access the URL,
+
+152
+00:07:19.00 --> 00:07:24.03
+we can go to target groups,
+select the second one, TG2,
+
+153
+00:07:24.03 --> 00:07:28.03
+and you'll notice, now this
+one is also an initial.
+
+154
+00:07:28.03 --> 00:07:30.04
+So if we try to refresh this,
+
+155
+00:07:30.04 --> 00:07:33.01
+we're still gonna get no response.
+
+156
+00:07:33.01 --> 00:07:34.07
+I'm actually doing a refresh,
+
+157
+00:07:34.07 --> 00:07:36.00
+you can see that over here.
+
+158
+00:07:36.00 --> 00:07:37.08
+It doesn't work because
+
+159
+00:07:37.08 --> 00:07:40.01
+the server is still being initialized.
+
+160
+00:07:40.01 --> 00:07:43.02
+So we'll have to wait, in
+fact, it's already ready,
+
+161
+00:07:43.02 --> 00:07:44.04
+it's now in healthy.
+
+162
+00:07:44.04 --> 00:07:49.03
+So, if we go back over
+here, if we did a refresh,
+
+163
+00:07:49.03 --> 00:07:52.01
+it's still not working,
+and I just realized,
+
+164
+00:07:52.01 --> 00:07:54.04
+the URL is not correct.
+
+165
+00:07:54.04 --> 00:07:57.00
+It is correct, but I need
+to add a trailing slash,
+
+166
+00:07:57.00 --> 00:08:00.01
+because the listener has
+been configured to add
+
+167
+00:08:00.01 --> 00:08:01.06
+the trailing slash.
+
+168
+00:08:01.06 --> 00:08:04.08
+So if I put a trailing slash
+over here and I hit enter,
+
+169
+00:08:04.08 --> 00:08:07.09
+now I can see that.
+
+170
+00:08:07.09 --> 00:08:10.05
+So that's how we configure a target group.
+
+171
+00:08:10.05 --> 00:08:12.01
+As you can see over here,
+
+172
+00:08:12.01 --> 00:08:14.05
+based on the requests that we make,
+
+173
+00:08:14.05 --> 00:08:18.04
+based on the URL or based on
+the words contained in the URL,
+
+174
+00:08:18.04 --> 00:08:21.00
+the traffic is being forwarded
+to different servers.
+
+175
+00:08:21.00 --> 00:08:24.07
+If I did slash beaches,
+
+176
+00:08:24.07 --> 00:08:26.04
+you'll notice that the
+traffic is being forwarded
+
+177
+00:08:26.04 --> 00:08:29.01
+to a different server,
+and if we did slash hills,
+
+178
+00:08:29.01 --> 00:08:30.08
+like what we tried right now,
+
+179
+00:08:30.08 --> 00:08:33.02
+the traffic is going
+to a different server.
+
+180
+00:08:33.02 --> 00:08:36.04
+As we can see, this is an
+intelligent load balancer.
+
+181
+00:08:36.04 --> 00:08:41.03
+It has the intelligence to know
+where to route the request.
+
+182
+00:08:41.03 --> 00:08:45.03
+The final piece of the
+puzzle is the index.html.
+
+183
+00:08:45.03 --> 00:08:47.06
+We're gonna put a file called index.html
+
+184
+00:08:47.06 --> 00:08:49.06
+on both the servers,
+
+185
+00:08:49.06 --> 00:08:52.08
+and we want to have a
+round robin load balancing
+
+186
+00:08:52.08 --> 00:08:57.01
+when somebody tries to access index.html.
+
+187
+00:08:57.01 --> 00:08:59.06
+In the next video, we'll
+see how to do that.
+
+188
+00:08:59.06 --> 00:09:01.05
+I'd like to thank you for watching,
+
+189
+00:09:01.05 --> 00:09:03.03
+and I'll catch you in the next video.
+
+190
+00:09:03.03 --> 00:09:04.01
+Thank you.
+

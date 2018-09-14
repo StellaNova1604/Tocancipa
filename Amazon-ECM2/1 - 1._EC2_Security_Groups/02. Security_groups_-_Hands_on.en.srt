@@ -1,0 +1,785 @@
+1
+00:00:00.01 --> 00:00:01.05
+- [Instructor] Welcome back.
+
+2
+00:00:01.05 --> 00:00:03.05
+In this video, we're gonna do some
+
+3
+00:00:03.05 --> 00:00:07.00
+hands-on exercises on security groups.
+
+4
+00:00:07.00 --> 00:00:09.00
+We'll implement all the concepts
+
+5
+00:00:09.00 --> 00:00:12.02
+that we understood in the last video.
+
+6
+00:00:12.02 --> 00:00:15.03
+If you're ready, let's begin.
+
+7
+00:00:15.03 --> 00:00:17.08
+All right, so I'm here at the AWS console
+
+8
+00:00:17.08 --> 00:00:19.06
+and, as you can see right now,
+
+9
+00:00:19.06 --> 00:00:22.00
+I'm in the tab called Instances
+
+10
+00:00:22.00 --> 00:00:25.08
+and I have one running EC2 instance.
+
+11
+00:00:25.08 --> 00:00:28.09
+If I wanted to see what
+security group has been assigned
+
+12
+00:00:28.09 --> 00:00:32.08
+to this EC2 instance, I can
+just drop down over here.
+
+13
+00:00:32.08 --> 00:00:34.09
+In the panel over here, I can see that
+
+14
+00:00:34.09 --> 00:00:37.05
+I have something called Security Groups
+
+15
+00:00:37.05 --> 00:00:39.05
+and this is the name of the security group
+
+16
+00:00:39.05 --> 00:00:41.01
+which is currently assigned.
+
+17
+00:00:41.01 --> 00:00:45.06
+It's called as SSH and ICMP allowed.
+
+18
+00:00:45.06 --> 00:00:48.00
+If I wanted to view the inbound rules
+
+19
+00:00:48.00 --> 00:00:51.05
+I could click on view inbound
+rules and we can see that
+
+20
+00:00:51.05 --> 00:00:54.06
+a couple of protocols is allowed inbound.
+
+21
+00:00:54.06 --> 00:00:58.07
+The first one is tcp,
+port 22, which is SSH.
+
+22
+00:00:58.07 --> 00:01:01.06
+It is allowed from all
+source IP addresses.
+
+23
+00:01:01.06 --> 00:01:03.06
+And then ICMP is also allowed
+
+24
+00:01:03.06 --> 00:01:06.08
+from all the source IP addresses.
+
+25
+00:01:06.08 --> 00:01:09.04
+How about creating some
+new security groups?
+
+26
+00:01:09.04 --> 00:01:11.05
+To create additional
+security groups, we could
+
+27
+00:01:11.05 --> 00:01:15.05
+go down to this tab over
+here called Security Groups.
+
+28
+00:01:15.05 --> 00:01:19.02
+Right now, I have about
+four security groups
+
+29
+00:01:19.02 --> 00:01:24.09
+out of which one is default
+and three are user-created.
+
+30
+00:01:24.09 --> 00:01:27.04
+If I wanted to create
+a new security group,
+
+31
+00:01:27.04 --> 00:01:30.03
+I can click on Create Security Group
+
+32
+00:01:30.03 --> 00:01:33.04
+and we need to first
+start by giving it a name.
+
+33
+00:01:33.04 --> 00:01:37.07
+I'm gonna call this one as HTTP allowed.
+
+34
+00:01:37.07 --> 00:01:43.00
+I'm also gonna give it a description.
+
+35
+00:01:43.00 --> 00:01:46.06
+Okay, and then we can also select the VPC.
+
+36
+00:01:46.06 --> 00:01:50.07
+In this case, I only have the default VPC.
+
+37
+00:01:50.07 --> 00:01:52.08
+Over here, we have two tabs,
+
+38
+00:01:52.08 --> 00:01:55.09
+one for Inbound and one for Outbound.
+
+39
+00:01:55.09 --> 00:02:00.01
+As you can see, the Inbound
+tab has no rules right now.
+
+40
+00:02:00.01 --> 00:02:02.08
+But if I go to Outbound, by default,
+
+41
+00:02:02.08 --> 00:02:05.09
+all outbound traffic is allowed.
+
+42
+00:02:05.09 --> 00:02:09.02
+If I wanted to change that, I
+can go to the right-hand side,
+
+43
+00:02:09.02 --> 00:02:12.08
+and I can click on this
+cross to remove that rule.
+
+44
+00:02:12.08 --> 00:02:15.00
+If I wanted to add a new rule,
+
+45
+00:02:15.00 --> 00:02:17.03
+I can click on Add Rule over here.
+
+46
+00:02:17.03 --> 00:02:19.05
+Right now, I'm gonna
+leave it the way it is
+
+47
+00:02:19.05 --> 00:02:22.07
+and go back to Inbound
+and I'm gonna add a rule
+
+48
+00:02:22.07 --> 00:02:25.08
+to allow Inbound HTTP traffic.
+
+49
+00:02:25.08 --> 00:02:28.02
+So I click on Add Rule over here.
+
+50
+00:02:28.02 --> 00:02:31.00
+The first thing is the type of traffic.
+
+51
+00:02:31.00 --> 00:02:33.07
+There are some pre-defined traffic types.
+
+52
+00:02:33.07 --> 00:02:35.00
+You can choose from one of them.
+
+53
+00:02:35.00 --> 00:02:38.06
+For example, you have SSH, SMTP, DNS,
+
+54
+00:02:38.06 --> 00:02:43.00
+HTTP, LDAP, IMAP, et cetera.
+
+55
+00:02:43.00 --> 00:02:45.07
+If you'd like to define
+your custom traffic type,
+
+56
+00:02:45.07 --> 00:02:48.01
+you could use one of
+the options over here.
+
+57
+00:02:48.01 --> 00:02:51.09
+For ICMP, you could use one
+of these options over here.
+
+58
+00:02:51.09 --> 00:02:54.03
+If you wanna allow everything inbound,
+
+59
+00:02:54.03 --> 00:02:56.08
+you can go for All traffic.
+
+60
+00:02:56.08 --> 00:02:59.03
+Right now, I'm trying to allow HTTP.
+
+61
+00:02:59.03 --> 00:03:02.04
+So I'm gonna select this
+one over here, HTTP.
+
+62
+00:03:02.04 --> 00:03:05.02
+By default, it selects the protocol as TCP
+
+63
+00:03:05.02 --> 00:03:07.08
+and the port number as 80.
+
+64
+00:03:07.08 --> 00:03:10.09
+Over here, I can define
+the source of that traffic.
+
+65
+00:03:10.09 --> 00:03:15.03
+If I give My IP, it takes
+my public IP address.
+
+66
+00:03:15.03 --> 00:03:17.06
+If I give Custom, I can define
+
+67
+00:03:17.06 --> 00:03:19.09
+my custom IP address range over here.
+
+68
+00:03:19.09 --> 00:03:25.04
+Of, if I give Anywhere,
+it takes all IP addresses.
+
+69
+00:03:25.04 --> 00:03:28.01
+We can also give a description over here.
+
+70
+00:03:28.01 --> 00:03:31.03
+If you wanted to add a new
+rule, you can say Add Rule
+
+71
+00:03:31.03 --> 00:03:33.08
+and you can define that traffic over here.
+
+72
+00:03:33.08 --> 00:03:35.05
+Right now, I'm gonna remove that
+
+73
+00:03:35.05 --> 00:03:38.05
+and have just one rule over here.
+
+74
+00:03:38.05 --> 00:03:40.08
+Before I click on Create,
+I also wanna show you
+
+75
+00:03:40.08 --> 00:03:42.04
+something very interesting.
+
+76
+00:03:42.04 --> 00:03:45.06
+If I select Custom over
+here, notice what it says.
+
+77
+00:03:45.06 --> 00:03:48.08
+Enter the CIDR, the IP or the name
+
+78
+00:03:48.08 --> 00:03:51.04
+of another Security Group.
+
+79
+00:03:51.04 --> 00:03:53.07
+Remember the example from the last video
+
+80
+00:03:53.07 --> 00:03:56.05
+where we understood that
+we only wanted to allow
+
+81
+00:03:56.05 --> 00:04:00.07
+inbound traffic to the database
+server from the web server.
+
+82
+00:04:00.07 --> 00:04:04.00
+All other traffic should not be allowed.
+
+83
+00:04:04.00 --> 00:04:07.01
+So, if you want to allow
+traffic from instances
+
+84
+00:04:07.01 --> 00:04:09.07
+that are associated with
+a specific security group,
+
+85
+00:04:09.07 --> 00:04:12.02
+you can call that
+security group over here.
+
+86
+00:04:12.02 --> 00:04:15.08
+For example, if I wanted
+to allow inbound traffic
+
+87
+00:04:15.08 --> 00:04:19.00
+from all EC2 instances associated with
+
+88
+00:04:19.00 --> 00:04:21.05
+this security group called web-server,
+
+89
+00:04:21.05 --> 00:04:26.00
+I could specify that as the source.
+
+90
+00:04:26.00 --> 00:04:27.07
+So right now, I'm gonna say Anywhere
+
+91
+00:04:27.07 --> 00:04:31.00
+to allow HTTP traffic from anywhere.
+
+92
+00:04:31.00 --> 00:04:33.07
+And I'm gonna click on Create over here.
+
+93
+00:04:33.07 --> 00:04:35.08
+So my security group has been created
+
+94
+00:04:35.08 --> 00:04:38.06
+and it's over here, HTTP allowed.
+
+95
+00:04:38.06 --> 00:04:42.00
+If you wanted to modify an
+existing security group,
+
+96
+00:04:42.00 --> 00:04:44.07
+you can go to Actions and you can say,
+
+97
+00:04:44.07 --> 00:04:48.00
+Edit inbound rules or Edit outbound rules.
+
+98
+00:04:48.00 --> 00:04:53.01
+Notice that you can also
+add tags to security groups.
+
+99
+00:04:53.01 --> 00:04:55.06
+If you wanted to view the
+inbound and outbound rules,
+
+100
+00:04:55.06 --> 00:04:57.08
+you can go to this tab
+over here called Inbound.
+
+101
+00:04:57.08 --> 00:05:00.03
+We can see that we have HTTP traffic.
+
+102
+00:05:00.03 --> 00:05:02.08
+Notice that it shows you two rows.
+
+103
+00:05:02.08 --> 00:05:05.07
+This one is for any IPv4 traffic
+
+104
+00:05:05.07 --> 00:05:08.07
+and this one is for any IPv6 traffic.
+
+105
+00:05:08.07 --> 00:05:10.04
+And if you wanted to
+view the outbound rules,
+
+106
+00:05:10.04 --> 00:05:13.06
+you could go over here to
+the tab called Outbound
+
+107
+00:05:13.06 --> 00:05:17.02
+and we can see that everything
+is allowed outbound.
+
+108
+00:05:17.02 --> 00:05:19.01
+Now let's try to associate this
+
+109
+00:05:19.01 --> 00:05:21.07
+with an existing EC2 instance.
+
+110
+00:05:21.07 --> 00:05:24.00
+So I go back to Instances over here.
+
+111
+00:05:24.00 --> 00:05:26.04
+I have my running instance,
+
+112
+00:05:26.04 --> 00:05:28.08
+which is associated
+with one security group,
+
+113
+00:05:28.08 --> 00:05:32.08
+which is SSH and ICMP allowed.
+
+114
+00:05:32.08 --> 00:05:34.07
+To associate another security group,
+
+115
+00:05:34.07 --> 00:05:39.06
+I would go to Actions, Networking,
+Change Security Groups.
+
+116
+00:05:39.06 --> 00:05:42.04
+We can see that we have
+one allowed right now,
+
+117
+00:05:42.04 --> 00:05:43.08
+or one enabled right now,
+
+118
+00:05:43.08 --> 00:05:45.07
+and I'm also going to enable this one,
+
+119
+00:05:45.07 --> 00:05:48.04
+which is HTTP allowed.
+
+120
+00:05:48.04 --> 00:05:51.02
+And I'm gonna click on
+Assign Security Groups.
+
+121
+00:05:51.02 --> 00:05:53.05
+So now, we have a couple
+of security groups
+
+122
+00:05:53.05 --> 00:05:56.02
+associated with that EC2 instance.
+
+123
+00:05:56.02 --> 00:05:58.09
+If I click on view inbound rules,
+
+124
+00:05:58.09 --> 00:06:04.04
+we can now see that we
+have port 22 tcp and icmp
+
+125
+00:06:04.04 --> 00:06:08.02
+from the first security group,
+you can see that over here.
+
+126
+00:06:08.02 --> 00:06:12.02
+And we have port 80, tcp, from
+the second security group,
+
+127
+00:06:12.02 --> 00:06:15.04
+which is called as HTTP allowed.
+
+128
+00:06:15.04 --> 00:06:18.05
+So, in the last video, we
+said that we can attach
+
+129
+00:06:18.05 --> 00:06:22.04
+multiple security groups
+to the same EC2 instance.
+
+130
+00:06:22.04 --> 00:06:26.00
+In this case, AWS would create
+a larger security group,
+
+131
+00:06:26.00 --> 00:06:28.01
+which is a combination of everything,
+
+132
+00:06:28.01 --> 00:06:30.05
+and that would be used to decide
+
+133
+00:06:30.05 --> 00:06:34.09
+what traffic is allowed
+inbound or outbound.
+
+134
+00:06:34.09 --> 00:06:36.07
+Remember we also understood that,
+
+135
+00:06:36.07 --> 00:06:39.00
+changes to security groups are applied
+
+136
+00:06:39.00 --> 00:06:41.07
+automatically and immediately.
+
+137
+00:06:41.07 --> 00:06:43.01
+Let's take a look at that.
+
+138
+00:06:43.01 --> 00:06:46.05
+So right now, we have
+ICMP allowed inbound.
+
+139
+00:06:46.05 --> 00:06:49.01
+Let's try to ping this EC2 instance.
+
+140
+00:06:49.01 --> 00:06:51.01
+So I'm gonna copy that IP address
+
+141
+00:06:51.01 --> 00:06:54.09
+and I'm gonna open up a terminal.
+
+142
+00:06:54.09 --> 00:06:58.09
+And I'm gonna try and
+ping that IP address.
+
+143
+00:06:58.09 --> 00:07:01.00
+And, as we can see that
+we're getting replies
+
+144
+00:07:01.00 --> 00:07:03.03
+from that EC2 instance.
+
+145
+00:07:03.03 --> 00:07:07.05
+Now let's remove ICMP
+from that security group.
+
+146
+00:07:07.05 --> 00:07:09.09
+So I'm gonna come back to the AWS console,
+
+147
+00:07:09.09 --> 00:07:12.02
+go to Security Groups.
+
+148
+00:07:12.02 --> 00:07:14.02
+This is the security group
+which has been applied
+
+149
+00:07:14.02 --> 00:07:18.05
+to that EC2 instance,
+SSH and ICMP allowed.
+
+150
+00:07:18.05 --> 00:07:23.04
+We can see that in the
+Inbound tab, ICMP is allowed.
+
+151
+00:07:23.04 --> 00:07:27.01
+Now, I'm gonna go to
+Actions, Edit inbound rules,
+
+152
+00:07:27.01 --> 00:07:30.00
+and I'm gonna remove both of these items.
+
+153
+00:07:30.00 --> 00:07:35.01
+ICMP from IPv4 and ICMP from all IPv6.
+
+154
+00:07:35.01 --> 00:07:40.00
+I'm gonna remove that and click on Save.
+
+155
+00:07:40.00 --> 00:07:43.06
+So, at this point, only SSH
+traffic is being allowed.
+
+156
+00:07:43.06 --> 00:07:47.00
+If we go back to Instances,
+click on the EC2 instance,
+
+157
+00:07:47.00 --> 00:07:50.01
+we can see that, when we
+click on view inbound rules,
+
+158
+00:07:50.01 --> 00:07:52.03
+there's no ICMP over here.
+
+159
+00:07:52.03 --> 00:07:53.08
+When I go back to my terminal,
+
+160
+00:07:53.08 --> 00:07:58.01
+you can see that the
+ping is still working.
+
+161
+00:07:58.01 --> 00:07:59.06
+How is that possible?
+
+162
+00:07:59.06 --> 00:08:01.06
+Well, the reason is, even though
+
+163
+00:08:01.06 --> 00:08:04.05
+the rule is applied immediately,
+
+164
+00:08:04.05 --> 00:08:07.04
+the existing conditions are not affected.
+
+165
+00:08:07.04 --> 00:08:10.00
+And this is a very critical learning.
+
+166
+00:08:10.00 --> 00:08:12.05
+Even if you make a change
+to your security group,
+
+167
+00:08:12.05 --> 00:08:15.08
+existing connections
+stay the way they are.
+
+168
+00:08:15.08 --> 00:08:17.01
+But notice what happens if I do
+
+169
+00:08:17.01 --> 00:08:19.07
+a control + C to terminate that.
+
+170
+00:08:19.07 --> 00:08:23.00
+I hit the up arrow, which
+is ping, and the IP address,
+
+171
+00:08:23.00 --> 00:08:27.00
+and then when I do an
+Enter, you'll notice that
+
+172
+00:08:27.00 --> 00:08:29.03
+now I'm getting timed out.
+
+173
+00:08:29.03 --> 00:08:31.03
+New connections take effect.
+
+174
+00:08:31.03 --> 00:08:34.05
+Existing connections
+stay the way they are.
+
+175
+00:08:34.05 --> 00:08:36.03
+Well, that's it for this video.
+
+176
+00:08:36.03 --> 00:08:37.08
+I hope you enjoyed this one.
+
+177
+00:08:37.08 --> 00:08:39.03
+I'd like to thank you for watching
+
+178
+00:08:39.03 --> 00:08:40.05
+and I'll catch you in the next video.
+
+179
+00:08:40.05 --> 00:08:41.06
+Thank you.
+

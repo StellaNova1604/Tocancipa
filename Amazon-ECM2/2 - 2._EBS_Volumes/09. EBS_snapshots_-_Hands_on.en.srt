@@ -1,0 +1,647 @@
+1
+00:00:01.00 --> 00:00:02.03
+- [Instructor] Welcome back.
+
+2
+00:00:02.03 --> 00:00:04.03
+In this video, we're gonna look at
+
+3
+00:00:04.03 --> 00:00:07.05
+EBS snapshots live in action.
+
+4
+00:00:07.05 --> 00:00:10.04
+All the concepts that we
+discussed in the last video,
+
+5
+00:00:10.04 --> 00:00:13.08
+we're gonna implement
+all of these concepts.
+
+6
+00:00:13.08 --> 00:00:16.06
+All right, so I'm logged
+into the AWS console
+
+7
+00:00:16.06 --> 00:00:19.01
+and right now I'm in the EC2 section
+
+8
+00:00:19.01 --> 00:00:22.05
+and I'm gonna first click on Volumes.
+
+9
+00:00:22.05 --> 00:00:26.01
+As you can see, right now
+I do not have any volumes.
+
+10
+00:00:26.01 --> 00:00:28.07
+So I'm gonna first create a new volume.
+
+11
+00:00:28.07 --> 00:00:30.07
+So I'm gonna say, Create Volume.
+
+12
+00:00:30.07 --> 00:00:33.06
+And we can choose any one
+of these types over here.
+
+13
+00:00:33.06 --> 00:00:36.02
+I'm gonna go for a General Purpose SSD.
+
+14
+00:00:36.02 --> 00:00:39.04
+And I'm gonna give the size as 1 gig.
+
+15
+00:00:39.04 --> 00:00:45.00
+And I'm gonna choose the
+Availability Zone as us-east-1a.
+
+16
+00:00:45.00 --> 00:00:46.08
+We can choose to encrypt the volume,
+
+17
+00:00:46.08 --> 00:00:51.00
+but right now, I'm just
+gonna say Create Volume.
+
+18
+00:00:51.00 --> 00:00:53.08
+So, the volume has now been created.
+
+19
+00:00:53.08 --> 00:00:55.01
+We can see that over here.
+
+20
+00:00:55.01 --> 00:00:57.05
+And, the State of available means that
+
+21
+00:00:57.05 --> 00:01:02.08
+it has not been associated or
+attached with an EC2 instance.
+
+22
+00:01:02.08 --> 00:01:06.01
+Let's try to create a
+snapshot for this volume.
+
+23
+00:01:06.01 --> 00:01:07.09
+So I'll go to Actions over here
+
+24
+00:01:07.09 --> 00:01:11.02
+and I'm gonna say Create Snapshot.
+
+25
+00:01:11.02 --> 00:01:13.00
+At this point, we can give it a name.
+
+26
+00:01:13.00 --> 00:01:15.03
+Let's call it as Snap-1.
+
+27
+00:01:15.03 --> 00:01:19.02
+Notice that it says Encrypted No.
+
+28
+00:01:19.02 --> 00:01:21.09
+Since the original
+volume was not encrypted,
+
+29
+00:01:21.09 --> 00:01:25.00
+I do not have the option
+to encrypt the snapshot.
+
+30
+00:01:25.00 --> 00:01:27.08
+I'm gonna say, Create, and
+
+31
+00:01:27.08 --> 00:01:29.05
+the snapshot creation has started.
+
+32
+00:01:29.05 --> 00:01:32.01
+We can click over here
+or we can close this
+
+33
+00:01:32.01 --> 00:01:34.05
+and go to Shapshots over here.
+
+34
+00:01:34.05 --> 00:01:37.03
+And the snapshot has been created.
+
+35
+00:01:37.03 --> 00:01:41.02
+Now, if we wanted to restore
+the snapshot into a volume,
+
+36
+00:01:41.02 --> 00:01:45.07
+we could go to Actions, and
+we can say Create Volume.
+
+37
+00:01:45.07 --> 00:01:47.01
+Let's try that.
+
+38
+00:01:47.01 --> 00:01:50.02
+Notice that, when you're
+restoring back to a volume,
+
+39
+00:01:50.02 --> 00:01:53.08
+you have the option to change the type,
+
+40
+00:01:53.08 --> 00:01:54.08
+which is interesting.
+
+41
+00:01:54.08 --> 00:01:58.08
+We also have the option
+to change the size.
+
+42
+00:01:58.08 --> 00:02:01.06
+And, most important,
+we also have the option
+
+43
+00:02:01.06 --> 00:02:04.09
+to change the Availability
+Zone, which means,
+
+44
+00:02:04.09 --> 00:02:08.07
+if we want to move a volume
+across Availability Zones,
+
+45
+00:02:08.07 --> 00:02:11.04
+we first need to create
+a snapshot and then
+
+46
+00:02:11.04 --> 00:02:15.00
+restore the snapshot into
+the new Availability Zone.
+
+47
+00:02:15.00 --> 00:02:19.00
+For example, I'm gonna say, us-east-1b
+
+48
+00:02:19.00 --> 00:02:24.01
+and I'm gonna click on Create Volume.
+
+49
+00:02:24.01 --> 00:02:27.05
+I'm gonna close this and go
+back to Volumes over here.
+
+50
+00:02:27.05 --> 00:02:30.03
+And we can see that now
+we have two volumes.
+
+51
+00:02:30.03 --> 00:02:33.09
+This is the original one,
+which was us-east-1a.
+
+52
+00:02:33.09 --> 00:02:38.06
+And this is the restored
+volume, us-east-1b.
+
+53
+00:02:38.06 --> 00:02:40.01
+Let's try this one more time.
+
+54
+00:02:40.01 --> 00:02:43.02
+But this time, we're gonna
+go for an encrypted volume.
+
+55
+00:02:43.02 --> 00:02:45.03
+So Create Volume.
+
+56
+00:02:45.03 --> 00:02:48.00
+GP2, General Purpose SSD.
+
+57
+00:02:48.00 --> 00:02:49.07
+Size is 1 gig.
+
+58
+00:02:49.07 --> 00:02:53.00
+And the Availability Zone is us-east-1a.
+
+59
+00:02:53.00 --> 00:02:57.00
+But this time I'm gonna
+say Encrypt this volume.
+
+60
+00:02:57.00 --> 00:03:00.01
+You have the option to
+select the default key.
+
+61
+00:03:00.01 --> 00:03:04.02
+Or, if you have a custom key,
+you could choose that as well.
+
+62
+00:03:04.02 --> 00:03:08.06
+In fact, let me take you to Mumbai
+
+63
+00:03:08.06 --> 00:03:12.03
+where I believe I have a
+new key present over there.
+
+64
+00:03:12.03 --> 00:03:14.06
+So I'm gonna take you back over here.
+
+65
+00:03:14.06 --> 00:03:17.02
+Notice the region has
+now changed to Mumbai.
+
+66
+00:03:17.02 --> 00:03:20.01
+And I'm gonna change the size to 1 gig.
+
+67
+00:03:20.01 --> 00:03:24.00
+And I'm gonna say Encryption, turned on.
+
+68
+00:03:24.00 --> 00:03:27.09
+Over here you'll notice that I
+have two keys to choose from.
+
+69
+00:03:27.09 --> 00:03:31.04
+This is the default key and
+this is the key that I created.
+
+70
+00:03:31.04 --> 00:03:36.09
+So you could use your
+own custom keys as well.
+
+71
+00:03:36.09 --> 00:03:38.01
+I'm gonna go back over here
+
+72
+00:03:38.01 --> 00:03:40.09
+and I'm gonna perform the lab from here.
+
+73
+00:03:40.09 --> 00:03:43.08
+I'm gonna use the default key.
+
+74
+00:03:43.08 --> 00:03:48.03
+And I'm gonna say, Create
+Volume, click on Close,
+
+75
+00:03:48.03 --> 00:03:53.02
+and now we can see the
+volume has been created.
+
+76
+00:03:53.02 --> 00:03:55.07
+So I'm just gonna go down and
+verify that this is the one.
+
+77
+00:03:55.07 --> 00:03:57.04
+Yup, encrypted.
+
+78
+00:03:57.04 --> 00:04:02.09
+And let's give it a name
+for identification purpose.
+
+79
+00:04:02.09 --> 00:04:05.05
+Let's call it as Encrypted Volume.
+
+80
+00:04:05.05 --> 00:04:07.06
+Now I'm gonna create a
+snapshot out of this.
+
+81
+00:04:07.06 --> 00:04:10.07
+So Actions, Create Snapshot.
+
+82
+00:04:10.07 --> 00:04:12.05
+Notice what happens over here.
+
+83
+00:04:12.05 --> 00:04:15.01
+It automatically turns on encryption
+
+84
+00:04:15.01 --> 00:04:18.08
+and we do not have the option
+to turn off encryption.
+
+85
+00:04:18.08 --> 00:04:19.09
+Let's give it a name.
+
+86
+00:04:19.09 --> 00:04:22.08
+Let's call it as Encrypted Snap.
+
+87
+00:04:22.08 --> 00:04:25.00
+Click on Create.
+
+88
+00:04:25.00 --> 00:04:28.03
+And click on Close and go
+back to Snapshots over here.
+
+89
+00:04:28.03 --> 00:04:32.05
+So this is the snapshot that
+is being created right now.
+
+90
+00:04:32.05 --> 00:04:34.09
+The snapshot creation has completed.
+
+91
+00:04:34.09 --> 00:04:37.07
+Let's try to create a volume out of it.
+
+92
+00:04:37.07 --> 00:04:40.06
+So Actions, Create Volume.
+
+93
+00:04:40.06 --> 00:04:42.03
+I want you to notice this guys.
+
+94
+00:04:42.03 --> 00:04:45.02
+There is no way to turn that off.
+
+95
+00:04:45.02 --> 00:04:48.04
+The volume will also be encrypted.
+
+96
+00:04:48.04 --> 00:04:51.02
+This is very, very important
+for us to understand,
+
+97
+00:04:51.02 --> 00:04:54.05
+that once your original
+volume has been encrypted,
+
+98
+00:04:54.05 --> 00:04:56.02
+the snapshot will be encrypted
+
+99
+00:04:56.02 --> 00:04:58.08
+and the volume that is
+created out of that snapshot
+
+100
+00:04:58.08 --> 00:05:00.04
+will also be encrypted.
+
+101
+00:05:00.04 --> 00:05:05.00
+You don't have the option to turn it off.
+
+102
+00:05:05.00 --> 00:05:06.06
+Let's cancel out of here.
+
+103
+00:05:06.06 --> 00:05:09.02
+And let me show you
+how to copy a snapshot.
+
+104
+00:05:09.02 --> 00:05:10.08
+So you can select your snapshot.
+
+105
+00:05:10.08 --> 00:05:14.09
+You can go to Actions,
+and we can say Copy.
+
+106
+00:05:14.09 --> 00:05:16.06
+When you select Copy, you have
+
+107
+00:05:16.06 --> 00:05:19.07
+the option to change the region.
+
+108
+00:05:19.07 --> 00:05:22.06
+So, for example, if I
+wanted to move this over to,
+
+109
+00:05:22.06 --> 00:05:25.07
+let's say, Mumbai, I can select that.
+
+110
+00:05:25.07 --> 00:05:27.08
+I can give it a nice description
+
+111
+00:05:27.08 --> 00:05:30.06
+and here, I have the
+option to change the key.
+
+112
+00:05:30.06 --> 00:05:32.07
+So when you're moving across the region,
+
+113
+00:05:32.07 --> 00:05:34.08
+you have the option to select your key.
+
+114
+00:05:34.08 --> 00:05:38.02
+And this key is what I
+have in the Mumbai region.
+
+115
+00:05:38.02 --> 00:05:40.03
+So I can select my key over here.
+
+116
+00:05:40.03 --> 00:05:43.00
+Well let me do this, let
+me select the other one.
+
+117
+00:05:43.00 --> 00:05:45.02
+We can say Copy.
+
+118
+00:05:45.02 --> 00:05:49.03
+So now, it is being moved
+over to the Mumbai region.
+
+119
+00:05:49.03 --> 00:05:52.07
+So I'm gonna close this and
+go back to Mumbai over here.
+
+120
+00:05:52.07 --> 00:05:55.09
+Cancel out of here, go to Snapshots
+
+121
+00:05:55.09 --> 00:06:00.05
+and you can see that the snapshot
+creation has now started.
+
+122
+00:06:00.05 --> 00:06:03.05
+So, in this way, we can create
+snapshots out of volumes
+
+123
+00:06:03.05 --> 00:06:05.07
+and we can move them across.
+
+124
+00:06:05.07 --> 00:06:07.08
+In the last video, we understood that
+
+125
+00:06:07.08 --> 00:06:11.07
+snapshots are actually
+stored in Amazon S3.
+
+126
+00:06:11.07 --> 00:06:15.02
+However, if you visited the AWS S3 console
+
+127
+00:06:15.02 --> 00:06:18.01
+you would not find your
+snapshots over there.
+
+128
+00:06:18.01 --> 00:06:19.09
+In fact, we can take a look at it.
+
+129
+00:06:19.09 --> 00:06:23.02
+I'll go to Services, and I'll open up S3
+
+130
+00:06:23.02 --> 00:06:25.04
+in a new tab over here.
+
+131
+00:06:25.04 --> 00:06:26.05
+And you can see over here,
+
+132
+00:06:26.05 --> 00:06:31.00
+I do not have any bucket where
+my snapshots are created.
+
+133
+00:06:31.00 --> 00:06:34.01
+In fact, these are all my
+existing and old buckets.
+
+134
+00:06:34.01 --> 00:06:37.02
+There's no new bucket that
+contains the snapshots.
+
+135
+00:06:37.02 --> 00:06:40.07
+So, even though snapshots
+are stored in Amazon S3,
+
+136
+00:06:40.07 --> 00:06:43.07
+you don't see them from the S3 console.
+
+137
+00:06:43.07 --> 00:06:48.05
+You can only see them
+from the AWS EC2 console.
+
+138
+00:06:48.05 --> 00:06:51.01
+And, by the way, I just
+noticed that it says, error.
+
+139
+00:06:51.01 --> 00:06:53.02
+I have no idea why that has happened.
+
+140
+00:06:53.02 --> 00:06:55.04
+Let's do a refresh.
+
+141
+00:06:55.04 --> 00:06:56.05
+Now it says pending.
+
+142
+00:06:56.05 --> 00:06:59.02
+So probably it should now complete.
+
+143
+00:06:59.02 --> 00:07:01.05
+So that's about EBS snapshots.
+
+144
+00:07:01.05 --> 00:07:03.00
+I'd like to thank you for watching.
+
+145
+00:07:03.00 --> 00:07:04.08
+And I'll catch you in the next video.
+
+146
+00:07:04.08 --> 00:07:05.06
+Thank you.
+

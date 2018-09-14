@@ -1,0 +1,877 @@
+1
+00:00:00.03 --> 00:00:02.07
+- [Instructor] Welcome back, in this video
+
+2
+00:00:02.07 --> 00:00:07.08
+we're gonna talk about
+placement groups, let's begin.
+
+3
+00:00:07.08 --> 00:00:10.06
+All right, so what do we
+mean by a placement group?
+
+4
+00:00:10.06 --> 00:00:13.05
+Well, before I take you into
+the technical definition
+
+5
+00:00:13.05 --> 00:00:16.02
+of what a placement group
+is, I'm gonna put it
+
+6
+00:00:16.02 --> 00:00:19.00
+to you in really simple words.
+
+7
+00:00:19.00 --> 00:00:21.05
+In simple words, a placement group is
+
+8
+00:00:21.05 --> 00:00:26.01
+just a logical grouping
+of your EC2 instances, it
+
+9
+00:00:26.01 --> 00:00:31.00
+just defines how your EC2
+instances are logically grouped.
+
+10
+00:00:31.00 --> 00:00:33.01
+There are two different
+types of groupings,
+
+11
+00:00:33.01 --> 00:00:36.00
+essentially two different
+types of placement groups.
+
+12
+00:00:36.00 --> 00:00:39.08
+Each of them has a certain way
+of grouping the EC2 instances
+
+13
+00:00:39.08 --> 00:00:42.09
+and gives a different output, right?
+
+14
+00:00:42.09 --> 00:00:45.04
+But in simple words, a placement group is
+
+15
+00:00:45.04 --> 00:00:49.07
+just a logical grouping
+of your EC2 instances.
+
+16
+00:00:49.07 --> 00:00:52.07
+Now let's look at the
+technical definition.
+
+17
+00:00:52.07 --> 00:00:57.00
+So launching instances in a
+placement group determines
+
+18
+00:00:57.00 --> 00:01:02.03
+how instances are placed
+on the underlying hardware.
+
+19
+00:01:02.03 --> 00:01:05.08
+There are two strategies for
+creating a placement group.
+
+20
+00:01:05.08 --> 00:01:08.05
+The first one is called -s cluster.
+
+21
+00:01:08.05 --> 00:01:12.04
+It clusters your instances
+into a low-latency group
+
+22
+00:01:12.04 --> 00:01:15.06
+within a single Availability Zone.
+
+23
+00:01:15.06 --> 00:01:17.08
+That's the limitation for cluster.
+
+24
+00:01:17.08 --> 00:01:19.09
+Your instances have to be grouped
+
+25
+00:01:19.09 --> 00:01:23.01
+within a single Availability Zone.
+
+26
+00:01:23.01 --> 00:01:26.00
+If you choose the spread
+strategy, it spreads
+
+27
+00:01:26.00 --> 00:01:30.09
+your instances across
+distinct underlying hardware.
+
+28
+00:01:30.09 --> 00:01:33.01
+The interesting part is there is no charge
+
+29
+00:01:33.01 --> 00:01:37.00
+for creating a placement group.
+
+30
+00:01:37.00 --> 00:01:40.04
+Let's talk a little bit more
+about cluster placement groups.
+
+31
+00:01:40.04 --> 00:01:43.01
+A cluster placement group
+is a logical grouping
+
+32
+00:01:43.01 --> 00:01:47.08
+of your instances within a
+single Availability Zone.
+
+33
+00:01:47.08 --> 00:01:50.07
+Placement groups are
+recommended for applications
+
+34
+00:01:50.07 --> 00:01:53.06
+that benefit from low network latency,
+
+35
+00:01:53.06 --> 00:01:56.08
+high network throughput, or both.
+
+36
+00:01:56.08 --> 00:02:00.04
+A good example for this would
+be stock market applications,
+
+37
+00:02:00.04 --> 00:02:03.06
+where your stock prices
+keep changing all the time,
+
+38
+00:02:03.06 --> 00:02:06.04
+in fact, almost every second.
+
+39
+00:02:06.04 --> 00:02:08.01
+That's a classic example of where
+
+40
+00:02:08.01 --> 00:02:11.06
+you might want to use a placement group.
+
+41
+00:02:11.06 --> 00:02:14.04
+A cluster placement group cannot span
+
+42
+00:02:14.04 --> 00:02:18.04
+multiple Availability Zones.
+
+43
+00:02:18.04 --> 00:02:20.07
+It is recommended to
+launch the required number
+
+44
+00:02:20.07 --> 00:02:24.03
+of instances in a single launch request
+
+45
+00:02:24.03 --> 00:02:27.03
+and also to use the same instance type
+
+46
+00:02:27.03 --> 00:02:31.01
+for all instances in a
+cluster placement group.
+
+47
+00:02:31.01 --> 00:02:33.07
+Essentially, what it is trying to say is,
+
+48
+00:02:33.07 --> 00:02:36.03
+let's say you want to have three instances
+
+49
+00:02:36.03 --> 00:02:39.04
+in a placement group, it is best to launch
+
+50
+00:02:39.04 --> 00:02:43.06
+all three instances
+within a single request.
+
+51
+00:02:43.06 --> 00:02:46.07
+What happens is, let's say
+you launch two instances first
+
+52
+00:02:46.07 --> 00:02:48.07
+into a placement group and you try
+
+53
+00:02:48.07 --> 00:02:51.08
+to add one more instance,
+there are chances
+
+54
+00:02:51.08 --> 00:02:55.06
+that you might receive an
+insufficient capacity error.
+
+55
+00:02:55.06 --> 00:02:58.04
+To avoid this, it is
+recommended that you launch
+
+56
+00:02:58.04 --> 00:03:02.04
+all required instances with
+a single launch request, and
+
+57
+00:03:02.04 --> 00:03:06.04
+it is also recommended that
+you use the same instance type.
+
+58
+00:03:06.04 --> 00:03:08.08
+Maybe all three of them are m4.large,
+
+59
+00:03:08.08 --> 00:03:11.06
+or maybe all three of them
+are some other instance type.
+
+60
+00:03:11.06 --> 00:03:15.06
+Essentially, they are all
+the same instance type.
+
+61
+00:03:15.06 --> 00:03:18.09
+The maximum network throughput
+between two instances
+
+62
+00:03:18.09 --> 00:03:21.06
+in a cluster placement group is limited
+
+63
+00:03:21.06 --> 00:03:24.08
+by the slower of the two instances.
+
+64
+00:03:24.08 --> 00:03:28.02
+For applications with high
+throughput requirements,
+
+65
+00:03:28.02 --> 00:03:31.05
+choose an instance type with 10-Gbps
+
+66
+00:03:31.05 --> 00:03:34.07
+or 25-Gbps network connectivity.
+
+67
+00:03:34.07 --> 00:03:36.09
+And I'll show you exactly
+how you can find out
+
+68
+00:03:36.09 --> 00:03:39.09
+what is the throughput
+of your EC2 instance.
+
+69
+00:03:39.09 --> 00:03:42.00
+So let's say I'm launching two instances
+
+70
+00:03:42.00 --> 00:03:44.04
+within a cluster placement group.
+
+71
+00:03:44.04 --> 00:03:47.03
+One of them has 10-Gbps capacity
+
+72
+00:03:47.03 --> 00:03:50.09
+and the other one has 25-Gbps capacity.
+
+73
+00:03:50.09 --> 00:03:52.04
+What's gonna be the network throughput
+
+74
+00:03:52.04 --> 00:03:54.05
+between both these instances?
+
+75
+00:03:54.05 --> 00:03:57.03
+It is equal to the slower
+of the two instances.
+
+76
+00:03:57.03 --> 00:04:00.04
+In this case, the slower one is 10-Gbps
+
+77
+00:04:00.04 --> 00:04:05.07
+and that will be the throughput
+between both the instances.
+
+78
+00:04:05.07 --> 00:04:09.00
+All right, now let's talk
+about spread placement groups.
+
+79
+00:04:09.00 --> 00:04:11.08
+A spread placement group
+is a group of instances
+
+80
+00:04:11.08 --> 00:04:16.09
+that are each placed on
+distinct underlying hardware.
+
+81
+00:04:16.09 --> 00:04:20.03
+So if you choose the option
+called spread placement group,
+
+82
+00:04:20.03 --> 00:04:24.02
+all your instances of the
+placement group will be placed
+
+83
+00:04:24.02 --> 00:04:26.09
+on distinct underlying hardware,
+
+84
+00:04:26.09 --> 00:04:28.09
+which means the physical servers on
+
+85
+00:04:28.09 --> 00:04:34.01
+which the instances are created
+will be totally different.
+
+86
+00:04:34.01 --> 00:04:37.01
+Launching instances in
+a spread placement group
+
+87
+00:04:37.01 --> 00:04:41.01
+reduces the risk of simultaneous
+failures that might occur
+
+88
+00:04:41.01 --> 00:04:44.08
+when instances share the
+same underlying hardware.
+
+89
+00:04:44.08 --> 00:04:47.07
+Imagine this, you had three EC2 instances
+
+90
+00:04:47.07 --> 00:04:50.08
+within a placement group and
+all the three instances are
+
+91
+00:04:50.08 --> 00:04:53.01
+on the same underlying hardware.
+
+92
+00:04:53.01 --> 00:04:55.01
+So if the underlying hardware fails,
+
+93
+00:04:55.01 --> 00:04:57.09
+all your instances fail,
+but that does not happen
+
+94
+00:04:57.09 --> 00:05:00.04
+with spread placement groups.
+
+95
+00:05:00.04 --> 00:05:03.04
+All your instances will
+be on separate physical
+
+96
+00:05:03.04 --> 00:05:06.02
+underlying hardware,
+which means even if one
+
+97
+00:05:06.02 --> 00:05:09.06
+of the hardware goes down,
+it's just one of the instances
+
+98
+00:05:09.06 --> 00:05:12.07
+in that placement group
+that will be affected.
+
+99
+00:05:12.07 --> 00:05:15.08
+The remaining will be just fine.
+
+100
+00:05:15.08 --> 00:05:17.09
+Spread placement groups are suitable
+
+101
+00:05:17.09 --> 00:05:22.09
+for mixing instance types or
+launching instances over time.
+
+102
+00:05:22.09 --> 00:05:26.03
+This was a limitation with
+cluster placement groups.
+
+103
+00:05:26.03 --> 00:05:29.00
+With cluster placement
+groups, the recommendation was
+
+104
+00:05:29.00 --> 00:05:31.07
+that you should launch
+all of them together
+
+105
+00:05:31.07 --> 00:05:34.04
+and you should have
+the same instance type.
+
+106
+00:05:34.04 --> 00:05:38.02
+Over here, that's not the case.
+
+107
+00:05:38.02 --> 00:05:41.05
+Spread placement groups are
+recommended for applications
+
+108
+00:05:41.05 --> 00:05:44.02
+that have a small number
+of critical instances
+
+109
+00:05:44.02 --> 00:05:48.05
+that should be kept
+separate from each other.
+
+110
+00:05:48.05 --> 00:05:50.04
+A spread placement group can span
+
+111
+00:05:50.04 --> 00:05:53.05
+multiple Availability Zones
+and you can have a max
+
+112
+00:05:53.05 --> 00:06:00.01
+of seven running instances per
+Availability Zone per group.
+
+113
+00:06:00.01 --> 00:06:03.03
+Let's now talk about some
+rules for placement groups.
+
+114
+00:06:03.03 --> 00:06:05.03
+Number one, the name you specify
+
+115
+00:06:05.03 --> 00:06:07.09
+for a placement group must be unique
+
+116
+00:06:07.09 --> 00:06:11.06
+within your AWS account for that region.
+
+117
+00:06:11.06 --> 00:06:14.02
+Not all instance types are
+available for launching
+
+118
+00:06:14.02 --> 00:06:16.08
+into a placement group,
+and I will talk about
+
+119
+00:06:16.08 --> 00:06:19.02
+which of those are not supported.
+
+120
+00:06:19.02 --> 00:06:22.02
+Placement groups cannot
+be merged, for example,
+
+121
+00:06:22.02 --> 00:06:25.05
+let's say I have one placement
+group of two instances
+
+122
+00:06:25.05 --> 00:06:28.02
+and another placement
+group of three instances.
+
+123
+00:06:28.02 --> 00:06:32.03
+If I wanted to merge all of
+them to make five instances
+
+124
+00:06:32.03 --> 00:06:35.08
+within one placement group,
+that would not be possible.
+
+125
+00:06:35.08 --> 00:06:38.03
+If I had to bring all the five instances
+
+126
+00:06:38.03 --> 00:06:40.08
+into the same placement group,
+
+127
+00:06:40.08 --> 00:06:42.09
+I can shut down the two instances
+
+128
+00:06:42.09 --> 00:06:44.08
+which are in the same placement group,
+
+129
+00:06:44.08 --> 00:06:50.05
+and launch in the other one
+which has three instances.
+
+130
+00:06:50.05 --> 00:06:53.01
+An instance can be launched
+into one placement group
+
+131
+00:06:53.01 --> 00:06:58.03
+at a time, it cannot span
+multiple placement groups.
+
+132
+00:06:58.03 --> 00:07:00.03
+All right, having understood the concepts,
+
+133
+00:07:00.03 --> 00:07:04.09
+let's look at some of this in action.
+
+134
+00:07:04.09 --> 00:07:07.02
+All right, so I'm here at the AWS console
+
+135
+00:07:07.02 --> 00:07:10.05
+and I'm first gonna navigate into EC2.
+
+136
+00:07:10.05 --> 00:07:13.05
+Before we launch an instance
+into a placement group,
+
+137
+00:07:13.05 --> 00:07:16.00
+we must first create a placement group,
+
+138
+00:07:16.00 --> 00:07:20.01
+and we can do that from
+here, Placement Groups.
+
+139
+00:07:20.01 --> 00:07:22.05
+Right now, I do not
+have a placement group.
+
+140
+00:07:22.05 --> 00:07:25.05
+I'm gonna start by creating
+one, Create Placement Group.
+
+141
+00:07:25.05 --> 00:07:30.05
+And I'm gonna call it as MyPlacementGroup,
+
+142
+00:07:30.05 --> 00:07:33.05
+and I'm gonna choose
+the strategy as Cluster.
+
+143
+00:07:33.05 --> 00:07:36.05
+We understood that when you
+choose the cluster strategy,
+
+144
+00:07:36.05 --> 00:07:38.00
+all of your instances have to be
+
+145
+00:07:38.00 --> 00:07:40.09
+within the same Availability Zone.
+
+146
+00:07:40.09 --> 00:07:44.03
+I'm gonna click on Create, and that's it.
+
+147
+00:07:44.03 --> 00:07:46.00
+Now when you launch the instance,
+
+148
+00:07:46.00 --> 00:07:48.04
+when you go back to Instances over here,
+
+149
+00:07:48.04 --> 00:07:50.06
+I'm going to click on Launch Instance
+
+150
+00:07:50.06 --> 00:07:54.07
+and I'm gonna select Amazon Linux AMI.
+
+151
+00:07:54.07 --> 00:07:57.08
+Now here is where you can
+see your network performance.
+
+152
+00:07:57.08 --> 00:08:00.00
+So you can see that some of them support
+
+153
+00:08:00.00 --> 00:08:06.08
+up to 10 Gbps, while some of
+them support up to 25 Gbps.
+
+154
+00:08:06.08 --> 00:08:09.00
+So you can see that over here.
+
+155
+00:08:09.00 --> 00:08:12.00
+Now, not all of your
+instance types are available
+
+156
+00:08:12.00 --> 00:08:14.02
+for launching into placement groups.
+
+157
+00:08:14.02 --> 00:08:19.01
+For example, if I tried
+t2.micro and click on Next,
+
+158
+00:08:19.01 --> 00:08:22.01
+ideally you should get
+that option over here.
+
+159
+00:08:22.01 --> 00:08:23.08
+But I do not have that option,
+
+160
+00:08:23.08 --> 00:08:28.01
+because t2.micro cannot be
+launched into a placement group.
+
+161
+00:08:28.01 --> 00:08:30.01
+So I'm gonna show you a document
+
+162
+00:08:30.01 --> 00:08:32.09
+which shows what are the instance types
+
+163
+00:08:32.09 --> 00:08:37.03
+which are allowed for placement groups.
+
+164
+00:08:37.03 --> 00:08:38.07
+All right, so this is the document
+
+165
+00:08:38.07 --> 00:08:40.03
+and I'm gonna be leaving a link
+
+166
+00:08:40.03 --> 00:08:43.01
+to this document in the resources section.
+
+167
+00:08:43.01 --> 00:08:46.07
+Over here, we can see that these
+are the only instance types
+
+168
+00:08:46.07 --> 00:08:49.04
+that can be launched
+into a placement group.
+
+169
+00:08:49.04 --> 00:08:51.09
+And we can see that, in general purpose,
+
+170
+00:08:51.09 --> 00:08:54.08
+we do not have the t2 instance class,
+
+171
+00:08:54.08 --> 00:08:57.03
+which is why we cannot use that.
+
+172
+00:08:57.03 --> 00:09:01.07
+So if we wanted to try it, we
+could probably try m4.large.
+
+173
+00:09:01.07 --> 00:09:05.08
+So let's go back to the console
+
+174
+00:09:05.08 --> 00:09:08.06
+and let's go back over here.
+
+175
+00:09:08.06 --> 00:09:12.01
+Let's say Launch Instance,
+Amazon Linux AMI,
+
+176
+00:09:12.01 --> 00:09:17.00
+and this time I'm gonna go with m4.large.
+
+177
+00:09:17.00 --> 00:09:20.02
+Click on Next, and over
+here we have the option
+
+178
+00:09:20.02 --> 00:09:23.05
+that says Add instance to placement group.
+
+179
+00:09:23.05 --> 00:09:26.01
+We can select an existing placement group.
+
+180
+00:09:26.01 --> 00:09:28.00
+This is the one that we created.
+
+181
+00:09:28.00 --> 00:09:33.05
+Or we could also create
+a new placement group.
+
+182
+00:09:33.05 --> 00:09:35.09
+So that's the concept of placement groups.
+
+183
+00:09:35.09 --> 00:09:37.02
+What's the bottom line?
+
+184
+00:09:37.02 --> 00:09:39.06
+The bottom line is that
+placement groups are
+
+185
+00:09:39.06 --> 00:09:43.02
+just a logical grouping
+of your EC2 instances.
+
+186
+00:09:43.02 --> 00:09:45.03
+There are two strategies
+that you can follow,
+
+187
+00:09:45.03 --> 00:09:49.08
+cluster and spread, each of
+them has different features.
+
+188
+00:09:49.08 --> 00:09:52.00
+Why would you want to
+put your EC2 instances
+
+189
+00:09:52.00 --> 00:09:53.06
+into a placement group?
+
+190
+00:09:53.06 --> 00:09:56.09
+Well, by doing that you
+get high network throughput
+
+191
+00:09:56.09 --> 00:09:59.07
+and low network latency.
+
+192
+00:09:59.07 --> 00:10:01.00
+That's about placement groups.
+
+193
+00:10:01.00 --> 00:10:02.06
+I'd like to thank you for watching,
+
+194
+00:10:02.06 --> 00:10:05.00
+and I'll catch you in the
+next video, thank you.
+

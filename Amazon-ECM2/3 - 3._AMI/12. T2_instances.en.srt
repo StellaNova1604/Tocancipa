@@ -1,0 +1,1558 @@
+1
+00:00:00.08 --> 00:00:02.02
+- [Instructor] Welcome back.
+
+2
+00:00:02.02 --> 00:00:05.03
+In this video, we're
+gonna focus our attention
+
+3
+00:00:05.03 --> 00:00:08.01
+on a specific EC2 instance type,
+
+4
+00:00:08.01 --> 00:00:11.01
+which is known as T2 instances.
+
+5
+00:00:11.01 --> 00:00:14.04
+There's something very special
+about these EC2 instances
+
+6
+00:00:14.04 --> 00:00:16.06
+and that's exactly what
+we're gonna understand
+
+7
+00:00:16.06 --> 00:00:17.09
+in this video.
+
+8
+00:00:17.09 --> 00:00:21.06
+If you are ready, let's begin.
+
+9
+00:00:21.06 --> 00:00:24.09
+Alright so what's special
+about T2 instances?
+
+10
+00:00:24.09 --> 00:00:28.08
+Well, T2 instances are
+designed to provide a baseline
+
+11
+00:00:28.08 --> 00:00:33.00
+level of CPU performance
+with the ability to burst
+
+12
+00:00:33.00 --> 00:00:37.02
+to a higher level when
+required by your workload.
+
+13
+00:00:37.02 --> 00:00:40.07
+T2 instances are the only
+type of EC2 instances
+
+14
+00:00:40.07 --> 00:00:44.03
+which are known as
+burstable EC2 instances.
+
+15
+00:00:44.03 --> 00:00:47.09
+Whereas all the other EC2
+instance types are known as
+
+16
+00:00:47.09 --> 00:00:50.07
+fixed performance EC2 instances.
+
+17
+00:00:50.07 --> 00:00:56.02
+That is, all those EC2 instances
+like M3, M4, I2, et cetera,
+
+18
+00:00:56.02 --> 00:00:59.00
+they give you a fixed
+level of performance.
+
+19
+00:00:59.00 --> 00:01:03.01
+However, T2 instances give
+you a baseline of performance,
+
+20
+00:01:03.01 --> 00:01:06.00
+and they also allow you to burst above,
+
+21
+00:01:06.00 --> 00:01:08.03
+when required by your workload.
+
+22
+00:01:08.03 --> 00:01:12.09
+Hence they're called as
+burstable EC2 instances.
+
+23
+00:01:12.09 --> 00:01:16.01
+T2 instances are well
+suited for a wide range
+
+24
+00:01:16.01 --> 00:01:19.01
+of general purpose applications, like,
+
+25
+00:01:19.01 --> 00:01:22.05
+microservices, low-latency
+interactive applications,
+
+26
+00:01:22.05 --> 00:01:26.03
+small and medium databases,
+virtual desktops, dev,
+
+27
+00:01:26.03 --> 00:01:29.03
+build and stage environments,
+code repositories
+
+28
+00:01:29.03 --> 00:01:31.00
+and product prototypes.
+
+29
+00:01:31.00 --> 00:01:31.09
+As you can see,
+
+30
+00:01:31.09 --> 00:01:36.08
+they are well suited for a
+lot of different applications.
+
+31
+00:01:36.08 --> 00:01:42.01
+Now I'm gonna introduce a
+concept called as CPU credits.
+
+32
+00:01:42.01 --> 00:01:44.05
+Traditional Amazon EC2 instance types
+
+33
+00:01:44.05 --> 00:01:46.08
+provide fixed performance,
+
+34
+00:01:46.08 --> 00:01:50.09
+while T2 instances provide a
+baseline of CPU performance
+
+35
+00:01:50.09 --> 00:01:55.08
+with the ability to burst
+above that baseline level.
+
+36
+00:01:55.08 --> 00:01:59.05
+The baseline performance
+and the ability to burst
+
+37
+00:01:59.05 --> 00:02:03.02
+is governed by something
+called as CPU credits.
+
+38
+00:02:03.02 --> 00:02:07.03
+So it's CPU credits that
+decides how much are you allowed
+
+39
+00:02:07.03 --> 00:02:10.06
+to burst above your baseline performance.
+
+40
+00:02:10.06 --> 00:02:13.03
+So what is one CPU credit?
+
+41
+00:02:13.03 --> 00:02:18.02
+Well, one CPU credit is
+equal to one virtual CPU,
+
+42
+00:02:18.02 --> 00:02:23.05
+running at 100% utilization
+for one full minute.
+
+43
+00:02:23.05 --> 00:02:27.04
+There are other combinations
+of number of virtual CPUs,
+
+44
+00:02:27.04 --> 00:02:32.07
+utilization and time that
+can equate to one CPU credit.
+
+45
+00:02:32.07 --> 00:02:36.07
+For example, one CPU
+credit is also equal to
+
+46
+00:02:36.07 --> 00:02:40.03
+one virtual CPU, running
+at 50% utilization,
+
+47
+00:02:40.03 --> 00:02:42.00
+for two minutes.
+
+48
+00:02:42.00 --> 00:02:46.04
+Or two virtual CPUs
+running at 25% utilization
+
+49
+00:02:46.04 --> 00:02:48.04
+for two minutes.
+
+50
+00:02:48.04 --> 00:02:50.02
+So these are various combinations
+
+51
+00:02:50.02 --> 00:02:55.01
+that give you a total of one CPU credit.
+
+52
+00:02:55.01 --> 00:02:56.04
+We now understood that,
+
+53
+00:02:56.04 --> 00:02:59.05
+if I have to burst above
+my baseline performance,
+
+54
+00:02:59.05 --> 00:03:02.07
+I need to have positive CPU credits.
+
+55
+00:03:02.07 --> 00:03:05.08
+So the question is, how do
+I get those CPU credits?
+
+56
+00:03:05.08 --> 00:03:07.05
+How do I earn them?
+
+57
+00:03:07.05 --> 00:03:11.08
+So each T2 instance
+continuously earns a set rate
+
+58
+00:03:11.08 --> 00:03:13.09
+of CPU credits per hour,
+
+59
+00:03:13.09 --> 00:03:16.09
+depending on the instance size.
+
+60
+00:03:16.09 --> 00:03:20.09
+If a T2 instance uses fewer CPU resources
+
+61
+00:03:20.09 --> 00:03:24.03
+than is required for the
+baseline performance,
+
+62
+00:03:24.03 --> 00:03:26.09
+the unspent CPU credits are accrued
+
+63
+00:03:26.09 --> 00:03:29.03
+in the CPU credit balance.
+
+64
+00:03:29.03 --> 00:03:31.08
+Which means if your CPU is running below
+
+65
+00:03:31.08 --> 00:03:33.02
+the baseline performance,
+
+66
+00:03:33.02 --> 00:03:36.07
+you are constantly earning CPU credits.
+
+67
+00:03:36.07 --> 00:03:39.02
+If a T2 instance needs to burst above
+
+68
+00:03:39.02 --> 00:03:41.01
+the baseline performance level,
+
+69
+00:03:41.01 --> 00:03:44.05
+it spends the accrued credits.
+
+70
+00:03:44.05 --> 00:03:47.03
+The more credits a T2
+instance has accrued,
+
+71
+00:03:47.03 --> 00:03:49.03
+the more time it can burst beyond the
+
+72
+00:03:49.03 --> 00:03:54.02
+baseline performance level.
+
+73
+00:03:54.02 --> 00:03:57.06
+Now we're gonna talk about
+T2 standard instances.
+
+74
+00:03:57.06 --> 00:03:58.08
+What are these?
+
+75
+00:03:58.08 --> 00:04:01.02
+Well, just about a few months back,
+
+76
+00:04:01.02 --> 00:04:03.04
+there was nothing called T2 standard.
+
+77
+00:04:03.04 --> 00:04:06.05
+It was all T2 instances only.
+
+78
+00:04:06.05 --> 00:04:07.07
+But the problem was,
+
+79
+00:04:07.07 --> 00:04:11.00
+T2 instances could only
+burst above the baseline
+
+80
+00:04:11.00 --> 00:04:13.03
+if they had CPU credits.
+
+81
+00:04:13.03 --> 00:04:16.05
+Now what if your application
+or your workload requires
+
+82
+00:04:16.05 --> 00:04:20.02
+to burst above and you
+do not have CPU credits?
+
+83
+00:04:20.02 --> 00:04:21.03
+You can do nothing about it,
+
+84
+00:04:21.03 --> 00:04:23.04
+because you do not have CPU credits
+
+85
+00:04:23.04 --> 00:04:25.08
+and you cannot burst above.
+
+86
+00:04:25.08 --> 00:04:29.01
+So AWS introduced another
+type of T2 instance,
+
+87
+00:04:29.01 --> 00:04:32.00
+called T2 unlimited,
+which we'll talk about
+
+88
+00:04:32.00 --> 00:04:34.04
+in just about couple of minutes.
+
+89
+00:04:34.04 --> 00:04:40.00
+So now, the classic T2 instance
+was renamed as T2 standard.
+
+90
+00:04:40.00 --> 00:04:43.01
+So T2 standard is what
+was always there and now,
+
+91
+00:04:43.01 --> 00:04:46.08
+you have another category
+called as T2 unlimited.
+
+92
+00:04:46.08 --> 00:04:48.07
+So what is T2 standard?
+
+93
+00:04:48.07 --> 00:04:51.08
+A T2 standard instance
+is suited for workloads
+
+94
+00:04:51.08 --> 00:04:55.07
+with an average CPU utilization
+that is consistently
+
+95
+00:04:55.07 --> 00:04:59.02
+below the baseline
+performance of that instance.
+
+96
+00:04:59.02 --> 00:05:01.06
+Essentially what we are trying to say is,
+
+97
+00:05:01.06 --> 00:05:05.06
+T2 standard instances work
+well when your workload
+
+98
+00:05:05.06 --> 00:05:09.03
+or your application requires
+average CPU utilization,
+
+99
+00:05:09.03 --> 00:05:11.06
+most of the time.
+
+100
+00:05:11.06 --> 00:05:13.05
+To burst above the baseline,
+
+101
+00:05:13.05 --> 00:05:16.00
+the instance spends
+credits that it's accrued
+
+102
+00:05:16.00 --> 00:05:19.03
+in its CPU credit balance.
+
+103
+00:05:19.03 --> 00:05:22.03
+If the instance is running
+low on accrued credits,
+
+104
+00:05:22.03 --> 00:05:24.04
+performance is gradually lowered
+
+105
+00:05:24.04 --> 00:05:26.04
+to the baseline performance level
+
+106
+00:05:26.04 --> 00:05:29.07
+so that the instance does not
+experience a sharp performance
+
+107
+00:05:29.07 --> 00:05:36.09
+drop off when its accrued
+CPU credit limit is depleted.
+
+108
+00:05:36.09 --> 00:05:39.00
+So how does all this work?
+
+109
+00:05:39.00 --> 00:05:43.03
+A T2 standard instance
+receives two types of credits.
+
+110
+00:05:43.03 --> 00:05:45.04
+The first one is an earned credit,
+
+111
+00:05:45.04 --> 00:05:48.03
+the second one is a launch credit.
+
+112
+00:05:48.03 --> 00:05:51.04
+When a T2 standard instance
+is in a running state,
+
+113
+00:05:51.04 --> 00:05:53.07
+it is continuously earning a set rate
+
+114
+00:05:53.07 --> 00:05:56.06
+of earned credits per hour.
+
+115
+00:05:56.06 --> 00:05:58.08
+When the instance has just started,
+
+116
+00:05:58.08 --> 00:06:03.00
+it has not earned credits for
+a good startup experience.
+
+117
+00:06:03.00 --> 00:06:06.05
+Therefore to provide a
+good startup experience,
+
+118
+00:06:06.05 --> 00:06:11.05
+it receives a certain number
+of launch credits at start.
+
+119
+00:06:11.05 --> 00:06:16.05
+T2 standard instances get 30
+launch credit per virtual CPU
+
+120
+00:06:16.05 --> 00:06:19.05
+at launch or start.
+
+121
+00:06:19.05 --> 00:06:21.05
+Launch credits are designed to provide
+
+122
+00:06:21.05 --> 00:06:25.01
+a good startup experience
+to allow instances
+
+123
+00:06:25.01 --> 00:06:27.04
+to burst immediately after launch,
+
+124
+00:06:27.04 --> 00:06:32.04
+before they have accrued earned credits.
+
+125
+00:06:32.04 --> 00:06:35.00
+Now I'm gonna take you to the AWS website
+
+126
+00:06:35.00 --> 00:06:37.00
+to show you a table.
+
+127
+00:06:37.00 --> 00:06:39.07
+Alright so I am on the AWS
+website and let's take a look
+
+128
+00:06:39.07 --> 00:06:41.00
+at this table.
+
+129
+00:06:41.00 --> 00:06:42.02
+On the left-hand side,
+
+130
+00:06:42.02 --> 00:06:46.01
+we have all the different
+instance types of T2.
+
+131
+00:06:46.01 --> 00:06:49.05
+So you have T2 nano, T2 micro, T2 small,
+
+132
+00:06:49.05 --> 00:06:52.09
+all the way up to T2 2xlarge.
+
+133
+00:06:52.09 --> 00:06:56.01
+This column over here shows
+you how many CPU credits
+
+134
+00:06:56.01 --> 00:06:58.01
+they earn per hour.
+
+135
+00:06:58.01 --> 00:07:00.05
+So if you're running T2 nano for one hour,
+
+136
+00:07:00.05 --> 00:07:03.04
+it earns three CPU credits.
+
+137
+00:07:03.04 --> 00:07:07.08
+While T2 micro earns six CPU
+credits and all the way up to
+
+138
+00:07:07.08 --> 00:07:12.02
+81 for T2 2xlarge.
+
+139
+00:07:12.02 --> 00:07:13.08
+So that's the number of CPU credits
+
+140
+00:07:13.08 --> 00:07:15.06
+that you can earn per hour.
+
+141
+00:07:15.06 --> 00:07:17.04
+But what about the maximum?
+
+142
+00:07:17.04 --> 00:07:18.09
+That is over here.
+
+143
+00:07:18.09 --> 00:07:22.01
+This column determines
+what is the maximum number
+
+144
+00:07:22.01 --> 00:07:26.05
+of credits that you can
+earn in a 24 hour period?
+
+145
+00:07:26.05 --> 00:07:30.02
+So let's say T2 nano is operating at lower
+
+146
+00:07:30.02 --> 00:07:33.01
+than the baseline
+performance for 24 hours.
+
+147
+00:07:33.01 --> 00:07:35.09
+So it earns three credits per hour,
+
+148
+00:07:35.09 --> 00:07:37.08
+and it keeps getting accumulated,
+
+149
+00:07:37.08 --> 00:07:41.05
+and it can go only to a max of 72 credits
+
+150
+00:07:41.05 --> 00:07:43.09
+in a 24 hour period.
+
+151
+00:07:43.09 --> 00:07:49.08
+Similarly T2 micro can only
+earn a max of 144 credits
+
+152
+00:07:49.08 --> 00:07:52.03
+in a 24 hour period.
+
+153
+00:07:52.03 --> 00:07:59.04
+And so on, all the way up
+to 1944 for T2 2xlarge.
+
+154
+00:07:59.04 --> 00:08:02.04
+Over here we can see the
+number of virtual CPUs.
+
+155
+00:08:02.04 --> 00:08:05.02
+T2 nano, T2 micro and T2 small,
+
+156
+00:08:05.02 --> 00:08:08.09
+they all have one virtual CPU.
+
+157
+00:08:08.09 --> 00:08:12.04
+This column over here shows
+you the baseline performance.
+
+158
+00:08:12.04 --> 00:08:14.04
+All along this video we've been talking
+
+159
+00:08:14.04 --> 00:08:16.07
+about baseline performance.
+
+160
+00:08:16.07 --> 00:08:19.08
+Well, what is the baseline
+performance level?
+
+161
+00:08:19.08 --> 00:08:23.05
+For T2 nano it's 5% of the CPU.
+
+162
+00:08:23.05 --> 00:08:28.03
+So if T2 nano is running at
+5% or lower CPU utilization,
+
+163
+00:08:28.03 --> 00:08:31.01
+it will be earning CPU credits.
+
+164
+00:08:31.01 --> 00:08:34.06
+Remember you earn CPU credits
+only when you're performing
+
+165
+00:08:34.06 --> 00:08:38.02
+at or below the baseline performance.
+
+166
+00:08:38.02 --> 00:08:41.08
+For T2 micro, the baseline is 10%.
+
+167
+00:08:41.08 --> 00:08:43.03
+But how 'bout this one.
+
+168
+00:08:43.03 --> 00:08:47.04
+For T2 medium it is 40% of 200%.
+
+169
+00:08:47.04 --> 00:08:51.04
+Now you see 200% because
+you have two virtual CPUs.
+
+170
+00:08:51.04 --> 00:08:56.07
+So it's 40% for a combination
+of both the virtual CPUs.
+
+171
+00:08:56.07 --> 00:08:59.03
+And similarly for four virtual CPUs,
+
+172
+00:08:59.03 --> 00:09:02.02
+it's 90% of 400%.
+
+173
+00:09:02.02 --> 00:09:07.02
+And for eight virtual
+CPUs, it is 135% of 800%,
+
+174
+00:09:07.02 --> 00:09:10.05
+for the eight virtual CPUs.
+
+175
+00:09:10.05 --> 00:09:13.07
+I know all this may be sounding
+a bit confusing to you.
+
+176
+00:09:13.07 --> 00:09:15.00
+But the good part is,
+
+177
+00:09:15.00 --> 00:09:17.06
+all this happens transparently
+in the background
+
+178
+00:09:17.06 --> 00:09:21.03
+without any user intervention.
+
+179
+00:09:21.03 --> 00:09:24.00
+Moving on, I'm gonna show
+you the launch credits,
+
+180
+00:09:24.00 --> 00:09:26.08
+so I'll take you over here to T2 standard.
+
+181
+00:09:26.08 --> 00:09:28.09
+I'm gonna leave all those
+links in the description
+
+182
+00:09:28.09 --> 00:09:30.05
+of this video.
+
+183
+00:09:30.05 --> 00:09:34.02
+And we can see over here
+the number of launch credits
+
+184
+00:09:34.02 --> 00:09:36.06
+each instance type receives.
+
+185
+00:09:36.06 --> 00:09:40.03
+So we understood that every
+instance type receives
+
+186
+00:09:40.03 --> 00:09:44.05
+30 launch credits per virtual CPU.
+
+187
+00:09:44.05 --> 00:09:47.06
+So T2 nano, T2 micro and T2 small,
+
+188
+00:09:47.06 --> 00:09:50.03
+they all have one virtual CPU,
+
+189
+00:09:50.03 --> 00:09:53.05
+so they all get 30 launch credits.
+
+190
+00:09:53.05 --> 00:09:57.04
+This one gets 60 because
+it has two virtual CPUs
+
+191
+00:09:57.04 --> 00:10:02.02
+and this one gets 240 because
+it has eight virtual CPUs.
+
+192
+00:10:02.02 --> 00:10:04.04
+Launch credits are essential because
+
+193
+00:10:04.04 --> 00:10:06.04
+when the EC2 instance boots up,
+
+194
+00:10:06.04 --> 00:10:08.09
+it might need a performance spike,
+
+195
+00:10:08.09 --> 00:10:12.05
+and launch credits allow you
+to burst above the baseline
+
+196
+00:10:12.05 --> 00:10:17.00
+to satisfy the performance spike.
+
+197
+00:10:17.00 --> 00:10:20.07
+Back over here, we'll now
+talk about T2 unlimited.
+
+198
+00:10:20.07 --> 00:10:23.00
+Like I said earlier, sometime back,
+
+199
+00:10:23.00 --> 00:10:25.06
+it only used to be T2 instances.
+
+200
+00:10:25.06 --> 00:10:27.08
+But then T2 instances had a problem.
+
+201
+00:10:27.08 --> 00:10:29.08
+They could not burst above,
+
+202
+00:10:29.08 --> 00:10:32.00
+if you did not have enough credits.
+
+203
+00:10:32.00 --> 00:10:34.03
+So they introduced a
+new type of T2 instance
+
+204
+00:10:34.03 --> 00:10:37.05
+called T2 unlimited,
+where you can burst above,
+
+205
+00:10:37.05 --> 00:10:39.03
+even if you do not have credits,
+
+206
+00:10:39.03 --> 00:10:41.03
+by paying a little money.
+
+207
+00:10:41.03 --> 00:10:45.06
+So T2 unlimited is a configuration
+option for T2 instances
+
+208
+00:10:45.06 --> 00:10:47.08
+that can be set at launch,
+
+209
+00:10:47.08 --> 00:10:53.05
+or enabled any time for a
+running or stopped T2 instance.
+
+210
+00:10:53.05 --> 00:10:56.07
+T2 unlimited instances can
+burst above the baseline
+
+211
+00:10:56.07 --> 00:11:00.09
+for as long as required,
+which is fantastic.
+
+212
+00:11:00.09 --> 00:11:05.03
+This enables you to enjoy the
+low T2 instance hourly price
+
+213
+00:11:05.03 --> 00:11:08.08
+and ensures that your
+instances are never held
+
+214
+00:11:08.08 --> 00:11:11.09
+to the baseline performance.
+
+215
+00:11:11.09 --> 00:11:13.07
+The most interesting part.
+
+216
+00:11:13.07 --> 00:11:17.08
+The basic T2 hourly instance
+price automatically covers
+
+217
+00:11:17.08 --> 00:11:20.01
+all CPU usage spikes,
+
+218
+00:11:20.01 --> 00:11:24.06
+if the average CPU utilization
+of a T2 unlimited instance
+
+219
+00:11:24.06 --> 00:11:27.01
+over a 24 hour rolling period,
+
+220
+00:11:27.01 --> 00:11:30.04
+is at or below the baseline.
+
+221
+00:11:30.04 --> 00:11:33.07
+Which means if we take the
+average of CPU utilization
+
+222
+00:11:33.07 --> 00:11:35.07
+for a 24 hour period,
+
+223
+00:11:35.07 --> 00:11:38.06
+and if your average is
+less than the baseline,
+
+224
+00:11:38.06 --> 00:11:41.02
+you don't pay extra even if you did spike
+
+225
+00:11:41.02 --> 00:11:43.05
+a few times during the day.
+
+226
+00:11:43.05 --> 00:11:45.07
+If the average is lower than the baseline
+
+227
+00:11:45.07 --> 00:11:47.04
+for a 24 hour period,
+
+228
+00:11:47.04 --> 00:11:50.04
+you do not pay extra.
+
+229
+00:11:50.04 --> 00:11:53.09
+If the average CPU utilization
+exceeds the baseline
+
+230
+00:11:53.09 --> 00:11:58.04
+over a 24 hour period, there
+is a flat additional rate,
+
+231
+00:11:58.04 --> 00:12:01.03
+per vCPU-hour.
+
+232
+00:12:01.03 --> 00:12:04.00
+How do we set this
+option for T2 unlimited?
+
+233
+00:12:04.00 --> 00:12:05.07
+Let me show you that.
+
+234
+00:12:05.07 --> 00:12:10.00
+So I'm back over here and I'm
+gonna go to the AWS console.
+
+235
+00:12:10.00 --> 00:12:13.00
+And I'm gonna click on launch instance.
+
+236
+00:12:13.00 --> 00:12:17.05
+I'm gonna select the first
+one which is Amazon Linux AMI.
+
+237
+00:12:17.05 --> 00:12:19.08
+I'll stick with T2 micro.
+
+238
+00:12:19.08 --> 00:12:21.02
+Click on next,
+
+239
+00:12:21.02 --> 00:12:25.03
+and here you'll have the
+option to enable T2 unlimited.
+
+240
+00:12:25.03 --> 00:12:28.00
+So we can just say enable,
+
+241
+00:12:28.00 --> 00:12:30.02
+and click on next.
+
+242
+00:12:30.02 --> 00:12:33.09
+Next, you can add a tag if required.
+
+243
+00:12:33.09 --> 00:12:36.06
+And we can also add a security group.
+
+244
+00:12:36.06 --> 00:12:39.03
+I'm gonna add this one over here.
+
+245
+00:12:39.03 --> 00:12:41.08
+Review and launch, and launch.
+
+246
+00:12:41.08 --> 00:12:44.02
+I'll acknowledge that I
+have access to the key pair.
+
+247
+00:12:44.02 --> 00:12:47.08
+And click on launch instances.
+
+248
+00:12:47.08 --> 00:12:49.00
+Now let's say,
+
+249
+00:12:49.00 --> 00:12:51.06
+you decided to turn that option off.
+
+250
+00:12:51.06 --> 00:12:53.07
+Or let's say, you did not turn it on,
+
+251
+00:12:53.07 --> 00:12:55.04
+and you wanna turn it on now.
+
+252
+00:12:55.04 --> 00:12:58.05
+It's very easy.
+
+253
+00:12:58.05 --> 00:13:02.07
+I'll just wait 'til it
+moves to the running state.
+
+254
+00:13:02.07 --> 00:13:04.05
+Okay so it's now running.
+
+255
+00:13:04.05 --> 00:13:08.05
+We can select that EC2
+instance, we can go to actions,
+
+256
+00:13:08.05 --> 00:13:10.05
+instance settings, and we can say,
+
+257
+00:13:10.05 --> 00:13:13.04
+change the T2 unlimited behavior.
+
+258
+00:13:13.04 --> 00:13:16.06
+So you go to change T2 unlimited,
+
+259
+00:13:16.06 --> 00:13:19.02
+and you can change the unlimited behavior.
+
+260
+00:13:19.02 --> 00:13:23.01
+In this case it will stop it
+because it is already enabled.
+
+261
+00:13:23.01 --> 00:13:24.06
+But if it was disabled,
+
+262
+00:13:24.06 --> 00:13:27.01
+you could turn it on from here as well.
+
+263
+00:13:27.01 --> 00:13:29.01
+The last thing that I'm gonna show you is,
+
+264
+00:13:29.01 --> 00:13:31.09
+how to monitor your CPU credit balance.
+
+265
+00:13:31.09 --> 00:13:34.06
+How do you know what's your balance?
+
+266
+00:13:34.06 --> 00:13:36.00
+The interesting part is,
+
+267
+00:13:36.00 --> 00:13:39.00
+you cannot see it on this console.
+
+268
+00:13:39.00 --> 00:13:41.08
+You have to use CloudWatch in order to see
+
+269
+00:13:41.08 --> 00:13:43.08
+your CPU credit balance.
+
+270
+00:13:43.08 --> 00:13:47.01
+Let me show you how to do that.
+
+271
+00:13:47.01 --> 00:13:50.08
+Okay so I have logged into
+another AWS account that I have,
+
+272
+00:13:50.08 --> 00:13:54.06
+and I've changed my
+service over to CloudWatch.
+
+273
+00:13:54.06 --> 00:13:58.01
+CloudWatch allows you to monitor
+your CPU credit utilization
+
+274
+00:13:58.01 --> 00:14:00.05
+and your CPU credit balance.
+
+275
+00:14:00.05 --> 00:14:03.06
+The way to do that is by
+creating some widgets.
+
+276
+00:14:03.06 --> 00:14:06.06
+So what I do is, I go
+to Dashboards over here.
+
+277
+00:14:06.06 --> 00:14:09.06
+I already have a dashboard called EC2.
+
+278
+00:14:09.06 --> 00:14:10.08
+If I click on that,
+
+279
+00:14:10.08 --> 00:14:13.00
+you will notice that I have some widgets
+
+280
+00:14:13.00 --> 00:14:16.08
+that monitor my credit
+balance and my credit usage.
+
+281
+00:14:16.08 --> 00:14:20.05
+This one is credit balance and
+credit usage for server one,
+
+282
+00:14:20.05 --> 00:14:22.08
+and this one is for server two.
+
+283
+00:14:22.08 --> 00:14:25.07
+This is a nice, beautiful
+timeline that shows me
+
+284
+00:14:25.07 --> 00:14:29.01
+the CPU credit usage for server one.
+
+285
+00:14:29.01 --> 00:14:31.08
+And this one is a stacked graph over here,
+
+286
+00:14:31.08 --> 00:14:34.03
+which shows me the CPU credit utilization
+
+287
+00:14:34.03 --> 00:14:38.06
+for server one compared
+against server two.
+
+288
+00:14:38.06 --> 00:14:40.04
+Isn't this really fantastic?
+
+289
+00:14:40.04 --> 00:14:41.08
+Looks so cool right?
+
+290
+00:14:41.08 --> 00:14:43.03
+Looks so beautiful.
+
+291
+00:14:43.03 --> 00:14:46.07
+Now you also have options over
+here to change the timeline.
+
+292
+00:14:46.07 --> 00:14:48.05
+For example if I want to see the values
+
+293
+00:14:48.05 --> 00:14:52.01
+over a 12 hour period, I can say 12 hours,
+
+294
+00:14:52.01 --> 00:14:54.01
+and it shows all that data.
+
+295
+00:14:54.01 --> 00:14:55.08
+How can you create these widgets?
+
+296
+00:14:55.08 --> 00:14:58.02
+You just say add widget over here,
+
+297
+00:14:58.02 --> 00:15:00.05
+and you can go to any
+one of these options.
+
+298
+00:15:00.05 --> 00:15:02.05
+These are different types of widgets.
+
+299
+00:15:02.05 --> 00:15:04.07
+Let's say you wanted a count
+widget so you can just select
+
+300
+00:15:04.07 --> 00:15:05.09
+this one over here.
+
+301
+00:15:05.09 --> 00:15:08.05
+And click on configure.
+
+302
+00:15:08.05 --> 00:15:12.02
+The options that you see
+over here will depend on
+
+303
+00:15:12.02 --> 00:15:14.09
+what services of AWS you are using.
+
+304
+00:15:14.09 --> 00:15:19.00
+For example, right now I'm
+using EBS, EC2 and ELB.
+
+305
+00:15:19.00 --> 00:15:20.07
+So I have these options.
+
+306
+00:15:20.07 --> 00:15:22.09
+If you're using only EC2,
+
+307
+00:15:22.09 --> 00:15:24.07
+you might only see EC2.
+
+308
+00:15:24.07 --> 00:15:27.06
+We are interested in the EC2 metrics only,
+
+309
+00:15:27.06 --> 00:15:29.07
+so I'm gonna go into that.
+
+310
+00:15:29.07 --> 00:15:32.03
+I'm gonna click on per-instance metrics,
+
+311
+00:15:32.03 --> 00:15:35.04
+and depending on the
+number of EC2 instances
+
+312
+00:15:35.04 --> 00:15:36.08
+running in your account,
+
+313
+00:15:36.08 --> 00:15:39.08
+you might see different values over here.
+
+314
+00:15:39.08 --> 00:15:41.07
+So I have two instances running,
+
+315
+00:15:41.07 --> 00:15:44.04
+server one and server two.
+
+316
+00:15:44.04 --> 00:15:48.02
+I am looking at server
+one CPU credit usage.
+
+317
+00:15:48.02 --> 00:15:50.01
+So I'll check that box over here.
+
+318
+00:15:50.01 --> 00:15:51.08
+It gets added over here,
+
+319
+00:15:51.08 --> 00:15:56.08
+and I'm also looking at,
+
+320
+00:15:56.08 --> 00:16:00.04
+this one which is CPU credit balance for,
+
+321
+00:16:00.04 --> 00:16:04.04
+not for server two, but for server one.
+
+322
+00:16:04.04 --> 00:16:05.02
+There you go.
+
+323
+00:16:05.02 --> 00:16:08.00
+CPU credit balance for server one.
+
+324
+00:16:08.00 --> 00:16:10.00
+So you can see these values over here,
+
+325
+00:16:10.00 --> 00:16:11.06
+and you can create your widget.
+
+326
+00:16:11.06 --> 00:16:13.00
+Once you create your widget,
+
+327
+00:16:13.00 --> 00:16:15.03
+it sits on your dashboard like what I have
+
+328
+00:16:15.03 --> 00:16:17.05
+on the screen right now.
+
+329
+00:16:17.05 --> 00:16:19.07
+I'm gonna make it a little easier for you.
+
+330
+00:16:19.07 --> 00:16:21.02
+So I'll go to actions.
+
+331
+00:16:21.02 --> 00:16:23.07
+I'll go to view and edit source.
+
+332
+00:16:23.07 --> 00:16:26.05
+I'm gonna copy this and
+paste it in the description
+
+333
+00:16:26.05 --> 00:16:31.02
+of this video.
+
+334
+00:16:31.02 --> 00:16:33.09
+What you need to do is,
+you go to CloudWatch,
+
+335
+00:16:33.09 --> 00:16:37.04
+you go to dashboards,
+you do a new dashboard.
+
+336
+00:16:37.04 --> 00:16:41.04
+Let's call it as My Dashboard.
+
+337
+00:16:41.04 --> 00:16:43.03
+Create dashboard,
+
+338
+00:16:43.03 --> 00:16:48.02
+and you go to Actions, view edit source.
+
+339
+00:16:48.02 --> 00:16:50.04
+Just remove whatever is here.
+
+340
+00:16:50.04 --> 00:16:55.04
+Paste that and you just need
+to change the EC2 instance IDs.
+
+341
+00:16:55.04 --> 00:17:00.00
+Replace that with your
+instance ID and your region.
+
+342
+00:17:00.00 --> 00:17:00.09
+And poof.
+
+343
+00:17:00.09 --> 00:17:05.00
+It's gonna be ready
+for you just like this.
+
+344
+00:17:05.00 --> 00:17:06.03
+What I like the most is,
+
+345
+00:17:06.03 --> 00:17:10.03
+we can actually convert it
+into full screen, like this,
+
+346
+00:17:10.03 --> 00:17:12.05
+and if you want to
+realign the whole thing,
+
+347
+00:17:12.05 --> 00:17:14.07
+you just do a Control
+minus and a Control plus.
+
+348
+00:17:14.07 --> 00:17:18.08
+It just realigns and the
+coolest thing is this.
+
+349
+00:17:18.08 --> 00:17:21.00
+We can change it into a
+dark mode and it looks
+
+350
+00:17:21.00 --> 00:17:23.07
+so cool and beautiful.
+
+351
+00:17:23.07 --> 00:17:25.04
+Well that's about T2 instances.
+
+352
+00:17:25.04 --> 00:17:27.03
+I hope you found that interesting.
+
+353
+00:17:27.03 --> 00:17:28.08
+I'd like to thank you for watching,
+
+354
+00:17:28.08 --> 00:17:30.05
+and I'll catch you in the next video.
+
+355
+00:17:30.05 --> 00:17:31.03
+Thank you.
+

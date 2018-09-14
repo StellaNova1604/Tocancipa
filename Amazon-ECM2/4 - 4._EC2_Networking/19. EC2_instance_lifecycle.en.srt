@@ -1,0 +1,494 @@
+1
+00:00:00.04 --> 00:00:01.07
+- [Instructor] Welcome back.
+
+2
+00:00:01.07 --> 00:00:06.06
+In this video, we'll talk
+about EC2 instance lifecycle.
+
+3
+00:00:06.06 --> 00:00:09.06
+Let's begin.
+
+4
+00:00:09.06 --> 00:00:13.09
+An EC2 instance has several
+stages as part of the lifecycle.
+
+5
+00:00:13.09 --> 00:00:17.06
+And the first stage is
+known as instance launch.
+
+6
+00:00:17.06 --> 00:00:22.00
+When an EC2 instance is launched,
+it enters the first state,
+
+7
+00:00:22.00 --> 00:00:25.02
+which is called as the pending state.
+
+8
+00:00:25.02 --> 00:00:28.05
+The instance type that you
+specified at launch time
+
+9
+00:00:28.05 --> 00:00:31.02
+determines the hardware
+of the host computer
+
+10
+00:00:31.02 --> 00:00:33.00
+for your instance.
+
+11
+00:00:33.00 --> 00:00:34.09
+Essentially, what it is saying is,
+
+12
+00:00:34.09 --> 00:00:38.08
+depending on the instance
+type, and the instance size,
+
+13
+00:00:38.08 --> 00:00:41.03
+the hardware of the
+underlying physical computer
+
+14
+00:00:41.03 --> 00:00:43.04
+will be determined.
+
+15
+00:00:43.04 --> 00:00:47.08
+Once the instance is ready,
+it enters the running state.
+
+16
+00:00:47.08 --> 00:00:50.05
+When the instance enters
+the running state,
+
+17
+00:00:50.05 --> 00:00:54.06
+you are billed for every second,
+with a one-minute minimum,
+
+18
+00:00:54.06 --> 00:00:56.06
+that you keep the instance running,
+
+19
+00:00:56.06 --> 00:00:58.08
+even if the instance remains idle
+
+20
+00:00:58.08 --> 00:01:01.01
+and you do not connect to it.
+
+21
+00:01:01.01 --> 00:01:03.00
+This is very important to understand.
+
+22
+00:01:03.00 --> 00:01:06.07
+The minimum billing cycle for
+an EC2 instance is one minute
+
+23
+00:01:06.07 --> 00:01:08.06
+and after your one minute is over,
+
+24
+00:01:08.06 --> 00:01:10.09
+it's a per-second billing.
+
+25
+00:01:10.09 --> 00:01:14.01
+Even if you do not use it, even
+if you do not connect to it,
+
+26
+00:01:14.01 --> 00:01:18.02
+you're certainly gonna
+get charged for that.
+
+27
+00:01:18.02 --> 00:01:20.06
+Next is instance start and stop.
+
+28
+00:01:20.06 --> 00:01:24.05
+When you stop your instance,
+it enters the stopping state
+
+29
+00:01:24.05 --> 00:01:27.05
+and then it enters the stopped state.
+
+30
+00:01:27.05 --> 00:01:30.04
+Instance usage or data transfer fees,
+
+31
+00:01:30.04 --> 00:01:33.09
+are not charged after
+the instance has stopped.
+
+32
+00:01:33.09 --> 00:01:38.08
+However, storage costs for
+EBS volumes are applied.
+
+33
+00:01:38.08 --> 00:01:41.04
+When the instance is in the stopped state,
+
+34
+00:01:41.04 --> 00:01:46.08
+certain attributes, such as
+instance type, can be modified.
+
+35
+00:01:46.08 --> 00:01:48.07
+When the instance is started,
+
+36
+00:01:48.07 --> 00:01:50.09
+it, again, enters the pending state
+
+37
+00:01:50.09 --> 00:01:55.05
+and the instance may have been
+moved to a new host computer,
+
+38
+00:01:55.05 --> 00:01:58.00
+which means, when you
+stop your EC2 instance
+
+39
+00:01:58.00 --> 00:02:01.04
+and when you start it again,
+the instance may have moved
+
+40
+00:02:01.04 --> 00:02:05.00
+to a different physical host.
+
+41
+00:02:05.00 --> 00:02:08.06
+If your instance is running in EC2-VPC,
+
+42
+00:02:08.06 --> 00:02:12.03
+it retains its private IPv4 address
+
+43
+00:02:12.03 --> 00:02:16.03
+and IPv6 address, if it had one.
+
+44
+00:02:16.03 --> 00:02:18.04
+What is EC2-VPC?
+
+45
+00:02:18.04 --> 00:02:24.00
+Well, all the new AWS accounts
+have the concept of VPC.
+
+46
+00:02:24.00 --> 00:02:27.05
+Longtime back or, maybe a few years back,
+
+47
+00:02:27.05 --> 00:02:31.05
+AWS did not have the concept of VPC.
+
+48
+00:02:31.05 --> 00:02:34.08
+Those accounts are called as EC2-Classic.
+
+49
+00:02:34.08 --> 00:02:38.05
+But all accounts which
+have the concept of a VPC
+
+50
+00:02:38.05 --> 00:02:41.00
+are called as EC2-VPC.
+
+51
+00:02:41.00 --> 00:02:45.08
+Most likely, the account that
+you're using is also EC2-VPC.
+
+52
+00:02:45.08 --> 00:02:49.07
+So, if your instance
+is running in EC2-VPC,
+
+53
+00:02:49.07 --> 00:02:54.03
+it will retain its private
+IPv4 and IPv6 address
+
+54
+00:02:54.03 --> 00:02:59.02
+when you stop and start it.
+
+55
+00:02:59.02 --> 00:03:00.08
+Instance reboot.
+
+56
+00:03:00.08 --> 00:03:02.07
+When an instance is rebooted,
+
+57
+00:03:02.07 --> 00:03:06.02
+it remains on the same host computer.
+
+58
+00:03:06.02 --> 00:03:11.05
+It also maintains its public
+DNS name, private IP address,
+
+59
+00:03:11.05 --> 00:03:16.02
+and any data on its
+instance store volumes.
+
+60
+00:03:16.02 --> 00:03:17.06
+In one of the earlier lectures,
+
+61
+00:03:17.06 --> 00:03:20.01
+when we spoke about
+instance store volumes,
+
+62
+00:03:20.01 --> 00:03:22.03
+we understood that instance store volumes
+
+63
+00:03:22.03 --> 00:03:24.07
+are used for temporary storage.
+
+64
+00:03:24.07 --> 00:03:28.03
+You will lose your data if
+your instance has been stopped,
+
+65
+00:03:28.03 --> 00:03:33.02
+it has been terminated or if
+the underlying hardware fails.
+
+66
+00:03:33.02 --> 00:03:34.07
+And we also understood that,
+
+67
+00:03:34.07 --> 00:03:37.03
+if your EC2 instance is rebooted,
+
+68
+00:03:37.03 --> 00:03:41.03
+the data in the instance
+store volume will persist.
+
+69
+00:03:41.03 --> 00:03:43.06
+Rebooting an instance does not start
+
+70
+00:03:43.06 --> 00:03:46.00
+a new instance billing period.
+
+71
+00:03:46.00 --> 00:03:47.06
+Per-second billing continues
+
+72
+00:03:47.06 --> 00:03:54.00
+without a further
+one-minute minimum charge.
+
+73
+00:03:54.00 --> 00:03:57.03
+Let's talk about instance retirement.
+
+74
+00:03:57.03 --> 00:03:59.09
+An instance is scheduled to be retired
+
+75
+00:03:59.09 --> 00:04:03.08
+when AWS detects a failure
+on the underlying hardware
+
+76
+00:04:03.08 --> 00:04:06.01
+that cannot be repaired.
+
+77
+00:04:06.01 --> 00:04:08.08
+If your instance is
+scheduled for retirement,
+
+78
+00:04:08.08 --> 00:04:11.06
+you will receive an
+email prior to the event
+
+79
+00:04:11.06 --> 00:04:15.06
+with the instance ID
+and the retirement date.
+
+80
+00:04:15.06 --> 00:04:18.08
+When an instance reaches its
+scheduled retirement date,
+
+81
+00:04:18.08 --> 00:04:22.09
+it is stopped or terminated by AWS.
+
+82
+00:04:22.09 --> 00:04:27.01
+If your instance root device
+is an Amazon EBS volume,
+
+83
+00:04:27.01 --> 00:04:28.08
+the instance is stopped
+
+84
+00:04:28.08 --> 00:04:32.04
+and you can start it again at anytime.
+
+85
+00:04:32.04 --> 00:04:34.07
+However, if your instance root device
+
+86
+00:04:34.07 --> 00:04:38.09
+is an instance store volume,
+the instance is terminated
+
+87
+00:04:38.09 --> 00:04:42.07
+and cannot be used again.
+
+88
+00:04:42.07 --> 00:04:45.00
+I'm gonna take you to the AWS console
+
+89
+00:04:45.00 --> 00:04:48.06
+and show you exactly where
+you get that notification.
+
+90
+00:04:48.06 --> 00:04:51.00
+And back over here to the AWS console
+
+91
+00:04:51.00 --> 00:04:54.01
+and I'm gonna navigate
+to the EC2 dashboard.
+
+92
+00:04:54.01 --> 00:04:57.00
+If your instance is
+scheduled for retirement,
+
+93
+00:04:57.00 --> 00:05:00.05
+you will see that over here
+in the Scheduled Events.
+
+94
+00:05:00.05 --> 00:05:03.04
+This is the place where
+they'll send you a notification
+
+95
+00:05:03.04 --> 00:05:06.02
+that your instance is about to be retired.
+
+96
+00:05:06.02 --> 00:05:08.07
+Of course, they will
+also send you an email
+
+97
+00:05:08.07 --> 00:05:11.08
+with the instance ID
+and the retirement date.
+
+98
+00:05:11.08 --> 00:05:17.06
+And you can also see it
+on the console over here.
+
+99
+00:05:17.06 --> 00:05:21.04
+Back over here, let's talk
+about instance termination.
+
+100
+00:05:21.04 --> 00:05:23.05
+When the instance is terminated,
+
+101
+00:05:23.05 --> 00:05:27.05
+the status changes to
+shutting down or terminated
+
+102
+00:05:27.05 --> 00:05:31.02
+and you stop incurring
+charges for that instance.
+
+103
+00:05:31.02 --> 00:05:33.03
+After the instance is terminated,
+
+104
+00:05:33.03 --> 00:05:36.06
+it remains visible in the
+console for a short while
+
+105
+00:05:36.06 --> 00:05:40.02
+and then the entry's
+automatically deleted.
+
+106
+00:05:40.02 --> 00:05:44.00
+Terminated instances cannot be recovered.
+
+107
+00:05:44.00 --> 00:05:46.07
+Well, that's about the
+EC2 instance lifecycle.
+
+108
+00:05:46.07 --> 00:05:48.03
+I'd like to thank you for watching
+
+109
+00:05:48.03 --> 00:05:49.09
+and I'll catch you in the next video.
+
+110
+00:05:49.09 --> 00:05:50.07
+Thank you.
+

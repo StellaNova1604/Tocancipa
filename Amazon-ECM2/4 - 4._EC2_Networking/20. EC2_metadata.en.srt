@@ -1,0 +1,438 @@
+1
+00:00:00.03 --> 00:00:01.06
+- [Instructor] Welcome back.
+
+2
+00:00:01.06 --> 00:00:03.06
+In this video, we're gonna talk about
+
+3
+00:00:03.06 --> 00:00:09.00
+a very interesting topic known
+as EC2 instance metadata.
+
+4
+00:00:09.00 --> 00:00:11.08
+This lecture requires you
+to perform some activities
+
+5
+00:00:11.08 --> 00:00:13.04
+on an EC2 instance,
+
+6
+00:00:13.04 --> 00:00:16.03
+so I'm gonna recommend you
+to launch an EC2 instance,
+
+7
+00:00:16.03 --> 00:00:19.07
+preferably a Windows and a Linux instance,
+
+8
+00:00:19.07 --> 00:00:22.06
+and you do it side by side with me.
+
+9
+00:00:22.06 --> 00:00:24.07
+Let's start.
+
+10
+00:00:24.07 --> 00:00:27.00
+So, what is instance metadata?
+
+11
+00:00:27.00 --> 00:00:31.03
+Well, instance metadata is
+data about your instances
+
+12
+00:00:31.03 --> 00:00:33.07
+that you can use to configure or manage
+
+13
+00:00:33.07 --> 00:00:35.07
+the running instances.
+
+14
+00:00:35.07 --> 00:00:37.06
+How do we get that data?
+
+15
+00:00:37.06 --> 00:00:40.05
+By accessing a specific URI,
+
+16
+00:00:40.05 --> 00:00:42.04
+and the URI is on your screen,
+
+17
+00:00:42.04 --> 00:00:57.01
+http://169.254.169.254/latest/meta-data/.
+
+18
+00:00:57.01 --> 00:01:01.01
+When you make an HTTP request
+to retrieve instance metadata,
+
+19
+00:01:01.01 --> 00:01:03.04
+you're not billed for that.
+
+20
+00:01:03.04 --> 00:01:05.02
+Well, that's the conceptual part.
+
+21
+00:01:05.02 --> 00:01:09.04
+Let's look at all of this in action.
+
+22
+00:01:09.04 --> 00:01:11.08
+Alright, so I'm here on the AWS console,
+
+23
+00:01:11.08 --> 00:01:14.08
+and as you can see, I have
+two running instances.
+
+24
+00:01:14.08 --> 00:01:18.05
+Over here, I have an Amazon Linux AMI,
+
+25
+00:01:18.05 --> 00:01:20.07
+which is called as LinuxServer,
+
+26
+00:01:20.07 --> 00:01:24.00
+and over here, I have
+a Windows EC2 instance.
+
+27
+00:01:24.00 --> 00:01:26.02
+I'm gonna first start with this one.
+
+28
+00:01:26.02 --> 00:01:28.01
+I've already connected to that instance,
+
+29
+00:01:28.01 --> 00:01:31.00
+so I'm gonna open up my terminal.
+
+30
+00:01:31.00 --> 00:01:32.02
+Alright, as you can see,
+
+31
+00:01:32.02 --> 00:01:35.02
+I've already logged into my EC2 instance.
+
+32
+00:01:35.02 --> 00:01:37.00
+How do we use that URI
+
+33
+00:01:37.00 --> 00:01:39.08
+to get metadata off this EC2 instance?
+
+34
+00:01:39.08 --> 00:01:42.09
+It's really simple, we're
+gonna use a pre-installed tool
+
+35
+00:01:42.09 --> 00:01:44.01
+called as cURL.
+
+36
+00:01:44.01 --> 00:01:52.05
+So you start with curl, and
+then you type in that URI.
+
+37
+00:01:52.05 --> 00:01:54.03
+Okay, so that's curl space
+
+38
+00:01:54.03 --> 00:02:03.04
+http://169.254.169.254/latest/meta-data.
+
+39
+00:02:03.04 --> 00:02:06.00
+Remember, I told you that trailing slash,
+
+40
+00:02:06.00 --> 00:02:08.05
+if you don't have it, it doesn't work.
+
+41
+00:02:08.05 --> 00:02:11.08
+So, make sure that you
+have that trailing slash.
+
+42
+00:02:11.08 --> 00:02:14.03
+Now when I hit enter, you can see that
+
+43
+00:02:14.03 --> 00:02:17.03
+there's a bunch of
+information that we can query.
+
+44
+00:02:17.03 --> 00:02:21.03
+For example, if I wanted
+to know what is the AMI ID,
+
+45
+00:02:21.03 --> 00:02:27.09
+I can append this with
+ami-id, which is from here.
+
+46
+00:02:27.09 --> 00:02:29.09
+Let's try that, hit enter,
+
+47
+00:02:29.09 --> 00:02:33.06
+and that's the AMI ID
+that I'm using right now.
+
+48
+00:02:33.06 --> 00:02:36.00
+Let's say I wanted to view my instance ID,
+
+49
+00:02:36.00 --> 00:02:40.00
+so I can remove that
+and type in instance-id,
+
+50
+00:02:40.00 --> 00:02:43.03
+and there I have it.
+
+51
+00:02:43.03 --> 00:02:45.08
+Let's say I wanted to
+view my instance type.
+
+52
+00:02:45.08 --> 00:02:50.08
+So I can hit the up arrow,
+and say instance-type,
+
+53
+00:02:50.08 --> 00:02:53.06
+and we can see that it's a t2 micro.
+
+54
+00:02:53.06 --> 00:02:55.09
+How about the mac address?
+
+55
+00:02:55.09 --> 00:03:02.03
+So, I'll hit the up
+arrow, and I'll say mac.
+
+56
+00:03:02.03 --> 00:03:05.08
+How about the public IP address?
+
+57
+00:03:05.08 --> 00:03:11.08
+Public-ipv4, and there
+you have the public IP.
+
+58
+00:03:11.08 --> 00:03:16.02
+We can also try the public host name.
+
+59
+00:03:16.02 --> 00:03:18.03
+Right, so you have the public host name.
+
+60
+00:03:18.03 --> 00:03:21.00
+That's how we can query and retrieve
+
+61
+00:03:21.00 --> 00:03:23.04
+the EC2 instance metadata.
+
+62
+00:03:23.04 --> 00:03:24.09
+It's really simple.
+
+63
+00:03:24.09 --> 00:03:28.02
+If you see something like this,
+which has a trailing slash,
+
+64
+00:03:28.02 --> 00:03:31.09
+that means you have further
+categories beyond this.
+
+65
+00:03:31.09 --> 00:03:39.03
+So, for example, if I
+did metadata-network/
+
+66
+00:03:39.03 --> 00:03:42.07
+you can see that there's one
+more, which is interfaces.
+
+67
+00:03:42.07 --> 00:03:45.08
+So we can try that.
+
+68
+00:03:45.08 --> 00:03:47.02
+Slash.
+
+69
+00:03:47.02 --> 00:03:50.00
+And then you have something called macs.
+
+70
+00:03:50.00 --> 00:03:53.03
+So, m-a-c-s slash.
+
+71
+00:03:53.03 --> 00:03:56.01
+Right now, we only get one mac address,
+
+72
+00:03:56.01 --> 00:03:57.08
+because on this EC2 instance,
+
+73
+00:03:57.08 --> 00:04:02.04
+I have only one network
+interface, which is ET80.
+
+74
+00:04:02.04 --> 00:04:04.07
+If I had more network interfaces,
+
+75
+00:04:04.07 --> 00:04:07.00
+I would receive more mac addresses.
+
+76
+00:04:07.00 --> 00:04:10.08
+In fact, one mac address per interface.
+
+77
+00:04:10.08 --> 00:04:15.01
+That's how you do it on a
+Linux or a Unix EC2 instance.
+
+78
+00:04:15.01 --> 00:04:18.00
+How do we do this on Windows?
+
+79
+00:04:18.00 --> 00:04:19.00
+To show you that,
+
+80
+00:04:19.00 --> 00:04:23.09
+I've already logged in to
+a Windows EC2 instance.
+
+81
+00:04:23.09 --> 00:04:25.00
+I have it over here.
+
+82
+00:04:25.00 --> 00:04:26.03
+So what I have done is
+
+83
+00:04:26.03 --> 00:04:29.07
+I've logged in and I've
+opened up Internet Explorer.
+
+84
+00:04:29.07 --> 00:04:33.03
+Now, the URI needs to be
+typed into the browser,
+
+85
+00:04:33.03 --> 00:04:42.04
+so it's gonna be
+http://169.254.169.254/latest,
+
+86
+00:04:42.04 --> 00:04:44.06
+and you can see that I've
+already tried it before,
+
+87
+00:04:44.06 --> 00:04:49.08
+/meta-data, don't forget
+the trailing slash,
+
+88
+00:04:49.08 --> 00:04:51.05
+and hit enter.
+
+89
+00:04:51.05 --> 00:04:54.05
+And now, we have that
+exact same information.
+
+90
+00:04:54.05 --> 00:04:56.05
+If I wanted to view the AMI ID,
+
+91
+00:04:56.05 --> 00:05:00.08
+I can say ami-id, hit
+enter, and we can see that.
+
+92
+00:05:00.08 --> 00:05:03.05
+If you wanted to go back,
+hit the back button,
+
+93
+00:05:03.05 --> 00:05:05.04
+and you can try some of the categories,
+
+94
+00:05:05.04 --> 00:05:12.03
+like, for example, maybe public keys.
+
+95
+00:05:12.03 --> 00:05:15.06
+And that's the key pair
+that I'm using, right?
+
+96
+00:05:15.06 --> 00:05:18.07
+So, that's about EC2 instance metadata.
+
+97
+00:05:18.07 --> 00:05:21.07
+Simply put, it is data
+about your EC2 instance,
+
+98
+00:05:21.07 --> 00:05:25.04
+which can be used by other
+applications or third-party tools
+
+99
+00:05:25.04 --> 00:05:27.08
+that you might be using
+in your organization.
+
+100
+00:05:27.08 --> 00:05:29.06
+What's important is that URI.
+

@@ -1,0 +1,841 @@
+1
+00:00:04.00 --> 00:00:04.09
+- All right.
+
+2
+00:00:04.09 --> 00:00:07.05
+So I'm here at the AWS EC2 console,
+
+3
+00:00:07.05 --> 00:00:10.04
+and let's start by
+launching an EC2 instance.
+
+4
+00:00:10.04 --> 00:00:12.05
+So we'll click on Launch Instance.
+
+5
+00:00:12.05 --> 00:00:13.08
+I'm gonna select the first one,
+
+6
+00:00:13.08 --> 00:00:17.01
+which is Amazon Linux AMI.
+
+7
+00:00:17.01 --> 00:00:21.08
+And I'm gonna select
+t2.micro, for this one.
+
+8
+00:00:21.08 --> 00:00:24.08
+Now, over here, you'll notice that,
+
+9
+00:00:24.08 --> 00:00:27.01
+after this option, which is t2.unlimited,
+
+10
+00:00:27.01 --> 00:00:30.09
+we only have the option
+to add the user data.
+
+11
+00:00:30.09 --> 00:00:33.03
+But as soon as I change
+the subnet, over here,
+
+12
+00:00:33.03 --> 00:00:36.00
+if I choose a specific subnet,
+
+13
+00:00:36.00 --> 00:00:37.07
+you'll notice that now I have the option
+
+14
+00:00:37.07 --> 00:00:41.02
+to add additional network interfaces.
+
+15
+00:00:41.02 --> 00:00:46.01
+By default, it takes eth0,
+which is the default interface,
+
+16
+00:00:46.01 --> 00:00:47.09
+but if I wanted to add one more,
+
+17
+00:00:47.09 --> 00:00:49.06
+I can say Add Device, and
+
+18
+00:00:49.06 --> 00:00:53.01
+we can add one more interface, right?
+
+19
+00:00:53.01 --> 00:00:54.09
+So this option is available only if
+
+20
+00:00:54.09 --> 00:00:57.08
+you select the subnet, over here.
+
+21
+00:00:57.08 --> 00:01:00.09
+Even if we do not add
+additional interfaces over here,
+
+22
+00:01:00.09 --> 00:01:03.04
+we have the option to add it later on.
+
+23
+00:01:03.04 --> 00:01:07.00
+So we'll leave it at the
+default, and we'll continue.
+
+24
+00:01:07.00 --> 00:01:09.00
+Storage of eight gigs is fine.
+
+25
+00:01:09.00 --> 00:01:11.02
+We can add some tags, if required.
+
+26
+00:01:11.02 --> 00:01:12.09
+I'm not doing that right now.
+
+27
+00:01:12.09 --> 00:01:16.09
+I'm gonna select a security group.
+
+28
+00:01:16.09 --> 00:01:18.07
+Review and Launch, Launch,
+
+29
+00:01:18.07 --> 00:01:22.03
+and I'll acknowledge that I
+have access to that key pair.
+
+30
+00:01:22.03 --> 00:01:25.07
+Now, the instance is getting provisioned.
+
+31
+00:01:25.07 --> 00:01:30.01
+I'm gonna click on this one
+and refresh a couple of times.
+
+32
+00:01:30.01 --> 00:01:31.05
+Meanwhile, we can notice, over here,
+
+33
+00:01:31.05 --> 00:01:35.01
+that we already have
+an IP address assigned,
+
+34
+00:01:35.01 --> 00:01:38.04
+so we can see that we have
+a public IPv4 address,
+
+35
+00:01:38.04 --> 00:01:41.08
+and we also have a private IPv4 address.
+
+36
+00:01:41.08 --> 00:01:46.03
+Notice that I have not
+received an IPv6 address.
+
+37
+00:01:46.03 --> 00:01:50.05
+And if I scroll down, I
+have one network interface.
+
+38
+00:01:50.05 --> 00:01:54.01
+If I click on that interface,
+I can see the interface ID,
+
+39
+00:01:54.01 --> 00:01:59.00
+the VPC ID, it says the
+attachment status is "attaching".
+
+40
+00:01:59.00 --> 00:02:02.04
+In fact, if I refresh
+this, it's now running.
+
+41
+00:02:02.04 --> 00:02:04.00
+Let's try that again.
+
+42
+00:02:04.00 --> 00:02:07.06
+So now it says it is
+attached, the attachment date,
+
+43
+00:02:07.06 --> 00:02:11.00
+the attachment time, private IPv4 address,
+
+44
+00:02:11.00 --> 00:02:13.08
+public IPv4 address,
+and the security group
+
+45
+00:02:13.08 --> 00:02:16.07
+that has been associated.
+
+46
+00:02:16.07 --> 00:02:18.06
+Now, I'm gonna click
+on this one, over here,
+
+47
+00:02:18.06 --> 00:02:21.05
+the interface ID, and when I do that,
+
+48
+00:02:21.05 --> 00:02:23.02
+it moves me to this tab, over here,
+
+49
+00:02:23.02 --> 00:02:26.06
+which is call as Network Interfaces.
+
+50
+00:02:26.06 --> 00:02:28.05
+This is the interface, and we can see
+
+51
+00:02:28.05 --> 00:02:31.09
+that the status is "in-use".
+
+52
+00:02:31.09 --> 00:02:35.02
+Now, let's try to add
+one more IPv4 address
+
+53
+00:02:35.02 --> 00:02:36.07
+to the same interface.
+
+54
+00:02:36.07 --> 00:02:40.01
+So you go to Actions, Manage IP Addresses,
+
+55
+00:02:40.01 --> 00:02:43.03
+and we can say Assign new IP.
+
+56
+00:02:43.03 --> 00:02:46.02
+At this point, you could
+type in an IP address
+
+57
+00:02:46.02 --> 00:02:49.06
+from that subnet, or
+you can say Auto-assign,
+
+58
+00:02:49.06 --> 00:02:50.05
+which means it will
+
+59
+00:02:50.05 --> 00:02:53.06
+automatically allocate
+an available address,
+
+60
+00:02:53.06 --> 00:02:56.02
+like what we see on the screen, right now.
+
+61
+00:02:56.02 --> 00:03:00.00
+Now, if I close this, and if
+I just come down, over here,
+
+62
+00:03:00.00 --> 00:03:03.00
+we can see that we have
+two private IP addresses,
+
+63
+00:03:03.00 --> 00:03:05.04
+one over here, and one over here,
+
+64
+00:03:05.04 --> 00:03:08.06
+both assigned to the same interface.
+
+65
+00:03:08.06 --> 00:03:11.05
+If I go back to Instances, over here,
+
+66
+00:03:11.05 --> 00:03:13.09
+I select a running
+instance, we can see that
+
+67
+00:03:13.09 --> 00:03:16.08
+we have a private IPv4 address,
+
+68
+00:03:16.08 --> 00:03:19.01
+which is the primary
+one, and we also have a
+
+69
+00:03:19.01 --> 00:03:23.04
+secondary private IPv4 address.
+
+70
+00:03:23.04 --> 00:03:26.06
+So that means you can have
+multiple addresses assigned
+
+71
+00:03:26.06 --> 00:03:29.07
+to the same interface.
+
+72
+00:03:29.07 --> 00:03:31.07
+Now, let's change things a little bit.
+
+73
+00:03:31.07 --> 00:03:35.04
+So we'll go back to Network
+Interfaces, all right?
+
+74
+00:03:35.04 --> 00:03:39.00
+So over here, I notice that
+there's a couple of interfaces,
+
+75
+00:03:39.00 --> 00:03:40.06
+and one of them is available.
+
+76
+00:03:40.06 --> 00:03:42.03
+I did not create that, right now.
+
+77
+00:03:42.03 --> 00:03:45.07
+I believe this is from earlier.
+
+78
+00:03:45.07 --> 00:03:49.08
+I did not do it right now, so
+I'm just gonna delete that.
+
+79
+00:03:49.08 --> 00:03:52.01
+Okay, so we are left
+with the one interface.
+
+80
+00:03:52.01 --> 00:03:54.02
+If we did Manage IP Addresses,
+
+81
+00:03:54.02 --> 00:03:56.07
+we notice both the IP addresses.
+
+82
+00:03:56.07 --> 00:04:00.02
+I'm gonna remove this one,
+Unassign, Yes, Update.
+
+83
+00:04:00.02 --> 00:04:03.04
+Now, we only have one
+private IPv4 address,
+
+84
+00:04:03.04 --> 00:04:07.02
+which is mapped to a public IPv4 address.
+
+85
+00:04:07.02 --> 00:04:09.07
+Let's try to create one more interface.
+
+86
+00:04:09.07 --> 00:04:13.00
+So you go to Actions, or rather,
+
+87
+00:04:13.00 --> 00:04:15.06
+we go to Create Network Interface.
+
+88
+00:04:15.06 --> 00:04:17.04
+We need to select a subnet.
+
+89
+00:04:17.04 --> 00:04:19.02
+I'm gonna select the same subnet
+
+90
+00:04:19.02 --> 00:04:21.08
+in which my EC2 instance is present,
+
+91
+00:04:21.08 --> 00:04:24.06
+which is ap-south-1a.
+
+92
+00:04:24.06 --> 00:04:27.01
+We can hard-code a private IPv4 address,
+
+93
+00:04:27.01 --> 00:04:29.07
+or we can say Auto-assign, and then
+
+94
+00:04:29.07 --> 00:04:32.08
+we must select a security group.
+
+95
+00:04:32.08 --> 00:04:35.09
+This brings us to a
+critical understanding.
+
+96
+00:04:35.09 --> 00:04:38.04
+All along, we've been talking
+about security groups,
+
+97
+00:04:38.04 --> 00:04:39.09
+and we've been saying that
+
+98
+00:04:39.09 --> 00:04:41.07
+we are attaching the security group
+
+99
+00:04:41.07 --> 00:04:44.04
+to the EC2 instance, but the reality is
+
+100
+00:04:44.04 --> 00:04:46.08
+that security groups are attached
+
+101
+00:04:46.08 --> 00:04:49.08
+to the network interface,
+and the network interface,
+
+102
+00:04:49.08 --> 00:04:54.06
+in turn, is attached to
+that EC2 instance, right?
+
+103
+00:04:54.06 --> 00:04:57.06
+I'm gonna say Yes, Create,
+
+104
+00:04:57.06 --> 00:05:01.01
+and we have this second
+interface, over here.
+
+105
+00:05:01.01 --> 00:05:02.05
+Right now, it is not attached,
+
+106
+00:05:02.05 --> 00:05:05.01
+so it says "available", let's do that.
+
+107
+00:05:05.01 --> 00:05:08.09
+Attach it to the running instance.
+
+108
+00:05:08.09 --> 00:05:09.07
+Fantastic.
+
+109
+00:05:09.07 --> 00:05:12.06
+Now, if I go back to Instances, over here,
+
+110
+00:05:12.06 --> 00:05:15.01
+and I click on that one, you can see that
+
+111
+00:05:15.01 --> 00:05:17.06
+we have two private IP addresses,
+
+112
+00:05:17.06 --> 00:05:20.08
+and both of them show up as primary,
+
+113
+00:05:20.08 --> 00:05:25.09
+and that's because I have
+two network interfaces.
+
+114
+00:05:25.09 --> 00:05:28.04
+Every private IPv4 address
+
+115
+00:05:28.04 --> 00:05:31.07
+can be assigned a public IPv4 address.
+
+116
+00:05:31.07 --> 00:05:34.00
+We'll talk about that in the next video,
+
+117
+00:05:34.00 --> 00:05:36.09
+when we discuss elastic IPs.
+
+118
+00:05:36.09 --> 00:05:41.04
+So it is possible to have
+multiple network interfaces.
+
+119
+00:05:41.04 --> 00:05:43.09
+Now, you might be thinking,
+what's the use case?
+
+120
+00:05:43.09 --> 00:05:47.07
+Why should I have multiple
+network interfaces?
+
+121
+00:05:47.07 --> 00:05:51.06
+We can separate production
+traffic and management traffic.
+
+122
+00:05:51.06 --> 00:05:56.00
+I can have all my
+management traffic on eth0,
+
+123
+00:05:56.00 --> 00:06:00.01
+and I can have all my
+production traffic on eth1.
+
+124
+00:06:00.01 --> 00:06:01.04
+Now, let's say I wanted to take down
+
+125
+00:06:01.04 --> 00:06:03.01
+this instance for maintenance,
+
+126
+00:06:03.01 --> 00:06:07.00
+and I want to redirect all this
+traffic to another instance.
+
+127
+00:06:07.00 --> 00:06:08.02
+It's really easy.
+
+128
+00:06:08.02 --> 00:06:11.00
+I just have to detach
+it from this instance,
+
+129
+00:06:11.00 --> 00:06:13.08
+and attach it to another EC2 instance,
+
+130
+00:06:13.08 --> 00:06:17.06
+and all the traffic
+gets redirected, right?
+
+131
+00:06:17.06 --> 00:06:21.03
+So it gives you so much flexibility.
+
+132
+00:06:21.03 --> 00:06:23.05
+Now, let's talk about IPv6.
+
+133
+00:06:23.05 --> 00:06:25.08
+Why don't we have an IPv6 address?
+
+134
+00:06:25.08 --> 00:06:29.00
+Well, the reason is, the
+VPC is not configured
+
+135
+00:06:29.00 --> 00:06:31.04
+with an IPv6 address range.
+
+136
+00:06:31.04 --> 00:06:34.09
+So if you're interested in
+getting IPv6 IP addresses,
+
+137
+00:06:34.09 --> 00:06:39.05
+what you need to do is,
+you need to go to VPC.
+
+138
+00:06:39.05 --> 00:06:42.08
+Right now, I only have my default VPC,
+
+139
+00:06:42.08 --> 00:06:45.09
+so I'm gonna select that, select that VPC.
+
+140
+00:06:45.09 --> 00:06:49.09
+We can see that the IPv6
+CIDR range is empty.
+
+141
+00:06:49.09 --> 00:06:51.08
+So we go to Actions, over here,
+
+142
+00:06:51.08 --> 00:06:57.04
+and we say Edit CIDRs, and
+we need to add an IPv6 CIDR.
+
+143
+00:06:57.04 --> 00:06:59.05
+It automatically fills one for you.
+
+144
+00:06:59.05 --> 00:07:01.03
+We can say close.
+
+145
+00:07:01.03 --> 00:07:04.00
+Now, we have the IPv6 CIDR, but
+
+146
+00:07:04.00 --> 00:07:05.04
+there's one more thing to do.
+
+147
+00:07:05.04 --> 00:07:09.06
+We also must assign IP
+addresses, or IP address ranges,
+
+148
+00:07:09.06 --> 00:07:13.08
+to the subnets, so we go
+back over here to Subnets.
+
+149
+00:07:13.08 --> 00:07:16.02
+We select the first one.
+
+150
+00:07:16.02 --> 00:07:20.00
+Subnet Actions, Edit IPv6 CIDRs,
+
+151
+00:07:20.00 --> 00:07:22.07
+and we can say Add IPv6 CIDR.
+
+152
+00:07:22.07 --> 00:07:25.06
+There you go.
+
+153
+00:07:25.06 --> 00:07:27.05
+Okay, and we can close that, and
+
+154
+00:07:27.05 --> 00:07:29.05
+I'll repeat that for the next one.
+
+155
+00:07:29.05 --> 00:07:32.08
+Subnet Actions, Edit IPv6 CIDRs,
+
+156
+00:07:32.08 --> 00:07:37.05
+Add IPv6 CIDR, say Yes, and Close.
+
+157
+00:07:37.05 --> 00:07:39.07
+So at this point, we are now ready
+
+158
+00:07:39.07 --> 00:07:42.06
+to start assigning IPv6 addresses.
+
+159
+00:07:42.06 --> 00:07:45.08
+So we go back over here, and let's try
+
+160
+00:07:45.08 --> 00:07:48.07
+to go back to Network Interfaces,
+
+161
+00:07:48.07 --> 00:07:51.06
+and let's try to edit the first one.
+
+162
+00:07:51.06 --> 00:07:54.08
+Actions, Manage IP Addresses, and notice,
+
+163
+00:07:54.08 --> 00:07:56.05
+now we have that option enabled.
+
+164
+00:07:56.05 --> 00:08:00.03
+So I'm gonna say Assign
+new IP, auto-assign,
+
+165
+00:08:00.03 --> 00:08:02.09
+Yes, and there you have it.
+
+166
+00:08:02.09 --> 00:08:07.03
+So I'll close this, and
+if I go back to Instances,
+
+167
+00:08:07.03 --> 00:08:11.07
+now, we should have an IPv6 address.
+
+168
+00:08:11.07 --> 00:08:14.00
+One last thing before we close this video,
+
+169
+00:08:14.00 --> 00:08:16.02
+we'll see a document that tells us
+
+170
+00:08:16.02 --> 00:08:19.00
+how many network
+interfaces can be attached
+
+171
+00:08:19.00 --> 00:08:21.03
+per EC2 instance type.
+
+172
+00:08:21.03 --> 00:08:22.03
+That is over here.
+
+173
+00:08:22.03 --> 00:08:24.08
+I'm also gonna leave a
+link to this document
+
+174
+00:08:24.08 --> 00:08:27.01
+in the description of this video.
+
+175
+00:08:27.01 --> 00:08:28.03
+I'm gonna go down, over here,
+
+176
+00:08:28.03 --> 00:08:31.08
+to t2.micro, or the t2 instances.
+
+177
+00:08:31.08 --> 00:08:33.07
+So we can see that, for t2.nano,
+
+178
+00:08:33.07 --> 00:08:36.06
+you can attach two network interfaces,
+
+179
+00:08:36.06 --> 00:08:39.06
+and this column tells
+you the maximum number
+
+180
+00:08:39.06 --> 00:08:42.08
+of IP addresses per interface.
+
+181
+00:08:42.08 --> 00:08:46.07
+This is for IPv4, and this is for IPv6.
+
+182
+00:08:46.07 --> 00:08:50.04
+So if you look at
+t2.micro, excuse me, there,
+
+183
+00:08:50.04 --> 00:08:53.05
+t2.micro, we can have
+two network interfaces,
+
+184
+00:08:53.05 --> 00:08:57.02
+and two IPv4 addresses per interface,
+
+185
+00:08:57.02 --> 00:09:01.02
+and two IPv6 addresses per interface.
+
+186
+00:09:01.02 --> 00:09:04.01
+If you look at t2.large, you can have
+
+187
+00:09:04.01 --> 00:09:08.04
+three network interfaces,
+12 IPv4 addresses
+
+188
+00:09:08.04 --> 00:09:12.04
+per network interface,
+and 12 IPv6 addresses
+
+189
+00:09:12.04 --> 00:09:13.08
+per network interface.
+
+190
+00:09:13.08 --> 00:09:16.09
+So that's a lot of flexibility.
+
+191
+00:09:16.09 --> 00:09:19.05
+Well, that's about network interfaces.
+
+192
+00:09:19.05 --> 00:09:21.02
+I'd like to thank you for watching,
+
+193
+00:09:21.02 --> 00:09:22.05
+and I'll catch you in the next video.
+
+194
+00:09:22.05 --> 00:09:23.06
+Thank you.
+

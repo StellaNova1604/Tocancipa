@@ -1,0 +1,976 @@
+1
+00:00:00.01 --> 00:00:01.04
+- [Narrator] Welcome back.
+
+2
+00:00:01.04 --> 00:00:04.02
+In this video, we're
+going to do some hands on
+
+3
+00:00:04.02 --> 00:00:07.02
+exercises on AMIs.
+
+4
+00:00:07.02 --> 00:00:10.04
+In one of the earlier
+lectures, we spoke about AMIs,
+
+5
+00:00:10.04 --> 00:00:13.06
+or Amazon Machine Images,
+and we spoke about this
+
+6
+00:00:13.06 --> 00:00:16.07
+in the lecture where we
+understood how to launch
+
+7
+00:00:16.07 --> 00:00:18.05
+an EC2 instance.
+
+8
+00:00:18.05 --> 00:00:21.06
+We saw that selecting
+an AMI is the first step
+
+9
+00:00:21.06 --> 00:00:24.01
+when you are creating an EC2 instance,
+
+10
+00:00:24.01 --> 00:00:27.02
+and we also understood
+that an AMI is a template
+
+11
+00:00:27.02 --> 00:00:30.02
+that contains all the required information
+
+12
+00:00:30.02 --> 00:00:32.01
+to launch an EC2 instance.
+
+13
+00:00:32.01 --> 00:00:34.06
+In this video, we're going to understand
+
+14
+00:00:34.06 --> 00:00:38.09
+how to create our own custom AMIs.
+
+15
+00:00:38.09 --> 00:00:42.00
+If you are ready, let's begin.
+
+16
+00:00:42.00 --> 00:00:45.03
+All right, so right now
+I'm at the AWS console
+
+17
+00:00:45.03 --> 00:00:48.01
+and as you can see right
+now I have a running
+
+18
+00:00:48.01 --> 00:00:50.03
+Windows EC2 instance.
+
+19
+00:00:50.03 --> 00:00:53.07
+This one is a Windows 2008 instance
+
+20
+00:00:53.07 --> 00:00:59.02
+and I have already connected
+to this EC2 instance.
+
+21
+00:00:59.02 --> 00:01:01.03
+So, here you can see that
+I'm already connected
+
+22
+00:01:01.03 --> 00:01:04.06
+to that EC2 instance and
+after connecting I have
+
+23
+00:01:04.06 --> 00:01:07.09
+installed something called as XAMPP.
+
+24
+00:01:07.09 --> 00:01:09.09
+XAMPP is an Apache distribution
+
+25
+00:01:09.09 --> 00:01:11.05
+and it's an open source tool.
+
+26
+00:01:11.05 --> 00:01:14.08
+So, you can see that I
+already have it installed.
+
+27
+00:01:14.08 --> 00:01:16.08
+The reason I'm doing this is to show you
+
+28
+00:01:16.08 --> 00:01:18.07
+what happens when you create an AMI
+
+29
+00:01:18.07 --> 00:01:21.05
+out of this EC2 instance.
+
+30
+00:01:21.05 --> 00:01:24.03
+Let's go back to the AWS console.
+
+31
+00:01:24.03 --> 00:01:26.08
+Back over here, when I
+select the EC2 instance
+
+32
+00:01:26.08 --> 00:01:29.07
+you can see that I have
+two volumes attached
+
+33
+00:01:29.07 --> 00:01:32.07
+to that EC2 instance,
+and I can confirm this
+
+34
+00:01:32.07 --> 00:01:34.06
+by going to volumes over here.
+
+35
+00:01:34.06 --> 00:01:37.02
+So you can see that we
+have a couple of volumes.
+
+36
+00:01:37.02 --> 00:01:40.06
+One is 30 gigs, and
+one is one gig in size.
+
+37
+00:01:40.06 --> 00:01:43.06
+Before we start the
+process of creating the AMI
+
+38
+00:01:43.06 --> 00:01:46.08
+let's first launch a
+continuous ping on the public
+
+39
+00:01:46.08 --> 00:01:49.04
+IP address of that EC2 instance.
+
+40
+00:01:49.04 --> 00:01:51.04
+So, I'll go back to instances over here,
+
+41
+00:01:51.04 --> 00:01:56.05
+copy that public IP
+address, open up a terminal,
+
+42
+00:01:56.05 --> 00:02:00.07
+and I'm gonna do a ping, and
+the IP address, hit enter.
+
+43
+00:02:00.07 --> 00:02:04.08
+So right now we have connectivity
+to that EC2 instance.
+
+44
+00:02:04.08 --> 00:02:07.08
+If I wanted to create an
+AMI I would select that
+
+45
+00:02:07.08 --> 00:02:12.09
+EC2 instance, go to actions,
+image, create image.
+
+46
+00:02:12.09 --> 00:02:15.07
+We can give it a name.
+
+47
+00:02:15.07 --> 00:02:20.02
+I'm gonna call it as
+Windows 2008 with XAMPP.
+
+48
+00:02:20.02 --> 00:02:22.05
+Notice that both the
+volumes are going to be
+
+49
+00:02:22.05 --> 00:02:25.09
+part of the AMI, and we
+also have a check box
+
+50
+00:02:25.09 --> 00:02:28.09
+over here that says no reboot.
+
+51
+00:02:28.09 --> 00:02:31.05
+Right now I'm gonna leave that unchecked
+
+52
+00:02:31.05 --> 00:02:33.09
+and see what happens.
+
+53
+00:02:33.09 --> 00:02:36.07
+Now, I'm gonna click on
+create image over here
+
+54
+00:02:36.07 --> 00:02:39.05
+and we can see that the
+create image request
+
+55
+00:02:39.05 --> 00:02:43.01
+has been received and the
+process has been started.
+
+56
+00:02:43.01 --> 00:02:45.06
+I'm gonna close that and
+go back to the terminal
+
+57
+00:02:45.06 --> 00:02:48.00
+to see what happens.
+
+58
+00:02:48.00 --> 00:02:51.03
+Back over here, the ping is still working.
+
+59
+00:02:51.03 --> 00:02:53.09
+I'm gonna give it about 30 seconds or so.
+
+60
+00:02:53.09 --> 00:02:59.01
+In fact, you can see that it
+has already started timing out,
+
+61
+00:02:59.01 --> 00:03:02.09
+which means the EC2
+instance has been rebooted
+
+62
+00:03:02.09 --> 00:03:06.05
+and this is something
+very critical to know.
+
+63
+00:03:06.05 --> 00:03:11.08
+EC2 instances will be rebooted
+if you try to create an AMI.
+
+64
+00:03:11.08 --> 00:03:14.01
+Right, if you don't want this to happen,
+
+65
+00:03:14.01 --> 00:03:16.04
+what you could do is you
+could use the option called
+
+66
+00:03:16.04 --> 00:03:19.08
+no reboot, however, if
+there is any data which is
+
+67
+00:03:19.08 --> 00:03:24.02
+sitting in the cache that
+would not be a part of the AMI.
+
+68
+00:03:24.02 --> 00:03:27.02
+To make sure that all the
+data is included in the AMI
+
+69
+00:03:27.02 --> 00:03:32.04
+ideally you want that EC2
+instance to be rebooted.
+
+70
+00:03:32.04 --> 00:03:35.03
+Back over here, now I'm
+gonna wait for some time
+
+71
+00:03:35.03 --> 00:03:38.03
+for that EC2 instance to come back online.
+
+72
+00:03:38.03 --> 00:03:41.05
+Meanwhile, we can go to
+AMIs and we can see that
+
+73
+00:03:41.05 --> 00:03:44.06
+the AMI is being provisioned.
+
+74
+00:03:44.06 --> 00:03:47.00
+I'm gonna pause the video
+here for a couple of minutes
+
+75
+00:03:47.00 --> 00:03:51.09
+until this moves to the available state.
+
+76
+00:03:51.09 --> 00:03:54.08
+All right, so after waiting
+for about three minutes
+
+77
+00:03:54.08 --> 00:03:57.00
+the AMI is now completed.
+
+78
+00:03:57.00 --> 00:03:58.07
+The process has been completed,
+
+79
+00:03:58.07 --> 00:04:01.03
+and it is now available, which means
+
+80
+00:04:01.03 --> 00:04:06.02
+we can now use the AMI to
+create new EC2 instances.
+
+81
+00:04:06.02 --> 00:04:07.04
+Let's do that now.
+
+82
+00:04:07.04 --> 00:04:12.04
+I'm gonna go to actions,
+and I'm gonna say launch.
+
+83
+00:04:12.04 --> 00:04:16.02
+So now we are in the EC2
+instance launch wizard.
+
+84
+00:04:16.02 --> 00:04:18.04
+I'm gonna say configure instance details.
+
+85
+00:04:18.04 --> 00:04:20.07
+I'm not gonna change anything over here,
+
+86
+00:04:20.07 --> 00:04:22.06
+leave everything at the default.
+
+87
+00:04:22.06 --> 00:04:25.07
+Notice that all the volumes from the AMI
+
+88
+00:04:25.07 --> 00:04:28.09
+or the original EC2 instance
+are found over here.
+
+89
+00:04:28.09 --> 00:04:31.03
+We have the 30 gigs
+volume, and we also have
+
+90
+00:04:31.03 --> 00:04:33.00
+the one gig volume.
+
+91
+00:04:33.00 --> 00:04:35.04
+If we did not want to
+use this one over here,
+
+92
+00:04:35.04 --> 00:04:38.02
+the additional volume, we can remove that,
+
+93
+00:04:38.02 --> 00:04:45.08
+click on next, and I'm
+gonna name it as WinServer2.
+
+94
+00:04:45.08 --> 00:04:47.08
+Configure security
+group, and I'm gonna use
+
+95
+00:04:47.08 --> 00:04:51.04
+an existing security group
+that allows RDP traffic,
+
+96
+00:04:51.04 --> 00:04:55.03
+preview and launch and launch,
+and I'm gonna acknowledge
+
+97
+00:04:55.03 --> 00:04:58.07
+that I have access to that key pair.
+
+98
+00:04:58.07 --> 00:05:00.05
+Launch instances.
+
+99
+00:05:00.05 --> 00:05:02.04
+Now, the instance is being launched.
+
+100
+00:05:02.04 --> 00:05:04.02
+We can click on view instances,
+
+101
+00:05:04.02 --> 00:05:07.08
+and we see that WinServer2
+is now being launched.
+
+102
+00:05:07.08 --> 00:05:10.05
+Now, this can take about
+two to three minutes.
+
+103
+00:05:10.05 --> 00:05:13.07
+So meanwhile, I'm gonna
+go back to AMIs over here.
+
+104
+00:05:13.07 --> 00:05:17.02
+We have that AMI, and
+I'm also gonna show you
+
+105
+00:05:17.02 --> 00:05:18.07
+snapshots over here.
+
+106
+00:05:18.07 --> 00:05:21.08
+So we can see that we
+have snapshots of both
+
+107
+00:05:21.08 --> 00:05:25.00
+the volumes of the original EC2 instance,
+
+108
+00:05:25.00 --> 00:05:28.08
+the 30 gig volume, and the
+one gig volume as well.
+
+109
+00:05:28.08 --> 00:05:32.00
+Whenever you create a new AMI the new AMI
+
+110
+00:05:32.00 --> 00:05:35.04
+is automatically registered,
+which means it becomes
+
+111
+00:05:35.04 --> 00:05:39.00
+available to create new EC2 instances.
+
+112
+00:05:39.00 --> 00:05:41.08
+If however you do not
+want to allow the creation
+
+113
+00:05:41.08 --> 00:05:45.09
+of new instances from that
+AMI you can de-register that
+
+114
+00:05:45.09 --> 00:05:49.07
+by going to actions, de-register.
+
+115
+00:05:49.07 --> 00:05:52.08
+If you want to modify the
+permissions of that AMI
+
+116
+00:05:52.08 --> 00:05:55.02
+you can go to modify image permissions.
+
+117
+00:05:55.02 --> 00:05:59.07
+Right now the AMI's owned by
+you and not shared with anyone.
+
+118
+00:05:59.07 --> 00:06:01.04
+If you would like to
+share it with specific
+
+119
+00:06:01.04 --> 00:06:05.01
+AWS accounts you can use
+this option called private,
+
+120
+00:06:05.01 --> 00:06:08.03
+and you can use the AWS
+account number of the person
+
+121
+00:06:08.03 --> 00:06:13.04
+or the organization with
+which you'd like to share.
+
+122
+00:06:13.04 --> 00:06:16.00
+If you want to make the AMI a public AMI
+
+123
+00:06:16.00 --> 00:06:18.00
+where you allow everybody to use that
+
+124
+00:06:18.00 --> 00:06:21.05
+you can use this option called public.
+
+125
+00:06:21.05 --> 00:06:23.07
+I'm gonna cancel out from here,
+
+126
+00:06:23.07 --> 00:06:26.09
+and back over here in the AMI
+section right now you have
+
+127
+00:06:26.09 --> 00:06:29.07
+a filter applied called owned by me.
+
+128
+00:06:29.07 --> 00:06:32.08
+So it only shows you AMIs
+that you have created.
+
+129
+00:06:32.08 --> 00:06:35.04
+If you want to see private
+AMIs that have been shared
+
+130
+00:06:35.04 --> 00:06:41.01
+with you, you can change
+that private images.
+
+131
+00:06:41.01 --> 00:06:43.08
+So you can see all the
+private images over here,
+
+132
+00:06:43.08 --> 00:06:46.07
+and if you want to see the
+public AMIs that are available
+
+133
+00:06:46.07 --> 00:06:48.06
+you can do public images.
+
+134
+00:06:48.06 --> 00:06:53.06
+So you can see there's 23,000
+AMIs available to choose from.
+
+135
+00:06:53.06 --> 00:06:56.07
+I'm gonna reset it back to owned by me.
+
+136
+00:06:56.07 --> 00:06:59.04
+How about copying this
+AMI to a different region?
+
+137
+00:06:59.04 --> 00:07:02.05
+Let's say I want to
+launch a new EC2 instance
+
+138
+00:07:02.05 --> 00:07:03.07
+in a different region.
+
+139
+00:07:03.07 --> 00:07:05.09
+So you could go to actions and you can say
+
+140
+00:07:05.09 --> 00:07:12.00
+copy AMI and you can copy it
+over to a different region.
+
+141
+00:07:12.00 --> 00:07:14.00
+When you're copying
+them you can also choose
+
+142
+00:07:14.00 --> 00:07:17.09
+to encrypt your EBS snapshots.
+
+143
+00:07:17.09 --> 00:07:19.09
+I'm gonna cancel out from here.
+
+144
+00:07:19.09 --> 00:07:22.07
+Go back to instances, and now we have
+
+145
+00:07:22.07 --> 00:07:24.07
+the running EC2 instance.
+
+146
+00:07:24.07 --> 00:07:26.08
+Let's try to connect to that.
+
+147
+00:07:26.08 --> 00:07:28.04
+So I'm gonna select this one over here
+
+148
+00:07:28.04 --> 00:07:32.05
+and click on connect, and
+I'm gonna say get password.
+
+149
+00:07:32.05 --> 00:07:34.08
+This is something that
+I wanted you to see.
+
+150
+00:07:34.08 --> 00:07:37.09
+It says the password is not available.
+
+151
+00:07:37.09 --> 00:07:41.00
+This instance was
+launched from a custom AMI
+
+152
+00:07:41.00 --> 00:07:44.01
+or the default password has changed.
+
+153
+00:07:44.01 --> 00:07:48.00
+So, AWS has no idea what
+the password for this
+
+154
+00:07:48.00 --> 00:07:51.07
+EC2 instance is, because
+the AMI was created
+
+155
+00:07:51.07 --> 00:07:55.02
+from this EC2 instance
+and it could be possible
+
+156
+00:07:55.02 --> 00:07:57.09
+you have a custom password on that.
+
+157
+00:07:57.09 --> 00:08:00.00
+This is very, very important.
+
+158
+00:08:00.00 --> 00:08:02.01
+You must be aware of the password
+
+159
+00:08:02.01 --> 00:08:05.02
+required to connect to that EC2 instance.
+
+160
+00:08:05.02 --> 00:08:08.03
+Right now I have an
+easier way to find out.
+
+161
+00:08:08.03 --> 00:08:11.09
+I can use connect on my first EC2 instance
+
+162
+00:08:11.09 --> 00:08:14.06
+and grab the password from there.
+
+163
+00:08:14.06 --> 00:08:15.09
+Decrypt the password.
+
+164
+00:08:15.09 --> 00:08:18.03
+This is my original password.
+
+165
+00:08:18.03 --> 00:08:20.09
+If I had changed this
+from the control panel
+
+166
+00:08:20.09 --> 00:08:23.03
+of the Windows operating
+system I would have
+
+167
+00:08:23.03 --> 00:08:25.04
+to use the new password.
+
+168
+00:08:25.04 --> 00:08:27.09
+So I'm gonna copy that,
+and I'm gonna open up
+
+169
+00:08:27.09 --> 00:08:33.00
+a remote desktop client.
+
+170
+00:08:33.00 --> 00:08:35.09
+All right, and I'm gonna
+start a new connection.
+
+171
+00:08:35.09 --> 00:08:39.06
+First of all, I'm gonna
+copy that password.
+
+172
+00:08:39.06 --> 00:08:46.01
+Go back to the AWS console,
+and copy the public IP address.
+
+173
+00:08:46.01 --> 00:08:48.08
+Back over here, I'm
+gonna put that IP address
+
+174
+00:08:48.08 --> 00:08:52.03
+and the user name would be administrator.
+
+175
+00:08:52.03 --> 00:08:56.03
+I'm gonna close that to
+save that connection.
+
+176
+00:08:56.03 --> 00:08:59.03
+Now, before I connect I'm
+gonna terminate my session
+
+177
+00:08:59.03 --> 00:09:02.06
+with this EC2 instance.
+
+178
+00:09:02.06 --> 00:09:04.07
+All right, I've closed
+that in the background.
+
+179
+00:09:04.07 --> 00:09:07.00
+Now I'm gonna establish a session with
+
+180
+00:09:07.00 --> 00:09:12.06
+the new EC2 instance called as WinServer2.
+
+181
+00:09:12.06 --> 00:09:17.02
+All right, I'm gonna accept that.
+
+182
+00:09:17.02 --> 00:09:20.00
+Okay, so now I have connected
+to that EC2 instance
+
+183
+00:09:20.00 --> 00:09:22.03
+and I want you to notice something now.
+
+184
+00:09:22.03 --> 00:09:25.05
+If I go to start you'll notice that
+
+185
+00:09:25.05 --> 00:09:29.07
+XAMPP is pre-installed,
+because the original
+
+186
+00:09:29.07 --> 00:09:34.08
+EC2 instance had XAMPP on
+it, the AMI had XAMPP on it,
+
+187
+00:09:34.08 --> 00:09:37.03
+and the EC2 instance
+created out of that AMI
+
+188
+00:09:37.03 --> 00:09:40.03
+also has XAMPP on it, which means
+
+189
+00:09:40.03 --> 00:09:43.07
+I can now use the AMI as a golden image
+
+190
+00:09:43.07 --> 00:09:47.00
+to create new EC2 instances.
+
+191
+00:09:47.00 --> 00:09:48.06
+Isn't this fantastic?
+
+192
+00:09:48.06 --> 00:09:52.01
+It makes things so much easier.
+
+193
+00:09:52.01 --> 00:09:54.04
+And finally, before I end this video
+
+194
+00:09:54.04 --> 00:09:58.03
+I'm gonna show you how to delete an AMI.
+
+195
+00:09:58.03 --> 00:10:00.01
+I'm back at the AWS console.
+
+196
+00:10:00.01 --> 00:10:01.07
+I'll go to AMIs.
+
+197
+00:10:01.07 --> 00:10:03.07
+There are two steps that
+need to be performed
+
+198
+00:10:03.07 --> 00:10:05.06
+to delete the AMI.
+
+199
+00:10:05.06 --> 00:10:07.07
+The first thing is you go to actions
+
+200
+00:10:07.07 --> 00:10:11.01
+and you de-register that.
+
+201
+00:10:11.01 --> 00:10:12.01
+Continue.
+
+202
+00:10:12.01 --> 00:10:13.07
+So now, it has been de-registered,
+
+203
+00:10:13.07 --> 00:10:16.03
+which means the AMI cannot be used
+
+204
+00:10:16.03 --> 00:10:19.07
+to launch new EC2
+instances, and to complete
+
+205
+00:10:19.07 --> 00:10:22.09
+the deletion process you would
+go to snapshots over here
+
+206
+00:10:22.09 --> 00:10:27.05
+and you would delete all
+snapshots off that AMI.
+
+207
+00:10:27.05 --> 00:10:29.03
+Now that the snapshots are deleted,
+
+208
+00:10:29.03 --> 00:10:32.00
+if you go back to AMIs you will still find
+
+209
+00:10:32.00 --> 00:10:33.08
+your AMI over there.
+
+210
+00:10:33.08 --> 00:10:36.04
+Now, this is something
+that takes a little while.
+
+211
+00:10:36.04 --> 00:10:38.01
+It can take a few minutes for
+
+212
+00:10:38.01 --> 00:10:41.06
+the AMI to get removed from here.
+
+213
+00:10:41.06 --> 00:10:43.01
+All right, so that's it for this video.
+
+214
+00:10:43.01 --> 00:10:44.03
+I hope you enjoyed it.
+
+215
+00:10:44.03 --> 00:10:46.05
+If you have any questions,
+please let me know.
+
+216
+00:10:46.05 --> 00:10:48.01
+I'd like to thank you for watching,
+
+217
+00:10:48.01 --> 00:10:50.05
+and I'll catch you in the
+next video, thank you.
+

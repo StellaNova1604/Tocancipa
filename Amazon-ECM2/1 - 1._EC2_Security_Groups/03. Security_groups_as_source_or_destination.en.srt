@@ -1,0 +1,1098 @@
+1
+00:00:00.06 --> 00:00:01.09
+- [Instructor] Welcome back.
+
+2
+00:00:01.09 --> 00:00:04.04
+In this video, we'll
+continue our discussion
+
+3
+00:00:04.04 --> 00:00:07.02
+on security groups, and we'll understand
+
+4
+00:00:07.02 --> 00:00:09.01
+how we can use security groups
+
+5
+00:00:09.01 --> 00:00:13.09
+as source or destination
+for another security group.
+
+6
+00:00:13.09 --> 00:00:15.04
+So in the last couple of videos,
+
+7
+00:00:15.04 --> 00:00:17.08
+we looked at the concepts
+of security groups,
+
+8
+00:00:17.08 --> 00:00:20.04
+and we also understood
+how we can configure
+
+9
+00:00:20.04 --> 00:00:23.07
+inbound and outbound
+rules for security groups.
+
+10
+00:00:23.07 --> 00:00:26.02
+In this video, I'm gonna show you exactly
+
+11
+00:00:26.02 --> 00:00:27.06
+how you can use security groups
+
+12
+00:00:27.06 --> 00:00:32.03
+as a source or destination
+for another security group.
+
+13
+00:00:32.03 --> 00:00:35.06
+If you're ready, let's begin.
+
+14
+00:00:35.06 --> 00:00:38.01
+Alright, so I'm here at the AWS console,
+
+15
+00:00:38.01 --> 00:00:41.07
+and you can see right now,
+I have no running instances.
+
+16
+00:00:41.07 --> 00:00:43.02
+The first thing that we'll do is
+
+17
+00:00:43.02 --> 00:00:47.03
+we'll spin up a new web server.
+
+18
+00:00:47.03 --> 00:00:49.02
+This one is a lab exercise,
+
+19
+00:00:49.02 --> 00:00:51.08
+so I hope you're signed
+into your AWS account,
+
+20
+00:00:51.08 --> 00:00:53.06
+and let's do it together.
+
+21
+00:00:53.06 --> 00:00:56.06
+We'll go to launch instance.
+
+22
+00:00:56.06 --> 00:00:59.07
+This lab can be done on a Windows machine
+
+23
+00:00:59.07 --> 00:01:02.00
+and on a Linux machine as well,
+
+24
+00:01:02.00 --> 00:01:03.09
+but we can do it very quickly
+
+25
+00:01:03.09 --> 00:01:07.00
+if we choose to do it
+on a Linux based system.
+
+26
+00:01:07.00 --> 00:01:08.00
+So let's do that.
+
+27
+00:01:08.00 --> 00:01:09.07
+We can select the first one over here
+
+28
+00:01:09.07 --> 00:01:13.08
+which is Amazon Linux AMI.
+
+29
+00:01:13.08 --> 00:01:16.00
+We'll select the size as t2 micro,
+
+30
+00:01:16.00 --> 00:01:18.03
+because that is free tier eligible.
+
+31
+00:01:18.03 --> 00:01:19.07
+Click on next.
+
+32
+00:01:19.07 --> 00:01:23.02
+Now you can choose any
+availability zone of your choice,
+
+33
+00:01:23.02 --> 00:01:27.01
+just make sure that you
+have auto-assign public IP
+
+34
+00:01:27.01 --> 00:01:30.02
+set to enable, or the subnet setting,
+
+35
+00:01:30.02 --> 00:01:32.00
+if that is set to enable,
+
+36
+00:01:32.00 --> 00:01:37.01
+because we need a public IP
+to access the web server.
+
+37
+00:01:37.01 --> 00:01:39.07
+Down over here, in advanced details,
+
+38
+00:01:39.07 --> 00:01:43.03
+I'm gonna write a small startup script.
+
+39
+00:01:43.03 --> 00:01:46.05
+I have that ready, so I'm just
+gonna paste that over here.
+
+40
+00:01:46.05 --> 00:01:47.04
+I'll explain it to you.
+
+41
+00:01:47.04 --> 00:01:49.05
+There are four commands.
+
+42
+00:01:49.05 --> 00:01:52.02
+The first command instructs
+the operating system
+
+43
+00:01:52.02 --> 00:01:54.04
+to run all the remaining commands
+
+44
+00:01:54.04 --> 00:01:57.04
+with the required privileges.
+
+45
+00:01:57.04 --> 00:02:01.00
+This one over here, yum
+install httpd minus y
+
+46
+00:02:01.00 --> 00:02:04.09
+installs Apache on the Linux server.
+
+47
+00:02:04.09 --> 00:02:08.08
+This one over here starts
+the Apache service.
+
+48
+00:02:08.08 --> 00:02:11.09
+And finally, I'm gonna
+write a small HTML code
+
+49
+00:02:11.09 --> 00:02:15.05
+inside a file called as index.html.
+
+50
+00:02:15.05 --> 00:02:18.01
+The index.html file is in the root folder,
+
+51
+00:02:18.01 --> 00:02:22.05
+which is /var/www/html.
+
+52
+00:02:22.05 --> 00:02:26.00
+It's a simple code, it
+says hi, I'm a web server,
+
+53
+00:02:26.00 --> 00:02:29.08
+within the h1 tag.
+
+54
+00:02:29.08 --> 00:02:31.07
+In the description of this video,
+
+55
+00:02:31.07 --> 00:02:33.04
+I will leave this code snip-it
+
+56
+00:02:33.04 --> 00:02:35.08
+so you can just copy and paste it.
+
+57
+00:02:35.08 --> 00:02:39.04
+By the way, we've not discussed
+about user data before.
+
+58
+00:02:39.04 --> 00:02:43.09
+User data is a very handy way
+to pass some startup scripts
+
+59
+00:02:43.09 --> 00:02:46.08
+to EC2 instances.
+
+60
+00:02:46.08 --> 00:02:48.09
+Whatever we input in user data
+
+61
+00:02:48.09 --> 00:02:54.03
+is executed at startup when
+the EC2 instance boots up.
+
+62
+00:02:54.03 --> 00:02:57.04
+Right, so now I'm gonna
+say next add storage.
+
+63
+00:02:57.04 --> 00:03:00.04
+Eight gigs of storage is absolutely fine.
+
+64
+00:03:00.04 --> 00:03:02.05
+Next we'll add some tags.
+
+65
+00:03:02.05 --> 00:03:07.04
+Let's call this as WebServer.
+
+66
+00:03:07.04 --> 00:03:09.07
+Next we need to create a security group.
+
+67
+00:03:09.07 --> 00:03:11.04
+Now the security group needs to allow
+
+68
+00:03:11.04 --> 00:03:15.02
+two kinds of protocols, SSH and HTTP.
+
+69
+00:03:15.02 --> 00:03:18.02
+SSH will allow us to log
+in to the EC2 instance
+
+70
+00:03:18.02 --> 00:03:19.08
+if we need to troubleshoot,
+
+71
+00:03:19.08 --> 00:03:23.04
+and HTTP will be used
+to access the web page.
+
+72
+00:03:23.04 --> 00:03:25.08
+So I'll create a new one.
+
+73
+00:03:25.08 --> 00:03:30.04
+I'll call it as SSH and HTTP allowed,
+
+74
+00:03:30.04 --> 00:03:32.03
+and I'll copy that in the description.
+
+75
+00:03:32.03 --> 00:03:36.03
+We already have SSH, we'll also add HTTP,
+
+76
+00:03:36.03 --> 00:03:41.05
+from all IP addresses,
+review and launch, launch,
+
+77
+00:03:41.05 --> 00:03:46.00
+and I'll make sure that I
+have access to the key pair,
+
+78
+00:03:46.00 --> 00:03:48.09
+and launch instances.
+
+79
+00:03:48.09 --> 00:03:50.09
+Now the instance is being launched.
+
+80
+00:03:50.09 --> 00:03:55.04
+We can go to view instances.
+
+81
+00:03:55.04 --> 00:03:58.06
+Refresh that.
+
+82
+00:03:58.06 --> 00:03:59.09
+After about 30 seconds,
+
+83
+00:03:59.09 --> 00:04:02.02
+the instance is now in a running state,
+
+84
+00:04:02.02 --> 00:04:04.09
+and I'm gonna copy that public IP address,
+
+85
+00:04:04.09 --> 00:04:08.06
+and I'm gonna try that
+in a new browser window.
+
+86
+00:04:08.06 --> 00:04:10.03
+Hit enter, and there you go.
+
+87
+00:04:10.03 --> 00:04:12.05
+It says Hi, I'm a web server.
+
+88
+00:04:12.05 --> 00:04:13.05
+Fantastic.
+
+89
+00:04:13.05 --> 00:04:17.00
+Next, we're gonna create
+a new load balancer.
+
+90
+00:04:17.00 --> 00:04:18.06
+So we'll go to this section over here,
+
+91
+00:04:18.06 --> 00:04:22.00
+which is called as load balancers.
+
+92
+00:04:22.00 --> 00:04:25.09
+We're doing this just to
+test this lab exercise.
+
+93
+00:04:25.09 --> 00:04:27.00
+Later on in this course,
+
+94
+00:04:27.00 --> 00:04:29.09
+we have a dedicated
+discussion on load balancers
+
+95
+00:04:29.09 --> 00:04:32.03
+where we'll deep dive
+into all the concepts
+
+96
+00:04:32.03 --> 00:04:34.01
+of load balancers.
+
+97
+00:04:34.01 --> 00:04:36.01
+Right now, I'm just
+trying to show you a lab
+
+98
+00:04:36.01 --> 00:04:39.08
+on security groups, so we'll
+not be discussing all concepts
+
+99
+00:04:39.08 --> 00:04:41.04
+related to load balancers.
+
+100
+00:04:41.04 --> 00:04:44.09
+We're just gonna launch
+it and test it, okay?
+
+101
+00:04:44.09 --> 00:04:47.04
+So let's do create load balancer.
+
+102
+00:04:47.04 --> 00:04:49.06
+We have three types of load balancers,
+
+103
+00:04:49.06 --> 00:04:53.00
+application, network, and classic.
+
+104
+00:04:53.00 --> 00:04:54.04
+Let's go with classic.
+
+105
+00:04:54.04 --> 00:04:56.09
+Click on create.
+
+106
+00:04:56.09 --> 00:04:58.05
+We'll give it a name, I'm gonna call it as
+
+107
+00:04:58.05 --> 00:05:01.00
+my elastic load balancer.
+
+108
+00:05:01.00 --> 00:05:05.02
+The load balancing protocol
+is HTTP on port 80,
+
+109
+00:05:05.02 --> 00:05:09.01
+and the instance also
+responds on HTTP on port 80,
+
+110
+00:05:09.01 --> 00:05:10.04
+which is fine.
+
+111
+00:05:10.04 --> 00:05:13.02
+Next, assign a security group.
+
+112
+00:05:13.02 --> 00:05:15.04
+Now, we could assign this one over here
+
+113
+00:05:15.04 --> 00:05:18.07
+because it already has HTTP allowed,
+
+114
+00:05:18.07 --> 00:05:20.08
+but I'm gonna create a new one,
+
+115
+00:05:20.08 --> 00:05:22.07
+and you'll know shortly why.
+
+116
+00:05:22.07 --> 00:05:27.04
+So I'm gonna call this
+one as HTTP for ELB,
+
+117
+00:05:27.04 --> 00:05:31.02
+or maybe HTTP for myELB.
+
+118
+00:05:31.02 --> 00:05:33.05
+I'll copy and paste
+that in the description,
+
+119
+00:05:33.05 --> 00:05:39.01
+and the type of traffic will be HTTP.
+
+120
+00:05:39.01 --> 00:05:42.02
+Next, we're not gonna
+configure any security settings
+
+121
+00:05:42.02 --> 00:05:45.02
+right now, we'll go on
+to the health check.
+
+122
+00:05:45.02 --> 00:05:47.09
+The health check is a way by
+which the load balancer knows
+
+123
+00:05:47.09 --> 00:05:51.04
+that the instance that is
+sitting behind the load balancer
+
+124
+00:05:51.04 --> 00:05:53.08
+is healthy and functioning.
+
+125
+00:05:53.08 --> 00:05:57.03
+And for that, the load
+balancer tries to access a file
+
+126
+00:05:57.03 --> 00:05:59.02
+on that instance.
+
+127
+00:05:59.02 --> 00:06:02.05
+Or we can say that the
+load balancer tries to ping
+
+128
+00:06:02.05 --> 00:06:04.01
+the instance behind it.
+
+129
+00:06:04.01 --> 00:06:08.02
+In this case, it is gonna use
+the HTTP protocol for ping,
+
+130
+00:06:08.02 --> 00:06:11.04
+on port 80, and it will
+try to ping this file,
+
+131
+00:06:11.04 --> 00:06:13.09
+which is index.html,
+
+132
+00:06:13.09 --> 00:06:16.00
+and we know that we already have this file
+
+133
+00:06:16.00 --> 00:06:18.03
+because we actually created a web page
+
+134
+00:06:18.03 --> 00:06:22.05
+by writing a little piece
+of code inside that file.
+
+135
+00:06:22.05 --> 00:06:24.02
+These are some values which are used
+
+136
+00:06:24.02 --> 00:06:26.00
+to configure the load balancer.
+
+137
+00:06:26.00 --> 00:06:27.08
+Right now, we're not gonna get into that.
+
+138
+00:06:27.08 --> 00:06:30.04
+We have another dedicated
+discussion for that.
+
+139
+00:06:30.04 --> 00:06:31.08
+We'll move on.
+
+140
+00:06:31.08 --> 00:06:34.03
+We'll say add EC2 instances.
+
+141
+00:06:34.03 --> 00:06:36.06
+Right now, we only have
+one running instance,
+
+142
+00:06:36.06 --> 00:06:40.01
+so I'm gonna select that, click on next.
+
+143
+00:06:40.01 --> 00:06:42.06
+You could add tags if you wanted to.
+
+144
+00:06:42.06 --> 00:06:44.04
+Right now, I'm not gonna do that.
+
+145
+00:06:44.04 --> 00:06:47.02
+Review and create, and click on create.
+
+146
+00:06:47.02 --> 00:06:49.09
+So now, the load balancer
+is being created.
+
+147
+00:06:49.09 --> 00:06:51.05
+Click on close.
+
+148
+00:06:51.05 --> 00:06:53.07
+We can see that load balancer over here,
+
+149
+00:06:53.07 --> 00:06:55.02
+and if we go to instances,
+
+150
+00:06:55.02 --> 00:06:59.03
+we have that one EC2
+instance that we selected.
+
+151
+00:06:59.03 --> 00:07:01.01
+It's called as WebServer,
+
+152
+00:07:01.01 --> 00:07:03.04
+and right now it says out of service.
+
+153
+00:07:03.04 --> 00:07:05.04
+Now we need to wait for some time
+
+154
+00:07:05.04 --> 00:07:07.09
+until it becomes in service,
+
+155
+00:07:07.09 --> 00:07:10.08
+and it can take up to one or two minutes,
+
+156
+00:07:10.08 --> 00:07:13.01
+depending on the values that we configured
+
+157
+00:07:13.01 --> 00:07:15.03
+while creating the load balancer.
+
+158
+00:07:15.03 --> 00:07:17.06
+So let's just pause
+this video for a second,
+
+159
+00:07:17.06 --> 00:07:22.07
+and I'll come back when
+this is in service.
+
+160
+00:07:22.07 --> 00:07:26.01
+Alright, so after waiting
+for about a minute or so,
+
+161
+00:07:26.01 --> 00:07:28.06
+the status is now in service,
+
+162
+00:07:28.06 --> 00:07:32.00
+which means the load balancer
+is forwarding traffic
+
+163
+00:07:32.00 --> 00:07:34.07
+to the instance that is sitting behind it.
+
+164
+00:07:34.07 --> 00:07:36.01
+How do we test this?
+
+165
+00:07:36.01 --> 00:07:38.03
+So we can go to description over here.
+
+166
+00:07:38.03 --> 00:07:41.05
+From here, we can grab the DNS
+name of that load balancer,
+
+167
+00:07:41.05 --> 00:07:46.02
+we can copy that, we can
+go to a new browser window,
+
+168
+00:07:46.02 --> 00:07:49.05
+we can type that and hit enter,
+
+169
+00:07:49.05 --> 00:07:52.04
+and it should show you the same web page,
+
+170
+00:07:52.04 --> 00:07:54.06
+because the load balancer
+takes that traffic
+
+171
+00:07:54.06 --> 00:07:57.03
+and forwards that to the web server.
+
+172
+00:07:57.03 --> 00:08:00.08
+This is fantastic,
+everything is working well.
+
+173
+00:08:00.08 --> 00:08:02.05
+But there's a small problem.
+
+174
+00:08:02.05 --> 00:08:05.02
+The problem is customers on the internet
+
+175
+00:08:05.02 --> 00:08:10.00
+can access this web page using
+the load balancer DNS name.
+
+176
+00:08:10.00 --> 00:08:13.04
+However, they can also
+directly access the web page
+
+177
+00:08:13.04 --> 00:08:16.09
+with the IP address of that server.
+
+178
+00:08:16.09 --> 00:08:18.03
+If this is possible,
+
+179
+00:08:18.03 --> 00:08:21.05
+it defeats the purpose of
+having a load balancer.
+
+180
+00:08:21.05 --> 00:08:22.09
+We have a load balancer
+
+181
+00:08:22.09 --> 00:08:25.03
+so that customers can
+hit the load balancer
+
+182
+00:08:25.03 --> 00:08:27.02
+and the traffic gets load balanced
+
+183
+00:08:27.02 --> 00:08:29.05
+between multiple instances.
+
+184
+00:08:29.05 --> 00:08:32.00
+In this case, yes we
+have only one instance,
+
+185
+00:08:32.00 --> 00:08:34.04
+but assuming that we
+had multiple instances,
+
+186
+00:08:34.04 --> 00:08:36.08
+the traffic would be load balanced.
+
+187
+00:08:36.08 --> 00:08:38.08
+Ideally, we do not want customers
+
+188
+00:08:38.08 --> 00:08:41.06
+to access the server directly,
+
+189
+00:08:41.06 --> 00:08:43.09
+so we need to configure this in a way
+
+190
+00:08:43.09 --> 00:08:46.00
+that the website is accessible
+
+191
+00:08:46.00 --> 00:08:48.02
+only if you hit the load balancer,
+
+192
+00:08:48.02 --> 00:08:51.07
+not if you hit the IP
+address of that server.
+
+193
+00:08:51.07 --> 00:08:52.08
+How do we do that?
+
+194
+00:08:52.08 --> 00:08:56.01
+Simple, we just need to
+modify the security group
+
+195
+00:08:56.01 --> 00:08:59.07
+that is associated with this web server.
+
+196
+00:08:59.07 --> 00:09:02.07
+So back over here to the EC2 console,
+
+197
+00:09:02.07 --> 00:09:05.01
+we'll go back to instances over here,
+
+198
+00:09:05.01 --> 00:09:07.04
+and first of all, we wanna verify
+
+199
+00:09:07.04 --> 00:09:09.08
+what is the security
+group that is associated
+
+200
+00:09:09.08 --> 00:09:12.06
+with this web server?
+
+201
+00:09:12.06 --> 00:09:13.08
+So this is my web server.
+
+202
+00:09:13.08 --> 00:09:16.03
+If I go down over here, I can see that
+
+203
+00:09:16.03 --> 00:09:21.09
+the security group is called
+as SSH and HTTP allowed.
+
+204
+00:09:21.09 --> 00:09:23.08
+So we'll go to security groups over here,
+
+205
+00:09:23.08 --> 00:09:26.05
+we'll click on SSH and HTTP allowed,
+
+206
+00:09:26.05 --> 00:09:29.06
+and we'll edit the inbound rule.
+
+207
+00:09:29.06 --> 00:09:32.09
+Over here, we can see that
+there are two entries for HTTP,
+
+208
+00:09:32.09 --> 00:09:36.06
+one that allows traffic
+from all IPv4 addresses,
+
+209
+00:09:36.06 --> 00:09:40.09
+and one that allows traffic
+from all IPv6 addresses.
+
+210
+00:09:40.09 --> 00:09:44.07
+To keep things simple,
+let's remove the IPv6 rule,
+
+211
+00:09:44.07 --> 00:09:49.07
+so now we're only allowing
+traffic from all IPv4 addresses.
+
+212
+00:09:49.07 --> 00:09:51.01
+And that's the problem,
+
+213
+00:09:51.01 --> 00:09:56.03
+because it is accepting
+traffic from all sources.
+
+214
+00:09:56.03 --> 00:09:57.08
+We want to modify this.
+
+215
+00:09:57.08 --> 00:10:01.03
+We want to make sure that
+the traffic is allowed
+
+216
+00:10:01.03 --> 00:10:04.09
+only if it is associated
+with the load balancer,
+
+217
+00:10:04.09 --> 00:10:07.05
+and the way to do that is to remove this
+
+218
+00:10:07.05 --> 00:10:09.03
+and call the security group
+
+219
+00:10:09.03 --> 00:10:12.06
+that is associated with
+that load balancer.
+
+220
+00:10:12.06 --> 00:10:16.08
+So I'll remove that, and
+I'll start by typing in sg,
+
+221
+00:10:16.08 --> 00:10:19.00
+because security groups have an identifier
+
+222
+00:10:19.00 --> 00:10:22.07
+which starts with sg, and
+we can see that over here,
+
+223
+00:10:22.07 --> 00:10:27.03
+we have a security group
+called HTTP for myELB,
+
+224
+00:10:27.03 --> 00:10:30.07
+and this is the one that we
+created for the load balancer.
+
+225
+00:10:30.07 --> 00:10:32.09
+So we select that.
+
+226
+00:10:32.09 --> 00:10:34.04
+Now what happens?
+
+227
+00:10:34.04 --> 00:10:39.07
+The server will allow HTTP
+traffic for only those instances
+
+228
+00:10:39.07 --> 00:10:45.09
+or resources that are associated
+with this security group.
+
+229
+00:10:45.09 --> 00:10:49.05
+Let's click on save, alright.
+
+230
+00:10:49.05 --> 00:10:51.02
+Now, we'll verify this.
+
+231
+00:10:51.02 --> 00:10:54.00
+We go back over here,
+and if we do a refresh,
+
+232
+00:10:54.00 --> 00:10:57.00
+it's working fine, but what about this?
+
+233
+00:10:57.00 --> 00:10:58.07
+Let's do a refresh over here,
+
+234
+00:10:58.07 --> 00:11:01.02
+and you can see that it's timing out.
+
+235
+00:11:01.02 --> 00:11:03.03
+In fact, if I copy that
+
+236
+00:11:03.03 --> 00:11:09.01
+and try that in a new browser
+window, it will not work.
+
+237
+00:11:09.01 --> 00:11:12.02
+The security group will
+now accept traffic only if
+
+238
+00:11:12.02 --> 00:11:15.01
+it is associated with an
+instance or a resource
+
+239
+00:11:15.01 --> 00:11:18.07
+that uses the security
+group that we specified.
+
+240
+00:11:18.07 --> 00:11:21.00
+Similarly, you could
+also do outbound rules,
+
+241
+00:11:21.00 --> 00:11:24.00
+you can go to actions,
+and edit inbound rules,
+
+242
+00:11:24.00 --> 00:11:25.07
+sorry, edit outbound rules,
+
+243
+00:11:25.07 --> 00:11:27.07
+and if you had a specific use case,
+
+244
+00:11:27.07 --> 00:11:31.06
+you could also put a
+security group over here.
+
+245
+00:11:31.06 --> 00:11:33.07
+Alright, so that's about this lecture.
+
+246
+00:11:33.07 --> 00:11:36.06
+Just make sure that you clean
+up your lab environment,
+
+247
+00:11:36.06 --> 00:11:39.06
+delete your load balancers,
+they're very expensive,
+
+248
+00:11:39.06 --> 00:11:42.04
+and also terminate your EC2 instance.
+
+249
+00:11:42.04 --> 00:11:44.00
+I'd like to thank you for watching,
+
+250
+00:11:44.00 --> 00:11:45.04
+and I'll catch you in the next video.
+
+251
+00:11:45.04 --> 00:11:46.02
+Thank you.
+

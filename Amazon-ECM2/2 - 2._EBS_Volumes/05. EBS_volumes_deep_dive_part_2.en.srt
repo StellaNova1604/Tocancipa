@@ -1,0 +1,332 @@
+1
+00:00:03.08 --> 00:00:07.01
+- [Instructor] Let's now
+talk about EBS volume types.
+
+2
+00:00:07.01 --> 00:00:10.07
+Amazon EBS volumes fall
+into two categories
+
+3
+00:00:10.07 --> 00:00:14.01
+based on performance
+characteristics and pricing.
+
+4
+00:00:14.01 --> 00:00:18.03
+Number one, we have SSD-backed volumes.
+
+5
+00:00:18.03 --> 00:00:21.03
+These are optimized for
+transactional workloads
+
+6
+00:00:21.03 --> 00:00:24.02
+involving frequent read
+or write operations
+
+7
+00:00:24.02 --> 00:00:26.03
+with small I/O size,
+
+8
+00:00:26.03 --> 00:00:30.06
+where the dominant
+performance attribute is IOPS,
+
+9
+00:00:30.06 --> 00:00:33.03
+input/output per second.
+
+10
+00:00:33.03 --> 00:00:38.03
+Number two, we have HDD-backed
+volumes or hard disk drives,
+
+11
+00:00:38.03 --> 00:00:41.04
+optimized for large streaming workloads
+
+12
+00:00:41.04 --> 00:00:47.03
+where throughput is a better
+performance measure than IOPS.
+
+13
+00:00:47.03 --> 00:00:49.07
+We go for SSD volumes when we are looking
+
+14
+00:00:49.07 --> 00:00:53.02
+for a very high number of IOPS,
+
+15
+00:00:53.02 --> 00:00:55.07
+whereas we go for HDD-backed volumes
+
+16
+00:00:55.07 --> 00:00:57.06
+when we are looking at throughput
+
+17
+00:00:57.06 --> 00:01:00.02
+as a performance attribute.
+
+18
+00:01:00.02 --> 00:01:03.06
+Talking about SSD volumes,
+we have two types.
+
+19
+00:01:03.06 --> 00:01:05.06
+We have general purpose SSD,
+
+20
+00:01:05.06 --> 00:01:08.04
+and then we have provisioned IOPS.
+
+21
+00:01:08.04 --> 00:01:10.09
+With general purpose SSD, the volume size
+
+22
+00:01:10.09 --> 00:01:15.06
+can be between 1 GB and 16 TB.
+
+23
+00:01:15.06 --> 00:01:20.07
+While for provisioned IOPS,
+it can be 4 GB to 16 TB.
+
+24
+00:01:20.07 --> 00:01:24.02
+The max IOPS for general
+purpose is 10,000,
+
+25
+00:01:24.02 --> 00:01:27.04
+which means 10,000
+input/output per second,
+
+26
+00:01:27.04 --> 00:01:32.04
+whereas for provisioned
+IOPS, the max can be 32,000.
+
+27
+00:01:32.04 --> 00:01:34.00
+You see that we also have differences
+
+28
+00:01:34.00 --> 00:01:36.05
+in terms of throughput volume,
+
+29
+00:01:36.05 --> 00:01:40.03
+and the dominant performance
+attribute is IOPS
+
+30
+00:01:40.03 --> 00:01:41.09
+for both of them,
+
+31
+00:01:41.09 --> 00:01:45.04
+which means we use IOPS
+as a comparison attribute
+
+32
+00:01:45.04 --> 00:01:48.00
+for SSD volumes.
+
+33
+00:01:48.00 --> 00:01:52.01
+Use cases, general purpose
+is suited for most workloads,
+
+34
+00:01:52.01 --> 00:01:54.06
+boot volumes, virtual desktops,
+
+35
+00:01:54.06 --> 00:01:57.03
+low latency interactive applications,
+
+36
+00:01:57.03 --> 00:01:59.05
+dev and test environments.
+
+37
+00:01:59.05 --> 00:02:01.02
+While provisioned IOPS is suitable
+
+38
+00:02:01.02 --> 00:02:03.06
+for critical business applications
+
+39
+00:02:03.06 --> 00:02:07.01
+that require sustained IOPS performance,
+
+40
+00:02:07.01 --> 00:02:13.08
+large database workloads such
+as MongoDB, Cassandra, etc.
+
+41
+00:02:13.08 --> 00:02:17.08
+Talking about HDD volume types,
+we have a couple of them.
+
+42
+00:02:17.08 --> 00:02:20.02
+Number one is throughput optimized
+
+43
+00:02:20.02 --> 00:02:23.05
+and number two is cold HDD.
+
+44
+00:02:23.05 --> 00:02:26.04
+The volume size is the same, 500 GB,
+
+45
+00:02:26.04 --> 00:02:28.06
+all the way up to 16 TB.
+
+46
+00:02:28.06 --> 00:02:32.06
+The max IOPS is 500 for
+throughput optimized,
+
+47
+00:02:32.06 --> 00:02:35.06
+and 250 for cold HDD.
+
+48
+00:02:35.06 --> 00:02:38.03
+You can see that there's a
+difference in max throughput
+
+49
+00:02:38.03 --> 00:02:40.03
+per volume as well.
+
+50
+00:02:40.03 --> 00:02:44.08
+The dominant attribute over
+here is MiBs per second
+
+51
+00:02:44.08 --> 00:02:47.08
+or throughput.
+
+52
+00:02:47.08 --> 00:02:49.05
+The use case for throughput optimized
+
+53
+00:02:49.05 --> 00:02:52.07
+is streaming workloads
+that require consistent,
+
+54
+00:02:52.07 --> 00:02:55.04
+fast throughput at a low price,
+
+55
+00:02:55.04 --> 00:03:01.04
+as well as big data, data
+warehouses, log processing, etc.
+
+56
+00:03:01.04 --> 00:03:05.03
+Please keep in mind this
+cannot be a boot volume.
+
+57
+00:03:05.03 --> 00:03:08.04
+Remember in the video where
+we launched an EC2 instance?
+
+58
+00:03:08.04 --> 00:03:11.03
+We saw that the root
+volume did not allow us
+
+59
+00:03:11.03 --> 00:03:15.04
+to select an HDD-backed volume.
+
+60
+00:03:15.04 --> 00:03:19.06
+Use cases for cold HDD are
+throughput-oriented storage
+
+61
+00:03:19.06 --> 00:03:23.07
+for large volumes where data
+is infrequently accessed
+
+62
+00:03:23.07 --> 00:03:27.02
+and lowest storage cost is important.
+
+63
+00:03:27.02 --> 00:03:32.01
+Again, it cannot be a boot volume.
+
+64
+00:03:32.01 --> 00:03:34.07
+The last one is EBS magnetic,
+
+65
+00:03:34.07 --> 00:03:39.00
+it is also known as
+previous generation HDD.
+
+66
+00:03:39.00 --> 00:03:42.05
+Magnetic volumes are
+backed by magnetic drives,
+
+67
+00:03:42.05 --> 00:03:46.06
+suited for workloads where
+data is accessed infrequently,
+
+68
+00:03:46.06 --> 00:03:48.06
+and where low cost storage
+
+69
+00:03:48.06 --> 00:03:52.05
+for small volume sizes is important.
+
+70
+00:03:52.05 --> 00:03:55.00
+Over here, you have volume sizes from 1 GB
+
+71
+00:03:55.00 --> 00:04:00.05
+all the way up to 1 TB and
+the max IOPS is 40 to 200.
+
+72
+00:04:00.05 --> 00:04:02.07
+Well, that's it for this video.
+
+73
+00:04:02.07 --> 00:04:04.03
+I'd like to thank you for watching,
+
+74
+00:04:04.03 --> 00:04:05.06
+and I'll catch you in the next video.
+
+75
+00:04:05.06 --> 00:04:06.05
+Thank you.
+

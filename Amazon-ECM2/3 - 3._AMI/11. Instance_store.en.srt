@@ -1,0 +1,806 @@
+1
+00:00:00.06 --> 00:00:01.09
+- [Instructor] Welcome back.
+
+2
+00:00:01.09 --> 00:00:04.03
+In this video, we're gonna discuss about
+
+3
+00:00:04.03 --> 00:00:08.06
+something known as EC2 Instance Store.
+
+4
+00:00:08.06 --> 00:00:12.00
+I'm sure you remember EBS volumes.
+
+5
+00:00:12.00 --> 00:00:14.01
+EBS volumes are block devices
+
+6
+00:00:14.01 --> 00:00:16.08
+that provide persistent storage.
+
+7
+00:00:16.08 --> 00:00:18.09
+Even if your EC2 Instance reboots,
+
+8
+00:00:18.09 --> 00:00:21.01
+you still have access to that data.
+
+9
+00:00:21.01 --> 00:00:24.08
+And EBS volumes can be
+used as the root device
+
+10
+00:00:24.08 --> 00:00:27.01
+for the EC2 Instances.
+
+11
+00:00:27.01 --> 00:00:29.01
+We have another class of volumes
+
+12
+00:00:29.01 --> 00:00:31.02
+or we have another type of storage
+
+13
+00:00:31.02 --> 00:00:33.03
+which is not persistent in nature
+
+14
+00:00:33.03 --> 00:00:35.05
+but is temporary in nature.
+
+15
+00:00:35.05 --> 00:00:38.06
+And that is what is Instance Store.
+
+16
+00:00:38.06 --> 00:00:41.02
+Let's take a look at it.
+
+17
+00:00:41.02 --> 00:00:43.07
+Alright, so what is an Instance Store?
+
+18
+00:00:43.07 --> 00:00:46.02
+Some Amazon EC2 instance types
+
+19
+00:00:46.02 --> 00:00:48.07
+come with a form of directly attached,
+
+20
+00:00:48.07 --> 00:00:53.02
+block-device storage, which
+is known as Instance Store.
+
+21
+00:00:53.02 --> 00:00:56.04
+The Instance Store is ideal
+for temporary storage,
+
+22
+00:00:56.04 --> 00:00:59.07
+such as buffers and caches,
+because the data stored
+
+23
+00:00:59.07 --> 00:01:02.07
+in Instance Store
+volumes is not persistent
+
+24
+00:01:02.07 --> 00:01:07.05
+through instance stops,
+terminations, or hardware failures.
+
+25
+00:01:07.05 --> 00:01:09.09
+An Instance Store consists of one
+
+26
+00:01:09.09 --> 00:01:12.08
+or more Instance Store volumes,
+
+27
+00:01:12.08 --> 00:01:17.04
+which are exposed as block devices.
+
+28
+00:01:17.04 --> 00:01:19.03
+The size of an Instance Store,
+
+29
+00:01:19.03 --> 00:01:22.01
+as well as the number of devices available
+
+30
+00:01:22.01 --> 00:01:26.00
+varies by instance type.
+
+31
+00:01:26.00 --> 00:01:27.07
+I have a diagram on the screen,
+
+32
+00:01:27.07 --> 00:01:31.01
+which tries to explain
+how Instance Store volumes
+
+33
+00:01:31.01 --> 00:01:33.08
+are exposed as block devices.
+
+34
+00:01:33.08 --> 00:01:35.09
+A collection of these volumes together
+
+35
+00:01:35.09 --> 00:01:38.06
+is what is known as Instance Store.
+
+36
+00:01:38.06 --> 00:01:42.02
+And each of these volumes
+are individually exposed
+
+37
+00:01:42.02 --> 00:01:43.07
+to the EC2 instance.
+
+38
+00:01:43.07 --> 00:01:47.08
+And we'll take a look at
+that in just about a minute.
+
+39
+00:01:47.08 --> 00:01:49.05
+Back over here, let's talk about
+
+40
+00:01:49.05 --> 00:01:52.02
+the Instance Store Lifetime.
+
+41
+00:01:52.02 --> 00:01:54.08
+You can specify Instance Store volumes
+
+42
+00:01:54.08 --> 00:01:57.07
+for an instance only when you launch it.
+
+43
+00:01:57.07 --> 00:02:00.08
+And we'll look at this
+in just about a minute.
+
+44
+00:02:00.08 --> 00:02:03.06
+We can detach an Instance Store volume
+
+45
+00:02:03.06 --> 00:02:07.03
+from one instance and attach
+it to a different instance.
+
+46
+00:02:07.03 --> 00:02:09.06
+This one is a significant difference
+
+47
+00:02:09.06 --> 00:02:11.09
+compared to EBS volumes.
+
+48
+00:02:11.09 --> 00:02:14.05
+We could do this easily with EBS volumes.
+
+49
+00:02:14.05 --> 00:02:17.01
+Just detach the volume
+from an EC2 instance
+
+50
+00:02:17.01 --> 00:02:20.01
+and attach that to another EC2 instance.
+
+51
+00:02:20.01 --> 00:02:25.00
+However, with Instance Store
+volumes, that's not possible.
+
+52
+00:02:25.00 --> 00:02:27.00
+The data in an Instance Store persists
+
+53
+00:02:27.00 --> 00:02:31.02
+only during the lifetime
+of its associated instance.
+
+54
+00:02:31.02 --> 00:02:32.04
+This is interesting.
+
+55
+00:02:32.04 --> 00:02:34.01
+If an instance reboots,
+
+56
+00:02:34.01 --> 00:02:36.09
+either intentionally or unintentionally,
+
+57
+00:02:36.09 --> 00:02:40.03
+data in the Instance Store still persists.
+
+58
+00:02:40.03 --> 00:02:43.09
+So that means, if your EC2
+instance has been rebooted,
+
+59
+00:02:43.09 --> 00:02:46.03
+you still have access to that data.
+
+60
+00:02:46.03 --> 00:02:49.00
+However, data in the
+Instance Store is lost
+
+61
+00:02:49.00 --> 00:02:52.01
+under the following circumstances.
+
+62
+00:02:52.01 --> 00:02:55.08
+Number one, the underlying
+disk drive fails.
+
+63
+00:02:55.08 --> 00:02:58.01
+Number two, the instance stops.
+
+64
+00:02:58.01 --> 00:03:03.00
+And number three, the instance terminates.
+
+65
+00:03:03.00 --> 00:03:03.09
+Moving on.
+
+66
+00:03:03.09 --> 00:03:06.00
+When you stop or terminate an instance,
+
+67
+00:03:06.00 --> 00:03:10.04
+every block of storage in
+the Instance Store is reset.
+
+68
+00:03:10.04 --> 00:03:13.02
+Therefore, your data cannot be accessed
+
+69
+00:03:13.02 --> 00:03:16.07
+through the Instance
+Store of another instance.
+
+70
+00:03:16.07 --> 00:03:20.01
+Essentially, after you
+terminate your EC2 instance,
+
+71
+00:03:20.01 --> 00:03:21.09
+if your Instance Store is allocated
+
+72
+00:03:21.09 --> 00:03:24.07
+to another customer, they
+can't access your data,
+
+73
+00:03:24.07 --> 00:03:26.07
+because everything has been reset
+
+74
+00:03:26.07 --> 00:03:30.06
+before it is allocated
+to the other customer.
+
+75
+00:03:30.06 --> 00:03:33.02
+If you create an AMI from an instance,
+
+76
+00:03:33.02 --> 00:03:37.04
+the data on its Instance
+Store volumes isn't preserved
+
+77
+00:03:37.04 --> 00:03:40.04
+and isn't present on the
+Instance Store volumes
+
+78
+00:03:40.04 --> 00:03:44.04
+of the instance that you
+launch from the new AMI.
+
+79
+00:03:44.04 --> 00:03:46.02
+This is another significant difference
+
+80
+00:03:46.02 --> 00:03:48.06
+compared to EBS volumes.
+
+81
+00:03:48.06 --> 00:03:52.01
+With EBS volumes, whatever data is there,
+
+82
+00:03:52.01 --> 00:03:54.05
+it is transferred to the AMI
+
+83
+00:03:54.05 --> 00:03:57.05
+and when you create an EC2
+instance out of that AMI,
+
+84
+00:03:57.05 --> 00:04:00.07
+the new instance also has that data,
+
+85
+00:04:00.07 --> 00:04:04.01
+but with Instance Store,
+that's not the case.
+
+86
+00:04:04.01 --> 00:04:07.05
+Therefore, do not rely on Instance Store
+
+87
+00:04:07.05 --> 00:04:10.03
+for valuable, long-term data.
+
+88
+00:04:10.03 --> 00:04:13.03
+Instead, use more duruable data storage
+
+89
+00:04:13.03 --> 00:04:18.01
+such as Amazon S3, Amazon
+EBS, or Amazon EFS,
+
+90
+00:04:18.01 --> 00:04:20.09
+which is Elastic File Storage.
+
+91
+00:04:20.09 --> 00:04:23.02
+So I'm back over here to this document.
+
+92
+00:04:23.02 --> 00:04:26.09
+I'm just gonna scroll down over here
+
+93
+00:04:26.09 --> 00:04:29.00
+and here, we have a nice eautiful table
+
+94
+00:04:29.00 --> 00:04:32.04
+that tells you every instance type
+
+95
+00:04:32.04 --> 00:04:35.00
+and what is the number
+of Instance Store volumes
+
+96
+00:04:35.00 --> 00:04:36.06
+that you can attach.
+
+97
+00:04:36.06 --> 00:04:39.05
+For example, if you look at c1_medium,
+
+98
+00:04:39.05 --> 00:04:44.08
+you can attach one Instance
+Store volume of size 350 gigs.
+
+99
+00:04:44.08 --> 00:04:47.04
+Or look at this guy, c1-xlarge,
+
+100
+00:04:47.04 --> 00:04:52.05
+you can attach four, each
+having a size of 420 GB.
+
+101
+00:04:52.05 --> 00:04:56.03
+The largest is over here, d2_8xlarge.
+
+102
+00:04:56.03 --> 00:05:00.03
+It allows you to attach
+24 Instance Store volumes,
+
+103
+00:05:00.03 --> 00:05:03.03
+each of size 2,000 gigs,
+
+104
+00:05:03.03 --> 00:05:06.08
+which is a massive amount of storage.
+
+105
+00:05:06.08 --> 00:05:09.03
+Now let's understand how
+to launch an EC2 instance
+
+106
+00:05:09.03 --> 00:05:12.03
+with an Instance Store volume.
+
+107
+00:05:12.03 --> 00:05:15.06
+So I'm gonna take you
+to the AWS EC2 console
+
+108
+00:05:15.06 --> 00:05:17.07
+and I'm gonna go to instances
+
+109
+00:05:17.07 --> 00:05:20.02
+and I'm gonna click on launch instance.
+
+110
+00:05:20.02 --> 00:05:23.01
+One way to launch an ES2 Instance Store
+
+111
+00:05:23.01 --> 00:05:25.06
+is to go to Community AMIs.
+
+112
+00:05:25.06 --> 00:05:28.06
+And down over here, we have a filter
+
+113
+00:05:28.06 --> 00:05:31.04
+where you can say, show me only those AMIs
+
+114
+00:05:31.04 --> 00:05:35.04
+whose root device happens
+to be Instance Store.
+
+115
+00:05:35.04 --> 00:05:37.00
+So you can see that over here,
+
+116
+00:05:37.00 --> 00:05:40.08
+I have about 2,151 AMIs,
+
+117
+00:05:40.08 --> 00:05:42.09
+each of them having the root device
+
+118
+00:05:42.09 --> 00:05:48.07
+as Instance Store, temporary storage.
+
+119
+00:05:48.07 --> 00:05:51.04
+The other way of doing it
+is you go to Quick Start
+
+120
+00:05:51.04 --> 00:05:55.04
+and you have all these
+AMIs, about 35 of them,
+
+121
+00:05:55.04 --> 00:05:58.06
+each of them having
+the root device as EBS.
+
+122
+00:05:58.06 --> 00:06:01.06
+You select any one of them.
+
+123
+00:06:01.06 --> 00:06:02.04
+Okay?
+
+124
+00:06:02.04 --> 00:06:05.06
+And now, here you have
+all the instance sizes
+
+125
+00:06:05.06 --> 00:06:07.04
+and you have a column over here
+
+126
+00:06:07.04 --> 00:06:09.09
+that tells you how much Instance Store
+
+127
+00:06:09.09 --> 00:06:14.03
+can be added to each of
+these instance types.
+
+128
+00:06:14.03 --> 00:06:18.04
+For example if you see only EBS, EBS only,
+
+129
+00:06:18.04 --> 00:06:21.06
+you cannot add an Instance Store volume,
+
+130
+00:06:21.06 --> 00:06:24.05
+but if you see something like this,
+
+131
+00:06:24.05 --> 00:06:28.05
+like this, which is x1.16xlarge,
+
+132
+00:06:28.05 --> 00:06:35.03
+you can attach one Instance
+Store volume of size 1920 gigs.
+
+133
+00:06:35.03 --> 00:06:38.07
+Moving on, you can see
+over here, d2.8 xlarge.
+
+134
+00:06:38.07 --> 00:06:42.03
+It comes with 36 virtual
+CPUs and it allows you
+
+135
+00:06:42.03 --> 00:06:49.09
+to attach 24 Instance Store
+volumes. each of size 2048 gigs.
+
+136
+00:06:49.09 --> 00:06:52.04
+If you do not see this
+column on your screen,
+
+137
+00:06:52.04 --> 00:06:53.08
+you can go to the top over here,
+
+138
+00:06:53.08 --> 00:06:55.08
+you can say Show Hide Columns
+
+139
+00:06:55.08 --> 00:06:58.04
+and you can just enable
+this column over here.
+
+140
+00:06:58.04 --> 00:07:00.04
+Let met show you an example.
+
+141
+00:07:00.04 --> 00:07:03.06
+I'm gonna pick, let's
+say this one over here,
+
+142
+00:07:03.06 --> 00:07:08.00
+i2.4xlarge, which gives me
+four Instance Store volumes,
+
+143
+00:07:08.00 --> 00:07:10.05
+each of size 800 gigs.
+
+144
+00:07:10.05 --> 00:07:13.01
+I select that and I click on Next.
+
+145
+00:07:13.01 --> 00:07:15.09
+You can change your preferences over here.
+
+146
+00:07:15.09 --> 00:07:18.00
+I'm gonna select Next and notice that
+
+147
+00:07:18.00 --> 00:07:22.03
+I have the four Instance Store volumes.
+
+148
+00:07:22.03 --> 00:07:24.09
+If I do not want any one of them,
+
+149
+00:07:24.09 --> 00:07:27.03
+I an just remove that from here.
+
+150
+00:07:27.03 --> 00:07:28.05
+I also want you to notice,
+
+151
+00:07:28.05 --> 00:07:31.08
+the size is not in our control.
+
+152
+00:07:31.08 --> 00:07:35.02
+If it's an EBS volum,
+we can decide the size,
+
+153
+00:07:35.02 --> 00:07:37.03
+but if it's Instance Store volume,
+
+154
+00:07:37.03 --> 00:07:39.08
+we do not have the option
+to change the size.
+
+155
+00:07:39.08 --> 00:07:41.06
+The size is predetermined.
+
+156
+00:07:41.06 --> 00:07:45.09
+In this case, it is 800 gigs.
+
+157
+00:07:45.09 --> 00:07:48.00
+Now what I have done is,
+before I started recording,
+
+158
+00:07:48.00 --> 00:07:51.08
+I already launched an EC2 instance
+
+159
+00:07:51.08 --> 00:07:56.05
+with an Instance Store
+volume, which is i2.xlarge.
+
+160
+00:07:56.05 --> 00:07:59.09
+It has one Instance Store
+and we can check that out
+
+161
+00:07:59.09 --> 00:08:02.06
+by logging into the EC2 instance.
+
+162
+00:08:02.06 --> 00:08:05.04
+After logging in, I'm gonna do sudo su
+
+163
+00:08:05.04 --> 00:08:07.04
+just to elevate my privileges
+
+164
+00:08:07.04 --> 00:08:12.05
+and I'm gonna try LSBLK to
+view all the attached devices.
+
+165
+00:08:12.05 --> 00:08:18.02
+So this on is my root volume,
+which is 8 8 gigs in size,
+
+166
+00:08:18.02 --> 00:08:21.06
+and this one here is the
+Instance Store volume,
+
+167
+00:08:21.06 --> 00:08:25.02
+which is about 800 gigs in size.
+
+168
+00:08:25.02 --> 00:08:28.01
+We also notice that the root volume
+
+169
+00:08:28.01 --> 00:08:29.08
+has been mounted, of course,
+
+170
+00:08:29.08 --> 00:08:32.05
+but this one has not been mounted
+
+171
+00:08:32.05 --> 00:08:36.00
+so before we can start using
+that, we need to mount tha
+
+172
+00:08:36.00 --> 00:08:37.07
+and if you've seen one
+of the only lectures
+
+173
+00:08:37.07 --> 00:08:41.03
+on how to attach EBS
+volumes to Linux devices,
+
+174
+00:08:41.03 --> 00:08:43.04
+you should be aware of how to mount
+
+175
+00:08:43.04 --> 00:08:46.04
+a volume onto a mount point.
+
+176
+00:08:46.04 --> 00:08:47.02
+Right.
+
+177
+00:08:47.02 --> 00:08:48.01
+So what's the bottom line?
+
+178
+00:08:48.01 --> 00:08:51.09
+The bottom line is EBS volumes
+give you persistent storage,
+
+179
+00:08:51.09 --> 00:08:55.03
+while Instance Store volumes
+give you temporary storage.
+
+180
+00:08:55.03 --> 00:08:58.01
+This is useful, especially
+if your application
+
+181
+00:08:58.01 --> 00:09:00.07
+requires only temporary storage,
+
+182
+00:09:00.07 --> 00:09:04.05
+such as having a buffer or having a cache.
+
+183
+00:09:04.05 --> 00:09:06.08
+Well, that's about Instance Store volumes.
+
+184
+00:09:06.08 --> 00:09:08.05
+I'd like to thank you for watching
+
+185
+00:09:08.05 --> 00:09:09.07
+and I'll catch you in the next video.
+
+186
+00:09:09.07 --> 00:09:10.08
+Thank you.
+

@@ -1,0 +1,727 @@
+1
+00:00:00.08 --> 00:00:01.07
+- [Narrator] Welcome back.
+
+2
+00:00:01.07 --> 00:00:03.09
+In this video we'll
+understand how to attach
+
+3
+00:00:03.09 --> 00:00:09.04
+an EBS volume to a Linux EC2 instance.
+
+4
+00:00:09.04 --> 00:00:13.07
+To get started, I'm first gonna
+dive into the AWS console.
+
+5
+00:00:13.07 --> 00:00:15.09
+Alright, I'm over here at the AWS console,
+
+6
+00:00:15.09 --> 00:00:20.01
+and you can see that I already
+have a running EC2 instance
+
+7
+00:00:20.01 --> 00:00:25.00
+and the AMI for that is Amazon Linux AMI.
+
+8
+00:00:25.00 --> 00:00:26.00
+When I go to volumes,
+
+9
+00:00:26.00 --> 00:00:28.05
+you can see that I have an 8 gig volume,
+
+10
+00:00:28.05 --> 00:00:31.02
+which is attached to that Linux instance.
+
+11
+00:00:31.02 --> 00:00:32.04
+And I'm gonna create a new one.
+
+12
+00:00:32.04 --> 00:00:34.01
+So I'm gonna click on new volume,
+
+13
+00:00:34.01 --> 00:00:37.02
+and I'm gonna choose the type as GP2,
+
+14
+00:00:37.02 --> 00:00:39.04
+which is General Purpose SSD,
+
+15
+00:00:39.04 --> 00:00:42.04
+and I'm gonna give the size as 1 gig,
+
+16
+00:00:42.04 --> 00:00:44.04
+and I'm gonna give the availability zone
+
+17
+00:00:44.04 --> 00:00:48.01
+as the same availability
+zone of my EC2 instance,
+
+18
+00:00:48.01 --> 00:00:51.01
+which is ap-south-1a.
+
+19
+00:00:51.01 --> 00:00:53.06
+Let's do create volume.
+
+20
+00:00:53.06 --> 00:00:55.03
+Now that the volume has been created,
+
+21
+00:00:55.03 --> 00:00:58.08
+I'm gonna do a refresh,
+
+22
+00:00:58.08 --> 00:01:02.07
+and we can see that the volume
+is now in an available state.
+
+23
+00:01:02.07 --> 00:01:07.01
+To attach the volume, we'll
+go to actions, attach volume,
+
+24
+00:01:07.01 --> 00:01:09.00
+and I'm gonna select my EC2 instance,
+
+25
+00:01:09.00 --> 00:01:17.04
+and notice that the device
+is shown as /dev/sdf.
+
+26
+00:01:17.04 --> 00:01:19.04
+Also notice that it gives
+you a warning over here
+
+27
+00:01:19.04 --> 00:01:22.03
+that newer Linux kernels
+may rename your devices
+
+28
+00:01:22.03 --> 00:01:26.09
+to /dev/xvdf, so when you
+log in to your EC2 instance,
+
+29
+00:01:26.09 --> 00:01:33.00
+the device will be shown
+like this: /dev/xvdf.
+
+30
+00:01:33.00 --> 00:01:36.02
+Let's do Attach, so now it is in use.
+
+31
+00:01:36.02 --> 00:01:38.04
+Next I'm gonna log in to my EC2 instance
+
+32
+00:01:38.04 --> 00:01:40.04
+and I've already done that.
+
+33
+00:01:40.04 --> 00:01:42.03
+You can see over here
+I've already logged in.
+
+34
+00:01:42.03 --> 00:01:45.08
+First of all, we need to
+verify how many volumes
+
+35
+00:01:45.08 --> 00:01:49.02
+have been attached to this EC2 instance.
+
+36
+00:01:49.02 --> 00:01:54.00
+And to do that we have a
+command which is lsblk.
+
+37
+00:01:54.00 --> 00:01:55.05
+Lsblk.
+
+38
+00:01:55.05 --> 00:01:57.05
+I'm gonna hit enter.
+
+39
+00:01:57.05 --> 00:01:59.00
+And over here we can see that this is
+
+40
+00:01:59.00 --> 00:02:04.04
+the root volume /vxda1 which is 8 gigs.
+
+41
+00:02:04.04 --> 00:02:06.04
+And this is the volume that we created,
+
+42
+00:02:06.04 --> 00:02:11.06
+/vdf which is 1 gig in size.
+
+43
+00:02:11.06 --> 00:02:16.02
+Notice that /xvda1 has a mount point of /.
+
+44
+00:02:16.02 --> 00:02:19.01
+Slash indicates that it
+is mounted to the root
+
+45
+00:02:19.01 --> 00:02:22.08
+of the Linux file system hierarchy.
+
+46
+00:02:22.08 --> 00:02:26.07
+However, this volume does
+not have a mount point.
+
+47
+00:02:26.07 --> 00:02:28.02
+So we need to mount this volume
+
+48
+00:02:28.02 --> 00:02:30.07
+before we can start using that.
+
+49
+00:02:30.07 --> 00:02:31.09
+But before we mount the volume,
+
+50
+00:02:31.09 --> 00:02:35.01
+we need to create a file
+system on that volume.
+
+51
+00:02:35.01 --> 00:02:39.01
+However, before doing that,
+we want to verify if there is
+
+52
+00:02:39.01 --> 00:02:43.02
+already an existing file system or not.
+
+53
+00:02:43.02 --> 00:02:53.08
+The way to do that is
+sudo file -s /dev/xvdf.
+
+54
+00:02:53.08 --> 00:02:55.01
+Before we run this command,
+
+55
+00:02:55.01 --> 00:02:56.03
+I also want you to notice that
+
+56
+00:02:56.03 --> 00:03:01.00
+the output of this command
+does not have /dev on it.
+
+57
+00:03:01.00 --> 00:03:03.06
+It only shows you this portion.
+
+58
+00:03:03.06 --> 00:03:05.00
+It hides the /dev part.
+
+59
+00:03:05.00 --> 00:03:07.05
+So we need to type that in explicitly.
+
+60
+00:03:07.05 --> 00:03:13.01
+Sudo file -s /dev/xvdf.
+
+61
+00:03:13.01 --> 00:03:15.07
+I hit enter, and if you
+see something like this,
+
+62
+00:03:15.07 --> 00:03:19.07
+just data, that means there
+is no file system on it.
+
+63
+00:03:19.07 --> 00:03:25.09
+We can try the same thing
+with the first volume, xvda1,
+
+64
+00:03:25.09 --> 00:03:29.04
+and you'll notice that there
+is some file system on it.
+
+65
+00:03:29.04 --> 00:03:32.02
+Ext4 is the file system type.
+
+66
+00:03:32.02 --> 00:03:36.04
+If we had created the new
+volume from an existing snapshot
+
+67
+00:03:36.04 --> 00:03:41.03
+it would already have a
+file system on top of that.
+
+68
+00:03:41.03 --> 00:03:43.08
+But right now we have
+created a blank volume.
+
+69
+00:03:43.08 --> 00:03:47.08
+That's why we do not have a file system.
+
+70
+00:03:47.08 --> 00:03:50.02
+So let's go ahead and
+create a new file system.
+
+71
+00:03:50.02 --> 00:03:55.02
+I'm gonna do sudo mkfs -t.
+
+72
+00:03:55.02 --> 00:03:59.01
+The file system type
+I'm gonna use as ext4,
+
+73
+00:03:59.01 --> 00:04:03.04
+and the volume is /dev/xvdf.
+
+74
+00:04:03.04 --> 00:04:04.09
+Hit enter,
+
+75
+00:04:04.09 --> 00:04:08.04
+and we can see that the file
+system has been created.
+
+76
+00:04:08.04 --> 00:04:11.06
+Next we need to create a
+directory for mounting it.
+
+77
+00:04:11.06 --> 00:04:15.06
+So I'm gonna do sudo mkdir,
+
+78
+00:04:15.06 --> 00:04:17.03
+and we can call it whatever we like.
+
+79
+00:04:17.03 --> 00:04:20.04
+I'm gonna call it as mp
+just for mount point.
+
+80
+00:04:20.04 --> 00:04:22.00
+Hit enter.
+
+81
+00:04:22.00 --> 00:04:26.05
+We can do ls to verify that
+the directory has been created.
+
+82
+00:04:26.05 --> 00:04:28.07
+We can see that over here.
+
+83
+00:04:28.07 --> 00:04:31.08
+Next we're gonna mount that.
+
+84
+00:04:31.08 --> 00:04:38.03
+So sudo mount /dev/xvdf
+
+85
+00:04:38.03 --> 00:04:40.07
+and the mount point, which is mp.
+
+86
+00:04:40.07 --> 00:04:44.00
+Hit enter, and it has now been mounted.
+
+87
+00:04:44.00 --> 00:04:48.00
+To verify this we could, again, do lsblk.
+
+88
+00:04:48.00 --> 00:04:49.09
+And we can see that over here,
+
+89
+00:04:49.09 --> 00:04:55.05
+/dev/xvdf has been
+mounted to this directory.
+
+90
+00:04:55.05 --> 00:04:58.04
+At this point we can
+start using the volume.
+
+91
+00:04:58.04 --> 00:05:00.03
+However, there's a problem.
+
+92
+00:05:00.03 --> 00:05:02.03
+If you reboot the EC2 instance,
+
+93
+00:05:02.03 --> 00:05:05.05
+you would have to repeat
+the process again.
+
+94
+00:05:05.05 --> 00:05:06.06
+So we wanna make sure that every time
+
+95
+00:05:06.06 --> 00:05:08.09
+the EC2 instance reboots,
+
+96
+00:05:08.09 --> 00:05:12.04
+it automatically gets mounted.
+
+97
+00:05:12.04 --> 00:05:14.00
+The way to do that is to make a
+
+98
+00:05:14.00 --> 00:05:17.00
+modification to the fs tab file.
+
+99
+00:05:17.00 --> 00:05:23.08
+So I'm gonna change my directory to /etc,
+
+100
+00:05:23.08 --> 00:05:26.06
+and I'm gonna do ls.
+
+101
+00:05:26.06 --> 00:05:27.09
+You can see that we have a file
+
+102
+00:05:27.09 --> 00:05:30.08
+over here which is called as fstab.
+
+103
+00:05:30.08 --> 00:05:36.02
+We can view the contents of
+that file with cat fstab.
+
+104
+00:05:36.02 --> 00:05:39.02
+This is what it has right now.
+
+105
+00:05:39.02 --> 00:05:42.06
+Before we modify this file
+we wanna take a backup.
+
+106
+00:05:42.06 --> 00:05:44.05
+This is a very critical file.
+
+107
+00:05:44.05 --> 00:05:46.08
+So first of all I'm gonna take a backup.
+
+108
+00:05:46.08 --> 00:05:49.08
+I'm gonna do sudo cp for copy.
+
+109
+00:05:49.08 --> 00:05:53.00
+Fstab is the original file name,
+
+110
+00:05:53.00 --> 00:05:59.06
+and I'm gonna copy it into
+another file called as fstab dot,
+
+111
+00:05:59.06 --> 00:06:04.03
+maybe old or maybe backup,
+whatever you'd like to call it.
+
+112
+00:06:04.03 --> 00:06:05.02
+Hit enter.
+
+113
+00:06:05.02 --> 00:06:07.07
+Let's do ls to verify.
+
+114
+00:06:07.07 --> 00:06:11.01
+So we can see that now we have fstab.old,
+
+115
+00:06:11.01 --> 00:06:14.03
+which will contain the
+original contents of this file.
+
+116
+00:06:14.03 --> 00:06:16.09
+Now we can start modifying this file.
+
+117
+00:06:16.09 --> 00:06:21.03
+So I'm gonna do sudo, and you
+can use your favorite editor.
+
+118
+00:06:21.03 --> 00:06:26.00
+I'm gonna use vi fstab.
+
+119
+00:06:26.00 --> 00:06:27.08
+Hit enter.
+
+120
+00:06:27.08 --> 00:06:33.03
+I'm gonna do insert, which will
+allow me to edit this file.
+
+121
+00:06:33.03 --> 00:06:41.04
+And we need to add a new line over here.
+
+122
+00:06:41.04 --> 00:06:45.07
+Alright, so I'm gonna
+start off with /dev/xvdf
+
+123
+00:06:45.07 --> 00:06:50.02
+and the mount point name, which is /mp.
+
+124
+00:06:50.02 --> 00:06:54.01
+The file system type, which is ext4.
+
+125
+00:06:54.01 --> 00:06:57.02
+And the last three values
+that you see over here.
+
+126
+00:06:57.02 --> 00:07:01.05
+This one over here indicates
+the file system mount options.
+
+127
+00:07:01.05 --> 00:07:04.09
+This one is the dump
+frequency of the file system,
+
+128
+00:07:04.09 --> 00:07:08.02
+and this one represents the order
+
+129
+00:07:08.02 --> 00:07:12.08
+of the file system
+checks done at boot time.
+
+130
+00:07:12.08 --> 00:07:14.09
+If you're not sure what to put over here,
+
+131
+00:07:14.09 --> 00:07:17.07
+you can use these values
+that I'm typing in right now.
+
+132
+00:07:17.07 --> 00:07:24.07
+Default, nofail, this one
+is 0, and this one is 2.
+
+133
+00:07:24.07 --> 00:07:31.08
+I'm gonna escape first, :wq!, hit enter.
+
+134
+00:07:31.08 --> 00:07:35.00
+And I'm just gonna verify
+that with cat fstab
+
+135
+00:07:35.00 --> 00:07:38.03
+just to make sure that the
+changes have been saved.
+
+136
+00:07:38.03 --> 00:07:42.06
+And we can see that the
+new entry has been added.
+
+137
+00:07:42.06 --> 00:07:44.00
+Before we finish off,
+
+138
+00:07:44.00 --> 00:07:47.02
+it's important to verify
+that it is working.
+
+139
+00:07:47.02 --> 00:07:51.06
+And we can do that with sudo mount -a.
+
+140
+00:07:51.06 --> 00:07:53.02
+This command will try to mount
+
+141
+00:07:53.02 --> 00:07:56.01
+all the entries in the fstab file.
+
+142
+00:07:56.01 --> 00:08:00.01
+Hit enter, and we can see
+that we have an error.
+
+143
+00:08:00.01 --> 00:08:05.03
+It says that the mount
+point /mp does not exist.
+
+144
+00:08:05.03 --> 00:08:07.00
+I did this on purpose to show you that
+
+145
+00:08:07.00 --> 00:08:11.00
+the mount point has to be
+given as the full path.
+
+146
+00:08:11.00 --> 00:08:13.08
+So if we come back over
+here, you see that?
+
+147
+00:08:13.08 --> 00:08:16.03
+This is what we need to specify.
+
+148
+00:08:16.03 --> 00:08:17.02
+So let's do that.
+
+149
+00:08:17.02 --> 00:08:21.05
+I'm gonna hit the up arrow, sudo v1 fstab.
+
+150
+00:08:21.05 --> 00:08:26.09
+Insert, and I'm gonna go down
+over here, make that change.
+
+151
+00:08:26.09 --> 00:08:33.02
+It's /home/ec2-user/mp.
+
+152
+00:08:33.02 --> 00:08:34.05
+Looks good.
+
+153
+00:08:34.05 --> 00:08:39.08
+Escape, :wq!, hit enter.
+
+154
+00:08:39.08 --> 00:08:44.03
+Let's do a cat fstab,
+
+155
+00:08:44.03 --> 00:08:47.02
+and this is the new entry that we made.
+
+156
+00:08:47.02 --> 00:08:52.00
+And finally, we can verify
+that with sudo mount -a.
+
+157
+00:08:52.00 --> 00:08:53.03
+If you don't see any error message,
+
+158
+00:08:53.03 --> 00:08:57.00
+that means everything is good.
+
+159
+00:08:57.00 --> 00:09:00.03
+At this point the volume has
+been mounted successfully,
+
+160
+00:09:00.03 --> 00:09:05.04
+and even if we reboot it is
+gonna get mounted automatically.
+
+161
+00:09:05.04 --> 00:09:08.03
+It's not as easy as doing
+on a Windows device.
+
+162
+00:09:08.03 --> 00:09:09.07
+It has a few steps.
+
+163
+00:09:09.07 --> 00:09:11.06
+But I hope you found that interesting.
+
+164
+00:09:11.06 --> 00:09:13.04
+I'd like to thank you for watching,
+
+165
+00:09:13.04 --> 00:09:15.00
+and I'll catch you in the next video.
+
+166
+00:09:15.00 --> 00:09:15.09
+Thank you.
+

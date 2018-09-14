@@ -1,0 +1,678 @@
+1
+00:00:00.06 --> 00:00:01.09
+- [Instructor] Welcome back.
+
+2
+00:00:01.09 --> 00:00:04.07
+In this video, we are going to deep dive
+
+3
+00:00:04.07 --> 00:00:07.08
+into the concept of EBS volumes.
+
+4
+00:00:07.08 --> 00:00:10.07
+Let's begin.
+
+5
+00:00:10.07 --> 00:00:13.07
+Alright, so what do we
+mean by an EBS volume?
+
+6
+00:00:13.07 --> 00:00:18.07
+Amazon Elastic Block Store,
+also known as Amazon EBS,
+
+7
+00:00:18.07 --> 00:00:21.06
+provides block level storage volumes
+
+8
+00:00:21.06 --> 00:00:25.01
+for use with EC2 instances.
+
+9
+00:00:25.01 --> 00:00:28.06
+EBS volumes are highly
+available and reliable
+
+10
+00:00:28.06 --> 00:00:31.08
+storage volumes that can be attached to
+
+11
+00:00:31.08 --> 00:00:36.09
+any running instance that is
+in the same availability zone.
+
+12
+00:00:36.09 --> 00:00:40.03
+Think of EBS volumes like hard drives.
+
+13
+00:00:40.03 --> 00:00:44.02
+We usually attach a hard drive
+to a laptop or a desktop.
+
+14
+00:00:44.02 --> 00:00:47.02
+In a similar way, we
+can attach EBS volumes
+
+15
+00:00:47.02 --> 00:00:50.04
+to amazon EC2 instances.
+
+16
+00:00:50.04 --> 00:00:52.05
+The one thing that we must remember
+
+17
+00:00:52.05 --> 00:00:57.00
+is that if you want to attach
+a volume to an EC2 instance,
+
+18
+00:00:57.00 --> 00:01:01.02
+they must be in the
+same availability zone.
+
+19
+00:01:01.02 --> 00:01:04.01
+Amazon EBS is recommended when data
+
+20
+00:01:04.01 --> 00:01:07.04
+must be quickly accessible and requires
+
+21
+00:01:07.04 --> 00:01:10.00
+long-term persistence.
+
+22
+00:01:10.00 --> 00:01:15.00
+EBS volumes behave like raw,
+unformatted block devices.
+
+23
+00:01:15.00 --> 00:01:18.05
+Like I said, think of it as a hard drive.
+
+24
+00:01:18.05 --> 00:01:21.03
+You can create a file system
+on top of these volumes,
+
+25
+00:01:21.03 --> 00:01:25.08
+or use them in any other way
+you would use a block device
+
+26
+00:01:25.08 --> 00:01:27.03
+like a hard drive.
+
+27
+00:01:27.03 --> 00:01:29.09
+So we can install an operating
+system on top of that,
+
+28
+00:01:29.09 --> 00:01:35.02
+we can even put a database
+on top of that, et cetera.
+
+29
+00:01:35.02 --> 00:01:38.04
+EBS volumes can be used as primary storage
+
+30
+00:01:38.04 --> 00:01:41.09
+for data that requires frequent updates,
+
+31
+00:01:41.09 --> 00:01:44.03
+such as the system drive for an instance
+
+32
+00:01:44.03 --> 00:01:48.03
+or storage for a database application.
+
+33
+00:01:48.03 --> 00:01:52.01
+What's very interesting is
+that EBS volumes persist
+
+34
+00:01:52.01 --> 00:01:56.06
+independently from the running
+life of an EC2 instance.
+
+35
+00:01:56.06 --> 00:01:59.01
+After a volume is attached to an instance,
+
+36
+00:01:59.01 --> 00:02:04.01
+it can be used like any
+other physical hard drive.
+
+37
+00:02:04.01 --> 00:02:08.02
+What does it mean that EBS
+volumes persist independently?
+
+38
+00:02:08.02 --> 00:02:10.09
+Well, if you have a running EC2 instance,
+
+39
+00:02:10.09 --> 00:02:14.02
+and you shut down that
+instance, it's not necessary
+
+40
+00:02:14.02 --> 00:02:17.01
+that you have to lose that EBS volume.
+
+41
+00:02:17.01 --> 00:02:21.02
+You can terminate your EC2
+instance and still retain
+
+42
+00:02:21.02 --> 00:02:24.00
+your EBS volume.
+
+43
+00:02:24.00 --> 00:02:26.02
+EBS volumes are flexible.
+
+44
+00:02:26.02 --> 00:02:29.01
+You can dynamically increase the size,
+
+45
+00:02:29.01 --> 00:02:32.06
+modify the provisioned IOPS capacity,
+
+46
+00:02:32.06 --> 00:02:37.03
+and change the volume type
+on live production volumes.
+
+47
+00:02:37.03 --> 00:02:41.02
+IOPS stands for Input Output Per Second.
+
+48
+00:02:41.02 --> 00:02:43.09
+So we can do all of
+these stuff on the fly.
+
+49
+00:02:43.09 --> 00:02:46.01
+We can change the size of the volume,
+
+50
+00:02:46.01 --> 00:02:49.01
+we can change the
+performance of that volume,
+
+51
+00:02:49.01 --> 00:02:52.03
+and we can also change
+the type of the volume
+
+52
+00:02:52.03 --> 00:02:55.04
+and I'm gonna show you all
+of this in the next video.
+
+53
+00:02:55.04 --> 00:02:58.08
+In this video, we'll just discuss
+the concepts and features,
+
+54
+00:02:58.08 --> 00:03:03.00
+in the next video, we'll see
+all of this live in action.
+
+55
+00:03:03.00 --> 00:03:07.05
+Let's now talk about data
+availability of EBS volumes.
+
+56
+00:03:07.05 --> 00:03:10.04
+When you create an EBS volume
+in an availability zone,
+
+57
+00:03:10.04 --> 00:03:13.01
+it is automatically
+replicated within that zone
+
+58
+00:03:13.01 --> 00:03:15.05
+to prevent data loss due to failure
+
+59
+00:03:15.05 --> 00:03:18.03
+of any single hardware component.
+
+60
+00:03:18.03 --> 00:03:21.09
+So whenever we create a new EBS volume,
+
+61
+00:03:21.09 --> 00:03:25.01
+it is automatically being
+replicated in the background
+
+62
+00:03:25.01 --> 00:03:30.08
+by EWS, to provide high data
+availability and resiliency.
+
+63
+00:03:30.08 --> 00:03:33.06
+After creating a volume,
+it can be attached to
+
+64
+00:03:33.06 --> 00:03:37.07
+any EC2 instance in the
+same availability zone.
+
+65
+00:03:37.07 --> 00:03:39.09
+That means if you have an EC2 instance
+
+66
+00:03:39.09 --> 00:03:42.09
+in, let's say, AB South 1A,
+
+67
+00:03:42.09 --> 00:03:45.06
+you can attach a volume only if the volume
+
+68
+00:03:45.06 --> 00:03:50.07
+also belongs to AB South 1A.
+
+69
+00:03:50.07 --> 00:03:53.08
+After you attach a volume,
+it appears as a native
+
+70
+00:03:53.08 --> 00:03:57.04
+block device similar to a hard drive.
+
+71
+00:03:57.04 --> 00:04:00.00
+At that point, the instance can interact
+
+72
+00:04:00.00 --> 00:04:04.07
+with the volume just as it
+would with a local drive.
+
+73
+00:04:04.07 --> 00:04:08.03
+The instance can format the
+EBS volume with a file system,
+
+74
+00:04:08.03 --> 00:04:13.02
+such as ext3, and then
+install applications as well.
+
+75
+00:04:13.02 --> 00:04:16.08
+Moving on, an EBS volume
+can be attached to only one
+
+76
+00:04:16.08 --> 00:04:20.04
+instance at a time within
+the same availability zone.
+
+77
+00:04:20.04 --> 00:04:22.09
+Just like we have a hard
+drive, which can only be
+
+78
+00:04:22.09 --> 00:04:26.04
+attached to one desktop or one laptop,
+
+79
+00:04:26.04 --> 00:04:29.04
+similarly, an EBS volume
+can only be attached
+
+80
+00:04:29.04 --> 00:04:31.08
+to a single EC2 instance.
+
+81
+00:04:31.08 --> 00:04:34.07
+However, multiple volumes can be attached
+
+82
+00:04:34.07 --> 00:04:37.06
+to a single instance,
+just like we can attach
+
+83
+00:04:37.06 --> 00:04:41.01
+multiple hard drives to a single computer.
+
+84
+00:04:41.01 --> 00:04:45.08
+Multiple volumes attached to
+a device can also be striped
+
+85
+00:04:45.08 --> 00:04:49.09
+for increased input and output
+and throughput performance,
+
+86
+00:04:49.09 --> 00:04:54.01
+which means multiple volumes
+can be logically combined
+
+87
+00:04:54.01 --> 00:04:59.03
+to appear like a single,
+larger EBS volume.
+
+88
+00:04:59.03 --> 00:05:03.06
+Moving on, let's talk about
+data persistence on EBS volumes.
+
+89
+00:05:03.06 --> 00:05:08.00
+An EBS volume is an off-instance
+storage that can persist
+
+90
+00:05:08.00 --> 00:05:11.06
+independently from the
+life of an instance.
+
+91
+00:05:11.06 --> 00:05:14.02
+You continue to pay for the volume usage
+
+92
+00:05:14.02 --> 00:05:17.05
+as long as the data persists.
+
+93
+00:05:17.05 --> 00:05:20.09
+EBS volumes that are attached
+to a running instance
+
+94
+00:05:20.09 --> 00:05:25.09
+can be detached from that
+instance with their data intact
+
+95
+00:05:25.09 --> 00:05:29.04
+when that instance is terminated.
+
+96
+00:05:29.04 --> 00:05:31.04
+If your EC2 instance is terminated,
+
+97
+00:05:31.04 --> 00:05:35.06
+that does not mean your EBS
+volume also has to terminate.
+
+98
+00:05:35.06 --> 00:05:39.04
+The volume can then be
+reattached to a new instance,
+
+99
+00:05:39.04 --> 00:05:43.01
+enabling quick recovery of data.
+
+100
+00:05:43.01 --> 00:05:46.08
+By default, EBS volumes that
+are created and attached
+
+101
+00:05:46.08 --> 00:05:51.00
+to an instance at launch are
+deleted when that instance
+
+102
+00:05:51.00 --> 00:05:53.08
+is terminated, and we saw this when we
+
+103
+00:05:53.08 --> 00:05:56.00
+launched an EC2 instance.
+
+104
+00:05:56.00 --> 00:05:59.06
+When you launch an EC2
+instance, on step number four,
+
+105
+00:05:59.06 --> 00:06:02.01
+we are required to add an EBS volume
+
+106
+00:06:02.01 --> 00:06:04.01
+for the root device storage.
+
+107
+00:06:04.01 --> 00:06:06.02
+And we've also saw that
+there is a check box
+
+108
+00:06:06.02 --> 00:06:09.03
+which says, "delete on termination."
+
+109
+00:06:09.03 --> 00:06:11.05
+That's the default check box.
+
+110
+00:06:11.05 --> 00:06:13.07
+When the EC2 instance gets terminated,
+
+111
+00:06:13.07 --> 00:06:16.03
+the volume also gets terminated.
+
+112
+00:06:16.03 --> 00:06:18.03
+We could uncheck that, and that would mean
+
+113
+00:06:18.03 --> 00:06:22.04
+the EC2 instance is
+independent from the volume.
+
+114
+00:06:22.04 --> 00:06:25.09
+This behavior can be modified
+when launching the instance,
+
+115
+00:06:25.09 --> 00:06:28.01
+causing the volume to persist even after
+
+116
+00:06:28.01 --> 00:06:30.06
+the instance is
+terminated, and enables you
+
+117
+00:06:30.06 --> 00:06:35.09
+to attach the volume to another instance.
+
+118
+00:06:35.09 --> 00:06:39.02
+If you are using an EBS-backed instance,
+
+119
+00:06:39.02 --> 00:06:41.08
+well, what does an
+EBS-backed instance mean?
+
+120
+00:06:41.08 --> 00:06:46.07
+An EC2 instance whose root
+volume is an EBS volume.
+
+121
+00:06:46.07 --> 00:06:49.06
+So if you're using an EBS-backed instance,
+
+122
+00:06:49.06 --> 00:06:51.09
+you can stop and restart that instance
+
+123
+00:06:51.09 --> 00:06:56.04
+without affecting the data
+stored in the attached volume.
+
+124
+00:06:56.04 --> 00:06:58.07
+The volume remains attached throughout
+
+125
+00:06:58.07 --> 00:07:01.02
+the stop and start cycle.
+
+126
+00:07:01.02 --> 00:07:03.00
+The data persists on the volume
+
+127
+00:07:03.00 --> 00:07:07.05
+until the volume is deleted explicitly.
+
+128
+00:07:07.05 --> 00:07:11.04
+The physical block storage
+used by deleted EBS volumes
+
+129
+00:07:11.04 --> 00:07:14.08
+is overwritten with zeroes
+before it is allocated
+
+130
+00:07:14.08 --> 00:07:19.00
+to another account, which means
+if you have an EBS volume,
+
+131
+00:07:19.00 --> 00:07:22.07
+and you delete that, that space
+which was reserved for you
+
+132
+00:07:22.07 --> 00:07:25.06
+may be used for creating
+another EBS volume
+
+133
+00:07:25.06 --> 00:07:27.05
+for another customer.
+
+134
+00:07:27.05 --> 00:07:30.05
+But before AWS does
+that, the physical space
+
+135
+00:07:30.05 --> 00:07:33.04
+used by your volume is
+overwritten with zeroes
+
+136
+00:07:33.04 --> 00:07:37.06
+to make sure all of your data
+has been completely erased.
+
+137
+00:07:37.06 --> 00:07:40.06
+When dealing with sensitive
+data, it is recommended
+
+138
+00:07:40.06 --> 00:07:43.08
+to encrypt the EBS volume.
+
+139
+00:07:43.08 --> 00:07:47.09
+Let's now talk about data
+encryption on EBS volumes.
+
+140
+00:07:47.09 --> 00:07:51.06
+EBS volumes can be encrypted
+to meet a wide range
+
+141
+00:07:51.06 --> 00:07:54.05
+of data-at-rest encryption requirements
+
+142
+00:07:54.05 --> 00:07:58.08
+for regulated or audited
+data and applications.
+
+143
+00:07:58.08 --> 00:08:03.02
+Amazon EBS encryption uses
+256-bit advanced encryption
+
+144
+00:08:03.02 --> 00:08:06.09
+standard algorithms,
+also known as AES-256,
+
+145
+00:08:06.09 --> 00:08:10.09
+and an Amazon-managed key infrastructure,
+
+146
+00:08:10.09 --> 00:08:14.03
+also known as KMS.
+
+147
+00:08:14.03 --> 00:08:17.00
+The encryption occurs
+on the server that hosts
+
+148
+00:08:17.00 --> 00:08:19.09
+the EC2 instance, providing encryption of
+
+149
+00:08:19.09 --> 00:08:22.07
+data-in-transit from the EC2 instance
+
+150
+00:08:22.07 --> 00:08:25.00
+to Amazon EBS storage.
+
