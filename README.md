@@ -10,14 +10,20 @@
 
 ## RobotModel67
 * AWS Realoaded
+* Proyecto de Grado:
+* FINANDINA: 
+  * Team Foundatin Server
+  * Bizagi
+  * Python Rules Machine
 
 ## Workload
-* Bizagi
-* Python Rules Machine
 * Application School: Angular, React & Vue
 * Asp Net Core Applications
 * JEE8 Web Apis
 * Node & Mongo background
+* Git Mastering
+* continuous-integration-and-continuous-delivery
+* AGILE
 
 ### Daily
 * Workout
